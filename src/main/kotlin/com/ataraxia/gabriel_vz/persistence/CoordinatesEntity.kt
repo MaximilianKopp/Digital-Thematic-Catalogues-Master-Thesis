@@ -1,6 +1,12 @@
-package com.ataraxia.gabriel_vz.model
+package com.ataraxia.gabriel_vz.persistence
 
-class Coordinates(
-        val longitude: Double,
-        val latitude: Double
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
+
+@Embeddable
+class CoordinatesEntity(
+        @Column(name = "longitude")
+        var longitude: Double,
+        @Column(name = "latitude")
+        var latitude: Double
 )

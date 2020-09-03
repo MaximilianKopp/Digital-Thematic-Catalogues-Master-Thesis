@@ -1,12 +1,26 @@
-package com.ataraxia.gabriel_vz.model
+package com.ataraxia.gabriel_vz.persistence
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
 
-class Discography(
-        id: String,
-        val title: String,
-        val label: String,
-        val recordId: String,
-        val dateOfPublishing: String,
-        val musicians: ArrayList<Person>
-) : AbstractEntity(id)
+@Entity
+@Table(name = "discography")
+class DiscographyEntity(
+
+        @Id
+        @GeneratedValue(generator = "system-uuid")
+        @GenericGenerator(name = "system-uuid", strategy = "uuid")
+        val id: String? = null,
+        var title: String,
+        var label: String,
+        var recordId: String,
+        var dateOfPublishing: String,
+
+        @ManyToMany(mappedBy = "relatedDiscographies")
+        var musicians: MutableList<PersonEntity>?,
+
+        @ManyToMany(cascade = [
+            CascadeType.PERSIST,
+            CascadeType.MERGE])
+        var relatedWorks: MutableList<WorkEntity>? = mutableListOf()
+)

@@ -1,10 +1,34 @@
-package com.ataraxia.gabriel_vz.model
+package com.ataraxia.gabriel_vz.persistence
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
 
-class Text(
-        id: String,
-        val title: String,
-        val author: String,
-        val excerpt: String
-) : AbstractEntity(id)
+@Entity
+@Table(name = "text")
+class TextEntity(
+
+        @Id
+        @GeneratedValue(generator = "system-uuid")
+        @GenericGenerator(name = "system-uuid", strategy = "uuid")
+        val id: String? = null,
+        var title: String,
+        var author: String,
+        var excerpt: String,
+
+        @OneToMany(
+                mappedBy = "relatedText",
+                cascade = [CascadeType.ALL],
+                orphanRemoval = true
+        )
+        var relatedWorks: MutableList<WorkEntity>? = mutableListOf()
+) {
+    fun addWork(workEntity: WorkEntity) {
+        relatedWorks?.add(workEntity)
+        workEntity.relatedText = this
+    }
+
+    fun removeWork(workEntity: WorkEntity) {
+        relatedWorks?.remove(workEntity)
+        workEntity.relatedText = null
+    }
+}

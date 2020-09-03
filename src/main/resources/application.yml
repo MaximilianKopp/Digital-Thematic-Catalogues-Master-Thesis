@@ -3,10 +3,11 @@ spring:
     url: jdbc:mysql://192.168.99.100:3306/gabriel_db
     username: root
     password: gabrielroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
-
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
 
