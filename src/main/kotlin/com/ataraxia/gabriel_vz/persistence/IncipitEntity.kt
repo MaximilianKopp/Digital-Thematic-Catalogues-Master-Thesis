@@ -2,10 +2,7 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.ataraxia.gabriel_vz.root.AbstractEntity
 import org.hibernate.annotations.GenericGenerator
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "incipit")
@@ -19,5 +16,9 @@ class IncipitEntity(
         var keysig: String,
         var timesig: String,
         var score: String,
-        var description: String
+        var description: String,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "id", referencedColumnName = "id")
+        var relatedWork: WorkEntity? = null
 )

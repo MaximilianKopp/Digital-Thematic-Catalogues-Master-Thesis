@@ -119,6 +119,7 @@
                         <artifactId>kotlin-maven-noarg</artifactId>
                         <version>${kotlin.version}</version>
                     </dependency>
+
                 </dependencies>
             </plugin>
         </plugins>

@@ -1,5 +1,7 @@
 package com.ataraxia.gabriel_vz.persistence
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
@@ -10,14 +12,23 @@ class WorkEntity(
         @Id
         @GeneratedValue(generator = "system-uuid")
         @GenericGenerator(name = "system-uuid", strategy = "uuid")
-        val id: String? = null,
+        val id: String? = "",
         var title: String,
         var dateOfCreation: String,
         var dateOfPremiere: String,
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @JsonManagedReference
+        @ManyToOne(
+                fetch = FetchType.LAZY,
+                cascade = [CascadeType.ALL]
+        )
         var placeOfPremiere: PlaceEntity?,
 
+        @OneToOne(
+                mappedBy = "relatedWork",
+                cascade = [CascadeType.ALL],
+        fetch = FetchType.EAGER)
+        var incipit: IncipitEntity? = null,
         var commentary: String,
         var dedication: String,
         var instrumentation: String,
@@ -25,15 +36,26 @@ class WorkEntity(
         var duration: String,
         var editor: String,
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @JsonManagedReference
+        @ManyToOne(
+                fetch = FetchType.LAZY,
+                cascade = [CascadeType.ALL]
+        )
         var relatedText: TextEntity?,
 
-        @ManyToMany(mappedBy = "relatedWorks")
-        var discographies: MutableList<DiscographyEntity>? = mutableListOf(),
+        @JsonManagedReference
+        @ManyToMany(mappedBy = "relatedWorks",
+                cascade = [CascadeType.ALL],
+                fetch = FetchType.LAZY)
+        var discographies: MutableSet<DiscographyEntity> = mutableSetOf(),
 
-        @ManyToMany(mappedBy = "relatedWorks")
+        @JsonManagedReference
+        @ManyToMany(mappedBy = "relatedWorks",
+                cascade = [CascadeType.ALL],
+                fetch = FetchType.LAZY)
         var relatedPersons: MutableList<PersonEntity>? = mutableListOf(),
 
+        @JsonManagedReference
         @OneToMany(
                 mappedBy = "relatedWork",
                 cascade = [CascadeType.ALL],
@@ -42,12 +64,12 @@ class WorkEntity(
         var literatureList: MutableList<LiteratureEntity>? = mutableListOf()
 ) {
     fun addDiscography(discographyEntity: DiscographyEntity) {
-        discographies?.add(discographyEntity)
+        discographies.add(discographyEntity)
         discographyEntity.relatedWorks?.add(this)
     }
 
     fun removeDiscography(discographyEntity: DiscographyEntity) {
-        discographies?.remove(discographyEntity)
+        discographies.remove(discographyEntity)
         discographyEntity.relatedWorks?.remove(this)
     }
 
@@ -70,4 +92,5 @@ class WorkEntity(
         literatureList?.remove(literature)
         literature.relatedWork = null
     }
+
 }

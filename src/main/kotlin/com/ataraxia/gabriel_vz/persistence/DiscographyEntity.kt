@@ -1,5 +1,7 @@
 package com.ataraxia.gabriel_vz.persistence
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
@@ -16,11 +18,24 @@ class DiscographyEntity(
         var recordId: String,
         var dateOfPublishing: String,
 
+        @JsonManagedReference
         @ManyToMany(mappedBy = "relatedDiscographies")
         var musicians: MutableList<PersonEntity>?,
 
-        @ManyToMany(cascade = [
-            CascadeType.PERSIST,
-            CascadeType.MERGE])
-        var relatedWorks: MutableList<WorkEntity>? = mutableListOf()
-)
+        @JsonBackReference
+        @ManyToMany(cascade = [CascadeType.ALL])
+        @JoinTable(
+                joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
+                inverseJoinColumns = [JoinColumn(name = "discography_id", referencedColumnName = "id")])
+        var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
+) {
+    fun addMusicians(personEntity: PersonEntity) {
+        musicians?.add(personEntity)
+        personEntity.relatedDiscographies?.add(this)
+    }
+
+    fun removeMusicians(personEntity: PersonEntity) {
+        musicians?.remove(personEntity)
+        personEntity.relatedDiscographies?.remove(this)
+    }
+}

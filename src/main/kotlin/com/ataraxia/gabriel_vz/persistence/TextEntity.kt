@@ -1,5 +1,6 @@
 package com.ataraxia.gabriel_vz.persistence
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
@@ -15,12 +16,12 @@ class TextEntity(
         var author: String,
         var excerpt: String,
 
+        @JsonBackReference
         @OneToMany(
                 mappedBy = "relatedText",
-                cascade = [CascadeType.ALL],
                 orphanRemoval = true
         )
-        var relatedWorks: MutableList<WorkEntity>? = mutableListOf()
+        var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
 ) {
     fun addWork(workEntity: WorkEntity) {
         relatedWorks?.add(workEntity)

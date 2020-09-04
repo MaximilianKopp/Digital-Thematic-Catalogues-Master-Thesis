@@ -1,5 +1,9 @@
 package com.ataraxia.gabriel_vz.persistence
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
+import org.hibernate.annotations.Fetch
+import org.hibernate.annotations.FetchMode
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
@@ -23,10 +27,12 @@ class PlaceEntity(
         )
         var coordinates: CoordinatesEntity,
 
-        @OneToMany(mappedBy = "placeOfPremiere",
-                cascade = [CascadeType.ALL],
-                orphanRemoval = true)
-        var relatedWorks: MutableList<WorkEntity>? = mutableListOf()
+        @JsonBackReference
+        @OneToMany(
+                mappedBy = "placeOfPremiere",
+                orphanRemoval = true
+        )
+        var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
 ) {
     fun addWork(workEntity: WorkEntity) {
         relatedWorks?.add(workEntity)
