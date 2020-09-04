@@ -19,10 +19,11 @@ class DiscographyEntity(
         var dateOfPublishing: String,
 
         @JsonManagedReference
-        @ManyToMany(mappedBy = "relatedDiscographies")
-        var musicians: MutableList<PersonEntity>?,
+        @ManyToMany(mappedBy = "relatedDiscographies",
+                cascade = [CascadeType.ALL])
+        var musicians: MutableSet<PersonEntity>? = mutableSetOf(),
 
-        @JsonBackReference
+        @JsonBackReference(value = "work-discography")
         @ManyToMany(cascade = [CascadeType.ALL])
         @JoinTable(
                 joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],

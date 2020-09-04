@@ -59,6 +59,7 @@ class WorkController {
                         this.dateOfCreation = workEntity.dateOfCreation
                         this.dateOfPremiere = workEntity.dateOfPremiere
                         this.placeOfPremiere = workEntity.placeOfPremiere
+                        this.incipit = workEntity.incipit
                         this.commentary = workEntity.commentary
                         this.dedication = workEntity.dedication
                         this.instrumentation = workEntity.instrumentation
@@ -67,6 +68,8 @@ class WorkController {
                         this.editor = workEntity.editor
                         this.relatedText = workEntity.relatedText
                         this.discographies = workEntity.discographies
+                        this.relatedPersons = workEntity.relatedPersons
+                        this.literatureList = workEntity.literatureList
                     }
             ResponseEntity(workRepository.save(updatedWorkEntity), HttpStatus.ACCEPTED)
         } else {

@@ -16,7 +16,7 @@ class TextEntity(
         var author: String,
         var excerpt: String,
 
-        @JsonBackReference
+        @JsonBackReference(value = "text-work")
         @OneToMany(
                 mappedBy = "relatedText",
                 orphanRemoval = true

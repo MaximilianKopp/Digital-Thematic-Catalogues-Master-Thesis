@@ -1,6 +1,5 @@
 package com.ataraxia.gabriel_vz.persistence
 
-import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
@@ -22,12 +21,12 @@ class WorkEntity(
                 fetch = FetchType.LAZY,
                 cascade = [CascadeType.ALL]
         )
-        var placeOfPremiere: PlaceEntity?,
+        var placeOfPremiere: PlaceEntity? = null,
 
         @OneToOne(
                 mappedBy = "relatedWork",
                 cascade = [CascadeType.ALL],
-        fetch = FetchType.EAGER)
+                fetch = FetchType.EAGER)
         var incipit: IncipitEntity? = null,
         var commentary: String,
         var dedication: String,
@@ -53,15 +52,14 @@ class WorkEntity(
         @ManyToMany(mappedBy = "relatedWorks",
                 cascade = [CascadeType.ALL],
                 fetch = FetchType.LAZY)
-        var relatedPersons: MutableList<PersonEntity>? = mutableListOf(),
+        var relatedPersons: MutableSet<PersonEntity>? = mutableSetOf(),
 
         @JsonManagedReference
         @OneToMany(
                 mappedBy = "relatedWork",
-                cascade = [CascadeType.ALL],
-                orphanRemoval = true
+                cascade = [CascadeType.ALL]
         )
-        var literatureList: MutableList<LiteratureEntity>? = mutableListOf()
+        var literatureList: MutableSet<LiteratureEntity>? = mutableSetOf()
 ) {
     fun addDiscography(discographyEntity: DiscographyEntity) {
         discographies.add(discographyEntity)
@@ -90,7 +88,12 @@ class WorkEntity(
 
     fun removeLiterature(literature: LiteratureEntity) {
         literatureList?.remove(literature)
-        literature.relatedWork = null
+        literature.relatedWork = this
+    }
+
+    fun addIncipit(incipit: IncipitEntity?) {
+        this.incipit = incipit
+        incipit?.relatedWork = this
     }
 
 }

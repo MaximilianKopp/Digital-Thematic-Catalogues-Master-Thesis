@@ -14,6 +14,22 @@ class GabrielVzApplication {
     @Bean
     fun init(workRepository: WorkRepository, discographyRepository: DiscographyRepository) = CommandLineRunner {
 
+        var testDiscography = DiscographyEntity(
+                id = null,
+                recordId = "222",
+                label = "Superdibummel",
+                dateOfPublishing = "23.12.22",
+                title = "SuperDamdam"
+        )
+
+        testDiscography.addMusicians(PersonEntity(
+                id = null,
+                name = "Maria",
+                description = "Versucherin",
+                pnd = "232",
+                role = "User"
+        ))
+
         var testWork = WorkEntity(
                 id = null,
                 title = "Sonata C-Dur",
@@ -40,16 +56,18 @@ class GabrielVzApplication {
                         author = "Schiller",
                         excerpt = "Freude mimimi"
                 ),
-                instrumentation = "Für Klavier",
-                incipit = IncipitEntity(
-                        id = null,
-                        description = "hihi",
-                        keysig = "g",
-                        score = "f-g-a-b",
-                        text = "Mimimi",
-                        timesig = "2/3"
-                )
+                instrumentation = "Für Klavier"
         )
+
+        testWork.addIncipit(incipit = IncipitEntity(
+                id = null,
+                description = "hihi",
+                keysig = "g",
+                score = "f-g-a-b",
+                text = "Mimimi",
+                timesig = "2/3"
+        ))
+
         testWork.addDiscography(DiscographyEntity(
                 id = null,
                 title = "Collection",
@@ -58,12 +76,14 @@ class GabrielVzApplication {
                 musicians = null,
                 recordId = "2323"
         ))
+
+        testWork.addDiscography(testDiscography)
+
         testWork.addDiscography(DiscographyEntity(
                 id = null,
                 title = "Musicial",
                 dateOfPublishing = "22.10.19",
                 label = "UDEMY",
-                musicians = null,
                 recordId = "21"
         ))
 

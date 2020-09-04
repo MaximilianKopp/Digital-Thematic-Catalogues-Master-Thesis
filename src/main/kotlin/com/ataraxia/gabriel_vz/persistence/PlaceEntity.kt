@@ -29,8 +29,7 @@ class PlaceEntity(
 
         @JsonBackReference
         @OneToMany(
-                mappedBy = "placeOfPremiere",
-                orphanRemoval = true
+                mappedBy = "placeOfPremiere"
         )
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
 ) {
