@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class PlaceFactory : Factory<Place, PlaceEntity, PlaceResource>() {
-    @Autowired
-    lateinit var coordinatesFactory: CoordinatesFactory
+
+    private val coordinatesFactory: CoordinatesFactory = CoordinatesFactory()
 
     override fun modelFromEntity(entity: PlaceEntity): Place = Place(
             id = entity.id,

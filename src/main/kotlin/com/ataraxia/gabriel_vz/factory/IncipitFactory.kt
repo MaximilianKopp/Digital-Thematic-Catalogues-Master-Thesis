@@ -7,7 +7,7 @@ import com.ataraxia.gabriel_vz.root.Factory
 import org.springframework.stereotype.Component
 
 @Component
-class Incipitfactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
+class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
 
     override fun modelFromEntity(entity: IncipitEntity): Incipit = Incipit(
             id = entity.id,

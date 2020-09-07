@@ -4,14 +4,13 @@ import com.ataraxia.gabriel_vz.model.Discography
 import com.ataraxia.gabriel_vz.persistence.DiscographyEntity
 import com.ataraxia.gabriel_vz.resource.DiscographyResource
 import com.ataraxia.gabriel_vz.root.Factory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyResource>() {
+class DiscographyFactory(
+        val personFactory: PersonFactory
+) : Factory<Discography, DiscographyEntity, DiscographyResource>() {
 
-    @Autowired
-    lateinit var personFactory: PersonFactory
 
     override fun modelFromEntity(entity: DiscographyEntity): Discography = Discography(
             id = entity.id,

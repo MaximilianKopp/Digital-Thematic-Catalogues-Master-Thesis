@@ -1,6 +1,7 @@
 package com.ataraxia.gabriel_vz.factory
 
 import com.ataraxia.gabriel_vz.model.Person
+import com.ataraxia.gabriel_vz.persistence.DiscographyEntity
 import com.ataraxia.gabriel_vz.persistence.PersonEntity
 import com.ataraxia.gabriel_vz.resource.PersonResource
 import com.ataraxia.gabriel_vz.root.Factory
@@ -10,11 +11,9 @@ import org.springframework.stereotype.Component
 @Component
 class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
 
-    @Autowired
-    lateinit var discographyFactory: DiscographyFactory
+    var discographyFactory: DiscographyFactory = DiscographyFactory(this)
 
-    @Autowired
-    lateinit var workFactory: WorkFactory
+    var workFactory: WorkFactory = WorkFactory(discographyFactory, LiteratureFactory(), this)
 
     override fun modelFromEntity(entity: PersonEntity): Person = Person(
             id = entity.id,

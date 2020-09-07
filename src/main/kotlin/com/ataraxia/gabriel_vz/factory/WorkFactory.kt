@@ -8,22 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class WorkFactory : Factory<Work, WorkEntity, WorkResource>() {
+class WorkFactory(
+        val discographyFactory: DiscographyFactory,
+        val literatureFactory: LiteratureFactory,
+        val personFactory: PersonFactory
+) : Factory<Work, WorkEntity, WorkResource>() {
 
     @Autowired
     lateinit var textFactory: TextFactory
 
     @Autowired
-    lateinit var discographyFactory: DiscographyFactory
-
-    @Autowired
     lateinit var placeFactory: PlaceFactory
-
-    @Autowired
-    lateinit var literatureFactory: LiteratureFactory
-
-    @Autowired
-    lateinit var personFactory: PersonFactory
 
     override fun modelFromEntity(entity: WorkEntity): Work = Work(
             id = entity.id,
