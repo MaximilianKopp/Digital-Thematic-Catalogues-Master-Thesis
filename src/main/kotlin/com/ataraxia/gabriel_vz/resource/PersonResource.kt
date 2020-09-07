@@ -1,7 +1,5 @@
 package com.ataraxia.gabriel_vz.resource
 
-import com.ataraxia.gabriel_vz.model.Discography
-import com.ataraxia.gabriel_vz.model.Work
 import org.springframework.hateoas.Link
 
 class PersonResource(
