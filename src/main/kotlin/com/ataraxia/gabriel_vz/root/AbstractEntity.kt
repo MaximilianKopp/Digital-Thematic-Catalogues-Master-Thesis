@@ -1,7 +1,7 @@
 package com.ataraxia.gabriel_vz.root
 
 abstract class AbstractEntity(
-        override val id: String
+        override val id: String?
 ) : EntityInterface {
 
     override fun equals(other: Any?): Boolean {

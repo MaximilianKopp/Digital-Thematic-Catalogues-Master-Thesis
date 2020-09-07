@@ -39,4 +39,32 @@ class DiscographyEntity(
         musicians?.remove(personEntity)
         personEntity.relatedDiscographies?.remove(this)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is DiscographyEntity) return false
+
+        if (id != other.id) return false
+        if (title != other.title) return false
+        if (label != other.label) return false
+        if (recordId != other.recordId) return false
+        if (dateOfPublishing != other.dateOfPublishing) return false
+        if (musicians != other.musicians) return false
+        if (relatedWorks != other.relatedWorks) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + title.hashCode()
+        result = 31 * result + label.hashCode()
+        result = 31 * result + recordId.hashCode()
+        result = 31 * result + dateOfPublishing.hashCode()
+        result = 31 * result + (musicians?.hashCode() ?: 0)
+        result = 31 * result + (relatedWorks?.hashCode() ?: 0)
+        return result
+    }
+
+
 }
