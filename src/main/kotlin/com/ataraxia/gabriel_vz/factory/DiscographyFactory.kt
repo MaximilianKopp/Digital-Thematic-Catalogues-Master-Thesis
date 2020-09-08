@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component
 
 @Component
 class DiscographyFactory(
-        val personFactory: PersonFactory
+
 ) : Factory<Discography, DiscographyEntity, DiscographyResource>() {
 
+    val personFactory: PersonFactory = PersonFactory()
 
     override fun modelFromEntity(entity: DiscographyEntity): Discography = Discography(
             id = entity.id,

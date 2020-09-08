@@ -1,24 +1,21 @@
 package com.ataraxia.gabriel_vz.factory
 
+import com.ataraxia.gabriel_vz.controller.WorkController
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.resource.WorkResource
 import com.ataraxia.gabriel_vz.root.Factory
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 
 @Component
 class WorkFactory(
         val discographyFactory: DiscographyFactory,
         val literatureFactory: LiteratureFactory,
-        val personFactory: PersonFactory
+        val personFactory: PersonFactory,
+        val textFactory: TextFactory,
+        val placeFactory: PlaceFactory
 ) : Factory<Work, WorkEntity, WorkResource>() {
-
-    @Autowired
-    lateinit var textFactory: TextFactory
-
-    @Autowired
-    lateinit var placeFactory: PlaceFactory
 
     override fun modelFromEntity(entity: WorkEntity): Work = Work(
             id = entity.id,
@@ -93,7 +90,12 @@ class WorkFactory(
     )
 
     override fun resourceFromModel(model: Work): WorkResource = WorkResource(
-            self = null,
+            self = WebMvcLinkBuilder
+                    .linkTo(WebMvcLinkBuilder
+                            .methodOn(WorkController::class.java)
+                            .one(model.id!!))
+                    .withSelfRel()
+                    .withTitle(model.title),
             id = model.id,
             title = model.title,
             relatedText = model.relatedText?.let { textFactory.resourceFromModel(it) },

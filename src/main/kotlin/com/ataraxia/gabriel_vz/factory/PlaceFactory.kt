@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class PlaceFactory : Factory<Place, PlaceEntity, PlaceResource>() {
+class PlaceFactory(
+        val coordinatesFactory: CoordinatesFactory
+) : Factory<Place, PlaceEntity, PlaceResource>() {
 
-    private val coordinatesFactory: CoordinatesFactory = CoordinatesFactory()
 
     override fun modelFromEntity(entity: PlaceEntity): Place = Place(
             id = entity.id,
