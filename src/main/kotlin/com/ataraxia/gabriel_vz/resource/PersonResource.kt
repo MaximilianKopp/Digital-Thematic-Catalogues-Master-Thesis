@@ -9,8 +9,8 @@ class PersonResource(
         var pnd: String,
         var role: String,
         var description: String,
-        var relatedWorks: MutableSet<WorkResource>,
-        var relatedDiscographies: MutableSet<DiscographyResource>
+        var relatedWorks: MutableSet<WorkResource>? = mutableSetOf(),
+        var relatedDiscographies: MutableSet<DiscographyResource>? = mutableSetOf()
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

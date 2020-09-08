@@ -2,6 +2,7 @@ package com.ataraxia.gabriel_vz.resource
 
 import com.ataraxia.gabriel_vz.model.*
 import org.springframework.hateoas.Link
+import org.springframework.hateoas.RepresentationModel
 
 class WorkResource(
         var self: Link?,
@@ -20,7 +21,7 @@ class WorkResource(
         var discographies: MutableSet<DiscographyResource>,
         var relatedPersons: MutableSet<PersonResource>,
         var literatureList: MutableSet<LiteratureResource>
-) {
+) : RepresentationModel<WorkResource>() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is WorkResource) return false
