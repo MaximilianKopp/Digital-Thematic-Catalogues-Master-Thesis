@@ -8,8 +8,8 @@ class Person(
         var pnd: String,
         var role: String,
         var description: String,
-        var relatedWorks: MutableSet<Work>,
-        var relatedDiscographies: MutableSet<Discography>
+        var relatedWorks: MutableSet<Work>? = mutableSetOf(),
+        var relatedDiscographies: MutableSet<Discography>? = mutableSetOf()
 ) : AbstractEntity(id) {
 
     override fun equals(other: Any?): Boolean {
