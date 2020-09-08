@@ -1,24 +1,30 @@
 package com.ataraxia.gabriel_vz.controller
 
-import com.ataraxia.gabriel_vz.persistence.WorkEntity
-import com.ataraxia.gabriel_vz.repository.WorkRepository
-import org.springframework.beans.factory.annotation.Autowired
+import arrow.core.extensions.option.foldable.isNotEmpty
+import arrow.core.toOption
+import com.ataraxia.gabriel_vz.factory.WorkFactory
+import com.ataraxia.gabriel_vz.model.Work
+import com.ataraxia.gabriel_vz.resource.WorkResource
+import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.service.WorkService
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-class WorkController {
-
-    @Autowired
-    lateinit var workRepository: WorkRepository
+class WorkController(
+        private val workFactory: WorkFactory,
+        private val workService: WorkService) : Controller<Work, WorkResource>() {
 
     @GetMapping("/works")
-    fun getWorks()
-            : ResponseEntity<List<WorkEntity>> {
+    override fun all(): ResponseEntity<List<WorkResource>> {
         return try {
-            val works = workRepository.findAll()
+            val works = workService
+                    .getAll()
+                    .map(workFactory::resourceFromModel)
+
             ResponseEntity(works, HttpStatus.OK)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -27,21 +33,22 @@ class WorkController {
     }
 
     @GetMapping("/works/{id}")
-    fun getWork(@PathVariable("id") id: String)
-            : ResponseEntity<WorkEntity> {
-        val work = workRepository.findById(id)
-        return if (work.isPresent)
-            ResponseEntity(work.get(), HttpStatus.OK)
-        else {
+    override fun one(@PathVariable("id") id: String)
+            : ResponseEntity<WorkResource> {
+        val work = workFactory.resourceFromModel(workService.get(id)).toOption()
+        return if (work.isNotEmpty()) {
+            ResponseEntity(work.orNull(), HttpStatus.OK)
+        } else {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
 
-    @PostMapping("/works")
-    fun createWork(@RequestBody workEntity: WorkEntity)
-            : ResponseEntity<WorkEntity> {
+    @PostMapping("/works", produces = [MediaType.APPLICATION_JSON_VALUE])
+    override fun create(@RequestBody work: Work)
+            : ResponseEntity<WorkResource> {
         return try {
-            ResponseEntity(workRepository.save(workEntity), HttpStatus.ACCEPTED)
+            workService.create(work)
+            ResponseEntity(workFactory.resourceFromModel(work), HttpStatus.ACCEPTED)
         } catch (e: Exception) {
             e.printStackTrace()
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -49,51 +56,30 @@ class WorkController {
     }
 
     @PutMapping("/works/{id}")
-    fun updateWork(@PathVariable("id") id: String, @RequestBody workEntity: WorkEntity)
-            : ResponseEntity<WorkEntity> {
-        val workData = workRepository.findById(id)
-        return if (workData.isPresent) {
-            val updatedWorkEntity = workData.get()
-                    .apply {
-                        this.title = workEntity.title
-                        this.dateOfCreation = workEntity.dateOfCreation
-                        this.dateOfPremiere = workEntity.dateOfPremiere
-                        this.placeOfPremiere = workEntity.placeOfPremiere
-                        this.incipit = workEntity.incipit
-                        this.commentary = workEntity.commentary
-                        this.dedication = workEntity.dedication
-                        this.instrumentation = workEntity.instrumentation
-                        this.category = workEntity.category
-                        this.duration = workEntity.duration
-                        this.editor = workEntity.editor
-                        this.relatedText = workEntity.relatedText
-                        this.discographies = workEntity.discographies
-                        this.relatedPersons = workEntity.relatedPersons
-                        this.literatureList = workEntity.literatureList
-                    }
-            ResponseEntity(workRepository.save(updatedWorkEntity), HttpStatus.ACCEPTED)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
+    override fun update(@PathVariable("id") id: String, @RequestBody work: Work)
+            : ResponseEntity<WorkResource> {
+        return try {
+            val workdata = workService.update(id, work)
+            ResponseEntity(workFactory.resourceFromModel(workdata), HttpStatus.ACCEPTED)
+        } catch (e: Exception) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
 
     @DeleteMapping("/works")
-    fun deleteWorks()
-            : ResponseEntity<HttpStatus> {
+    override fun deleteAll(): ResponseEntity<HttpStatus> {
         return try {
-            workRepository.deleteAll()
-            val responseEntity = ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT)
-            responseEntity
+            workService.deleteAll()
+            ResponseEntity(HttpStatus.NO_CONTENT)
         } catch (e: Exception) {
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 
     @DeleteMapping("/works/{id}")
-    fun deleteWork(@PathVariable("id") id: String)
-            : ResponseEntity<HttpStatus> {
+    override fun delete(@PathVariable("id") id: String): ResponseEntity<HttpStatus> {
         return try {
-            workRepository.deleteById(id)
+            workService.delete(id)
             ResponseEntity(HttpStatus.NO_CONTENT)
         } catch (e: Exception) {
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
