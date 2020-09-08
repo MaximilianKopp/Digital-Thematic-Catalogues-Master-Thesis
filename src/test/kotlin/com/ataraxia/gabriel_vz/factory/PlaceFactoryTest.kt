@@ -17,8 +17,8 @@ import kotlin.test.assertNotNull
 @TestInstance(PER_CLASS)
 internal class PlaceFactoryTest {
 
-    private val placeFactory = PlaceFactory()
     private val coordinatesFactory = CoordinatesFactory()
+    private val placeFactory = PlaceFactory(coordinatesFactory)
 
     private val placeUID = UUID.randomUUID().toString()
 
