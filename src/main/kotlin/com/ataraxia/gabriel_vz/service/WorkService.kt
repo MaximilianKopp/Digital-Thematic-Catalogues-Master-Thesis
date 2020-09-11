@@ -1,8 +1,10 @@
 package com.ataraxia.gabriel_vz.service
 
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
 import com.ataraxia.gabriel_vz.factory.WorkFactory
 import com.ataraxia.gabriel_vz.model.Work
-import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.repository.WorkRepository
 import com.ataraxia.gabriel_vz.root.Service
 
@@ -12,22 +14,35 @@ class WorkService(
         private val workFactory: WorkFactory
 ) : Service<Work>() {
 
-    override fun getAll(): MutableList<Work> = workRepository
-            .findAll().map {
-                workFactory.modelFromEntity(it)
-            }.toMutableList()
-
-    override fun get(id: String): Work = workFactory
-            .modelFromEntity(workRepository.findById(id).get())
-
-    override fun create(work: Work): Work {
-        val workEntity = workRepository.save(workFactory.entityFromModel(work))
-        return workFactory.modelFromEntity(workEntity)
+    override fun getAll(): Either<Exception, MutableList<Work>> = try {
+        workRepository.findAll()
+                .map(workFactory::modelFromEntity)
+                .toMutableList()
+                .right()
+    } catch (e: Exception) {
+        e.left()
     }
 
-    override fun update(id: String, work: Work): Work {
+
+    override fun get(id: String): Either<Exception, Work> = try {
+        workRepository.findById(id)
+                .map(workFactory::modelFromEntity)
+                .get()
+                .right()
+    } catch (e: Exception) {
+        e.left()
+    }
+
+    override fun create(m: Work): Either<Exception, Work> = try {
+        val workEntity = workRepository.save(workFactory.entityFromModel(m))
+        workFactory.modelFromEntity(workEntity).right()
+    } catch (e: Exception) {
+        e.left()
+    }
+
+    override fun update(id: String, m: Work): Either<Exception, Work> = try {
         val workData = workRepository.findById(id)
-        val workEntity = workFactory.entityFromModel(work)
+        val workEntity = workFactory.entityFromModel(m)
         val updatedWorkEntity = workData.get()
                 .apply {
                     this.title = workEntity.title
@@ -46,11 +61,20 @@ class WorkService(
                     this.relatedPersons = workEntity.relatedPersons
                     this.literatureList = workEntity.literatureList
                 }
-        val result = workRepository.save(updatedWorkEntity)
-        return workFactory.modelFromEntity(result)
+        workFactory.modelFromEntity(updatedWorkEntity).right()
+    } catch (e: Exception) {
+        e.left()
     }
 
-    override fun deleteAll() = workRepository.deleteAll()
+    override fun deleteAll() = try {
+        workRepository.deleteAll().right()
+    } catch (e: Exception) {
+        e.left()
+    }
 
-    override fun delete(id: String) = workRepository.deleteById(id)
+    override fun delete(id: String) = try {
+        workRepository.deleteById(id).right()
+    } catch (e: Exception) {
+        e.left()
+    }
 }
