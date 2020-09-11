@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
+import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @SpringBootApplication
 class GabrielVzApplication {
@@ -102,7 +103,12 @@ class GabrielVzApplication {
                 role = "User"
         ))
         workRepository.save(testWork)
+
+        testWork.relatedPersons?.elementAt(0)?.name = "Otto"
+        workRepository.save(testWork)
+
     }
+
 
 }
 
