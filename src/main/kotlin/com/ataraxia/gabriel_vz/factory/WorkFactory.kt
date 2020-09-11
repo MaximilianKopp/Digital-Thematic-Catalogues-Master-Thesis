@@ -1,6 +1,6 @@
 package com.ataraxia.gabriel_vz.factory
 
-import com.ataraxia.gabriel_vz.controller.WorkController
+import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.resource.WorkResource
@@ -92,7 +92,7 @@ class WorkFactory(
     override fun resourceFromModel(model: Work): WorkResource = WorkResource(
             self = WebMvcLinkBuilder
                     .linkTo(WebMvcLinkBuilder
-                            .methodOn(WorkController::class.java)
+                            .methodOn(WorkApiController::class.java)
                             .one(model.id!!))
                     .withSelfRel()
                     .withTitle(model.title),

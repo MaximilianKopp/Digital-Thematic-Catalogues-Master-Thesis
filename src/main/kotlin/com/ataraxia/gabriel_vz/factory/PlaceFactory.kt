@@ -4,7 +4,6 @@ import com.ataraxia.gabriel_vz.model.Place
 import com.ataraxia.gabriel_vz.persistence.PlaceEntity
 import com.ataraxia.gabriel_vz.resource.PlaceResource
 import com.ataraxia.gabriel_vz.root.Factory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
@@ -38,6 +37,11 @@ class PlaceFactory(
     )
 
     override fun resourceFromModel(model: Place): PlaceResource = PlaceResource(
+//            self = WebMvcLinkBuilder
+//                    .linkTo(WebMvcLinkBuilder
+//                            .methodOn(PlaceController::class.java).one(model.id!!))
+//                    .withSelfRel()
+//                    .withTitle(model.name),
             self = null,
             id = model.id,
             name = model.name,

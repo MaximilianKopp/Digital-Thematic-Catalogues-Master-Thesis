@@ -1,12 +1,9 @@
 package com.ataraxia.gabriel_vz.factory
 
 import com.ataraxia.gabriel_vz.model.Person
-import com.ataraxia.gabriel_vz.model.Place
-import com.ataraxia.gabriel_vz.persistence.DiscographyEntity
 import com.ataraxia.gabriel_vz.persistence.PersonEntity
 import com.ataraxia.gabriel_vz.resource.PersonResource
 import com.ataraxia.gabriel_vz.root.Factory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component

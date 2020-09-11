@@ -24,7 +24,6 @@ internal class CoordinatesFactoryTest {
     )
 
     private fun simpleCoordinatesResource() = CoordinatesResource(
-            self = null,
             longitude = 23.23232,
             latitude = 13.2322
     )

@@ -51,7 +51,6 @@ internal class PlaceFactoryTest {
             country = "Wien",
             name = "Beethovensaal",
             coordinates = CoordinatesResource(
-                    self = null,
                     longitude = 44.23212,
                     latitude = 53.19827
             )
