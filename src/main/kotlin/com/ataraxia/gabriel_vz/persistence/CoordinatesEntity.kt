@@ -1,7 +1,7 @@
 package com.ataraxia.gabriel_vz.persistence
 
-import org.hibernate.annotations.GenericGenerator
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Embeddable
 
 @Embeddable
 class CoordinatesEntity(

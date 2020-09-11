@@ -4,7 +4,6 @@ import arrow.core.Either
 import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.IncipitFactory
 import com.ataraxia.gabriel_vz.model.Incipit
-import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.resource.IncipitResource
 import com.ataraxia.gabriel_vz.root.Controller
 import com.ataraxia.gabriel_vz.service.IncipitService

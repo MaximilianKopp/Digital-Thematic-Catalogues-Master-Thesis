@@ -1,6 +1,5 @@
 package com.ataraxia.gabriel_vz.persistence
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
 import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*

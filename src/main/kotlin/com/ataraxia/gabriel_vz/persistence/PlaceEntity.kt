@@ -1,9 +1,6 @@
 package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import com.fasterxml.jackson.annotation.JsonManagedReference
-import org.hibernate.annotations.Fetch
-import org.hibernate.annotations.FetchMode
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 

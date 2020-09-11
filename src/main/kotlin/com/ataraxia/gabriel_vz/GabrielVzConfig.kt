@@ -3,7 +3,6 @@ package com.ataraxia.gabriel_vz
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.integration.config.EnableIntegration
-import springfox.documentation.builders.ApiInfoBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.service.ApiInfo
@@ -30,7 +29,7 @@ class GabrielVzConfig {
     private fun apiDetails(): ApiInfo {
         return ApiInfo(
                 "Wolfgang Gabriel Verzeichnis API",
-                "This Api is part of the Master-Thesis: Digital Thematic Catalogs - Software architecture and reference implementation",
+                "This Api is part of the Master-Thesis: Digital Thematic Catalogue - Software Architecture and Reference Implementation",
                 "1.0",
                 "Free to use",
                 springfox.documentation.service.Contact("Kopp, Maximilian", "ataraxiatech.com", "m.kopp89@web.de"),

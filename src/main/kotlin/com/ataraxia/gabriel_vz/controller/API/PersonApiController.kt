@@ -4,7 +4,6 @@ import arrow.core.Either
 import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.PersonFactory
 import com.ataraxia.gabriel_vz.model.Person
-import com.ataraxia.gabriel_vz.model.Text
 import com.ataraxia.gabriel_vz.resource.PersonResource
 import com.ataraxia.gabriel_vz.resource.TextResource
 import com.ataraxia.gabriel_vz.root.Controller

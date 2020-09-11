@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
-import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @SpringBootApplication
 class GabrielVzApplication {
@@ -15,7 +14,7 @@ class GabrielVzApplication {
     @Bean
     fun init(workRepository: WorkRepository, discographyRepository: DiscographyRepository) = CommandLineRunner {
 
-        var testDiscography = DiscographyEntity(
+        val testDiscography = DiscographyEntity(
                 id = null,
                 recordId = "222",
                 label = "Superdibummel",
@@ -31,7 +30,7 @@ class GabrielVzApplication {
                 role = "User"
         ))
 
-        var testWork = WorkEntity(
+        val testWork = WorkEntity(
                 id = null,
                 title = "Sonata C-Dur",
                 category = "Klaviermusik",

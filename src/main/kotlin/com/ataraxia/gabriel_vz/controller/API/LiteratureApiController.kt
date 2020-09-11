@@ -4,10 +4,8 @@ import arrow.core.Either
 import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.LiteratureFactory
 import com.ataraxia.gabriel_vz.model.Literature
-import com.ataraxia.gabriel_vz.model.Text
 import com.ataraxia.gabriel_vz.resource.LiteratureResource
 import com.ataraxia.gabriel_vz.resource.TextResource
-import com.ataraxia.gabriel_vz.resource.WorkResource
 import com.ataraxia.gabriel_vz.root.Controller
 import com.ataraxia.gabriel_vz.service.LiteratureService
 import io.swagger.annotations.Api

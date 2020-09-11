@@ -7,9 +7,7 @@ import com.ataraxia.gabriel_vz.root.Factory
 import org.springframework.stereotype.Component
 
 @Component
-class DiscographyFactory(
-
-) : Factory<Discography, DiscographyEntity, DiscographyResource>() {
+class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyResource>() {
 
     val personFactory: PersonFactory = PersonFactory()
 
