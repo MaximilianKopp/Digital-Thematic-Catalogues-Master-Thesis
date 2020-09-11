@@ -20,4 +20,20 @@ class LiteratureEntity(
         @JsonBackReference
         @ManyToOne(fetch = FetchType.LAZY)
         var relatedWork: WorkEntity? = null
-)
+) {
+        override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (other !is LiteratureEntity) return false
+
+                if (id != other.id) return false
+                if (author != other.author) return false
+                if (isbn != other.isbn) return false
+                if (yearOfPublishing != other.yearOfPublishing) return false
+
+                return true
+        }
+
+        override fun hashCode(): Int {
+                return 31
+        }
+}

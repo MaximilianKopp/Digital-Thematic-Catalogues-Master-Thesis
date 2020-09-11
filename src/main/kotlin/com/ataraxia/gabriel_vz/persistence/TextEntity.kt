@@ -32,4 +32,22 @@ class TextEntity(
         relatedWorks?.remove(workEntity)
         workEntity.relatedText = null
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is TextEntity) return false
+
+        if (id != other.id) return false
+        if (title != other.title) return false
+        if (author != other.author) return false
+        if (excerpt != other.excerpt) return false
+        if (relatedWorks != other.relatedWorks) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return 31
+    }
+
 }

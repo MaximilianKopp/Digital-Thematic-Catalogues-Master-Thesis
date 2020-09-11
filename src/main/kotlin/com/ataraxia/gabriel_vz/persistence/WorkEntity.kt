@@ -38,27 +38,43 @@ class WorkEntity(
         @JsonManagedReference
         @ManyToOne(
                 fetch = FetchType.LAZY,
-                cascade = [CascadeType.ALL]
+                cascade = [
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ]
         )
         var relatedText: TextEntity?,
 
         @JsonManagedReference
-        @ManyToMany(mappedBy = "relatedWorks",
-                cascade = [CascadeType.ALL],
-                fetch = FetchType.LAZY)
+        @ManyToMany(
+                mappedBy = "relatedWorks",
+                cascade = [
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ]
+        )
         var discographies: MutableSet<DiscographyEntity> = mutableSetOf(),
 
         @JsonManagedReference
-        @ManyToMany(mappedBy = "relatedWorks",
-                cascade = [CascadeType.ALL],
-                fetch = FetchType.LAZY)
+        @ManyToMany(
+                mappedBy = "relatedWorks",
+                cascade = [
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ]
+        )
         var relatedPersons: MutableSet<PersonEntity>? = mutableSetOf(),
 
         @JsonManagedReference
-        @OneToMany(
-                mappedBy = "relatedWork",
-                cascade = [CascadeType.ALL]
-        )
+        @OneToMany(mappedBy = "relatedWork",
+                cascade = [
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ], orphanRemoval = true)
         var literatureList: MutableSet<LiteratureEntity>? = mutableSetOf()
 ) {
     fun addDiscography(discographyEntity: DiscographyEntity) {
@@ -96,4 +112,26 @@ class WorkEntity(
         incipit?.relatedWork = this
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is WorkEntity) return false
+
+        if (id != other.id) return false
+        if (title != other.title) return false
+        if (dateOfCreation != other.dateOfCreation) return false
+        if (dateOfPremiere != other.dateOfPremiere) return false
+        if (placeOfPremiere != other.placeOfPremiere) return false
+        if (commentary != other.commentary) return false
+        if (dedication != other.dedication) return false
+        if (instrumentation != other.instrumentation) return false
+        if (category != other.category) return false
+        if (duration != other.duration) return false
+        if (editor != other.editor) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return 31
+    }
 }

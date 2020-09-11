@@ -23,8 +23,8 @@ class PersonEntity(
             CascadeType.MERGE
         ])
         @JoinTable(
-                joinColumns = [JoinColumn(name = "work_id")],
-                inverseJoinColumns = [JoinColumn(name = "person_id")]
+                joinColumns = [JoinColumn(name = "person_id")],
+                inverseJoinColumns = [JoinColumn(name = "work_id")]
         )
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf(),
 
@@ -34,8 +34,26 @@ class PersonEntity(
             CascadeType.MERGE
         ])
         @JoinTable(
-                joinColumns = [JoinColumn(name = "discography_id")],
-                inverseJoinColumns = [JoinColumn(name = "musician_id")]
+                joinColumns = [JoinColumn(name = "musician_id")],
+                inverseJoinColumns = [JoinColumn(name = "discography_id")]
         )
         var relatedDiscographies: MutableSet<DiscographyEntity>? = mutableSetOf()
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PersonEntity) return false
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (pnd != other.pnd) return false
+        if (role != other.role) return false
+        if (description != other.description) return false
+        if (relatedDiscographies != other.relatedDiscographies) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return 31
+    }
+}

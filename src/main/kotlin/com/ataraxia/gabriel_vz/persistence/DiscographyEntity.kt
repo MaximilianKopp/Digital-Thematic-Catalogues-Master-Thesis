@@ -2,6 +2,7 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
+import org.hibernate.annotations.Fetch
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
@@ -20,14 +21,24 @@ class DiscographyEntity(
 
         @JsonManagedReference
         @ManyToMany(mappedBy = "relatedDiscographies",
-                cascade = [CascadeType.ALL])
+                fetch = FetchType.LAZY,
+                cascade = [
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE])
         var musicians: MutableSet<PersonEntity>? = mutableSetOf(),
 
         @JsonBackReference(value = "work-discography")
-        @ManyToMany(cascade = [CascadeType.ALL])
+        @ManyToMany(
+                fetch = FetchType.LAZY,
+                cascade = [
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+                ]
+        )
         @JoinTable(
-                joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
-                inverseJoinColumns = [JoinColumn(name = "discography_id", referencedColumnName = "id")])
+                joinColumns = [JoinColumn(name = "discography_id", referencedColumnName = "id")],
+                inverseJoinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")])
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
 ) {
     fun addMusicians(personEntity: PersonEntity) {
@@ -49,22 +60,12 @@ class DiscographyEntity(
         if (label != other.label) return false
         if (recordId != other.recordId) return false
         if (dateOfPublishing != other.dateOfPublishing) return false
-        if (musicians != other.musicians) return false
-        if (relatedWorks != other.relatedWorks) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = id?.hashCode() ?: 0
-        result = 31 * result + title.hashCode()
-        result = 31 * result + label.hashCode()
-        result = 31 * result + recordId.hashCode()
-        result = 31 * result + dateOfPublishing.hashCode()
-        result = 31 * result + (musicians?.hashCode() ?: 0)
-        result = 31 * result + (relatedWorks?.hashCode() ?: 0)
-        return result
+        return 31
     }
-
 
 }

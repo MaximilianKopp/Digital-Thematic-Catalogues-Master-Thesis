@@ -1,9 +1,6 @@
 package com.ataraxia.gabriel_vz.resource
 
-import org.springframework.hateoas.Link
-
 class CoordinatesResource(
-        var self: Link?,
         var longitude: Double,
         var latitude: Double
 ) {
@@ -18,9 +15,10 @@ class CoordinatesResource(
     }
 
     override fun hashCode(): Int {
-        var result = self?.hashCode() ?: 0
-        result = 31 * result + longitude.hashCode()
+        var result = longitude.hashCode()
         result = 31 * result + latitude.hashCode()
         return result
     }
+
+
 }

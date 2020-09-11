@@ -29,4 +29,24 @@ class IncipitEntity(
                 relatedWork = workEntity
                 workEntity.addIncipit(this)
         }
+
+        override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (other !is IncipitEntity) return false
+
+                if (id != other.id) return false
+                if (text != other.text) return false
+                if (keysig != other.keysig) return false
+                if (timesig != other.timesig) return false
+                if (score != other.score) return false
+                if (description != other.description) return false
+
+                return true
+        }
+
+        override fun hashCode(): Int {
+                return 31
+        }
+
+
 }
