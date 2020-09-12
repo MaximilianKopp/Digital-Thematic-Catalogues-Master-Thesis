@@ -17,7 +17,7 @@ internal class PersonFactoryTest {
     private val personID = UUID.randomUUID().toString()
     private var personFactory: PersonFactory = PersonFactory()
 
-    private val simplePerson = Person(
+    private fun simplePerson() = Person(
             id = personID,
             description = "Pianist",
             name = "Alberto",
@@ -27,7 +27,7 @@ internal class PersonFactoryTest {
             role = "Musician"
     )
 
-    private val simplePersonEntity = PersonEntity(
+    private fun simplePersonEntity() = PersonEntity(
             id = personID,
             description = "Pianist",
             name = "Alberto",
@@ -37,7 +37,7 @@ internal class PersonFactoryTest {
             role = "Musician"
     )
 
-    private val simplePersonResource = PersonResource(
+    private fun simplePersonResource() = PersonResource(
             self = null,
             id = personID,
             description = "Pianist",
@@ -50,7 +50,7 @@ internal class PersonFactoryTest {
 
     @Test
     fun `personModel from personEntity`() {
-        val personEntity = simplePersonEntity
+        val personEntity = simplePersonEntity()
         val person = personFactory.modelFromEntity(personEntity)
 
         assertNotNull(person)
@@ -64,7 +64,7 @@ internal class PersonFactoryTest {
 
     @Test
     fun `personEntity from personModel`() {
-        val person = simplePerson
+        val person = simplePerson()
         val personEntity = personFactory.entityFromModel(person)
 
         assertNotNull(person)
@@ -78,7 +78,7 @@ internal class PersonFactoryTest {
 
     @Test
     fun `personModel from personResource`() {
-        val personResource = simplePersonResource
+        val personResource = simplePersonResource()
         val person = personFactory.modelFromResource(personResource)
 
         assertNotNull(person)
@@ -92,7 +92,7 @@ internal class PersonFactoryTest {
 
     @Test
     fun `personResource from personModel`() {
-        val person = simplePerson
+        val person = simplePerson()
         val personResource = personFactory.resourceFromModel(person)
 
         assertNotNull(person)
