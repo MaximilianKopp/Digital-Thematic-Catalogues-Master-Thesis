@@ -6,7 +6,7 @@ import com.ataraxia.gabriel_vz.factory.LiteratureFactory
 import com.ataraxia.gabriel_vz.model.Literature
 import com.ataraxia.gabriel_vz.resource.LiteratureResource
 import com.ataraxia.gabriel_vz.resource.TextResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.LiteratureService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/literature", description = "Operations about Literature")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class LiteratureApiController(
         private val literatureFactory: LiteratureFactory,
         private val literatureService: LiteratureService
-) : Controller<Literature>() {
+) : ApiController<Literature>() {
 
     @GetMapping("/literature")
     @ApiOperation(

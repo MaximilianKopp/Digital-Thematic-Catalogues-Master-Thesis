@@ -4,6 +4,7 @@ import com.ataraxia.gabriel_vz.persistence.*
 import com.ataraxia.gabriel_vz.repository.DiscographyRepository
 import com.ataraxia.gabriel_vz.repository.WorkRepository
 import org.springframework.boot.CommandLineRunner
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean

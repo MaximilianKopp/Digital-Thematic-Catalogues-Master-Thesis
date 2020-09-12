@@ -5,7 +5,7 @@ import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.TextFactory
 import com.ataraxia.gabriel_vz.model.Text
 import com.ataraxia.gabriel_vz.resource.TextResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.TextService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/texts", description = "Operations about Texts")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class TextApiController(
         private val textFactory: TextFactory,
         private val textService: TextService
-) : Controller<Text>() {
+) : ApiController<Text>() {
 
     @GetMapping("/texts")
     @ApiOperation(

@@ -5,7 +5,7 @@ import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.DiscographyFactory
 import com.ataraxia.gabriel_vz.model.Discography
 import com.ataraxia.gabriel_vz.resource.DiscographyResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.DiscographyService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/discographies")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class DiscographyApiController(
         private val discographyFactory: DiscographyFactory,
         private val discographyService: DiscographyService
-) : Controller<Discography>() {
+) : ApiController<Discography>() {
 
     @GetMapping("/discographies")
     @ApiOperation(

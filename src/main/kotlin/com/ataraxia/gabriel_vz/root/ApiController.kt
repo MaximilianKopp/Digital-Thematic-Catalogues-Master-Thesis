@@ -2,7 +2,7 @@ package com.ataraxia.gabriel_vz.root
 
 import org.springframework.http.ResponseEntity
 
-abstract class Controller<M> {
+abstract class ApiController<M> {
 
     abstract fun all(): ResponseEntity<Any>
 

@@ -5,7 +5,7 @@ import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.IncipitFactory
 import com.ataraxia.gabriel_vz.model.Incipit
 import com.ataraxia.gabriel_vz.resource.IncipitResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.IncipitService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/incipits", description = "Operations about Incipits")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class IncipitApiController(
         private val incipitFactory: IncipitFactory,
         private val incipitService: IncipitService
-) : Controller<Incipit>() {
+) : ApiController<Incipit>() {
 
     @GetMapping("/incipits")
     @ApiOperation(

@@ -5,7 +5,7 @@ import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.PlaceFactory
 import com.ataraxia.gabriel_vz.model.Place
 import com.ataraxia.gabriel_vz.resource.PlaceResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.PlaceService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/places", description = "Operations about Places")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class PlaceApiController(
         private val placeFactory: PlaceFactory,
         private val placeService: PlaceService
-) : Controller<Place>() {
+) : ApiController<Place>() {
 
     @GetMapping("/places")
     @ApiOperation(

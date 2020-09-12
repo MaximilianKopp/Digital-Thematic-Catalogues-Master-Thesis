@@ -6,7 +6,7 @@ import com.ataraxia.gabriel_vz.factory.PersonFactory
 import com.ataraxia.gabriel_vz.model.Person
 import com.ataraxia.gabriel_vz.resource.PersonResource
 import com.ataraxia.gabriel_vz.resource.TextResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.PersonService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/persons", description = "Operations about Persons")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class PersonApiController(
         private val personFactory: PersonFactory,
         private val personService: PersonService
-) : Controller<Person>() {
+) : ApiController<Person>() {
 
     @GetMapping("/persons")
     @ApiOperation(

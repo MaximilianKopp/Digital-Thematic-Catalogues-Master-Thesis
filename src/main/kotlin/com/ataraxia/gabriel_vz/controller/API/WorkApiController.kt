@@ -5,7 +5,7 @@ import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.WorkFactory
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.resource.WorkResource
-import com.ataraxia.gabriel_vz.root.Controller
+import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.WorkService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Api(value = "/works", description = "Operations about Works")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 class WorkApiController(
         private val workFactory: WorkFactory,
         private val workService: WorkService
-) : Controller<Work>() {
+) : ApiController<Work>() {
 
     @GetMapping("/works")
     @ApiOperation(
