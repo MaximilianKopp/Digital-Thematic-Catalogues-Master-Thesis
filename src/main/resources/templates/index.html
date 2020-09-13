@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{../styles.css}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <meta charset="UTF-8">
+    <title>Wolfgang Gabriel - Thematic Catalogue</title>
+</head>
+<body th:style="'background:url('+ @{../images/background.jpg} +')no-repeat center'">
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="row">
+
+    <div class="col col-md-2">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+    </div>
+
+    <div class="col col-md-6">
+        <h3>Biographie:</h3>
+        <p class="biography">
+            <em>Wolfgang Gabriel (* June 9, 1930 in Vienna) is an Austrian composer, conductor and music teacher. The
+                son of a psychiatrist and a teacher, played the piano already as a child. After WWII he
+                attended the Realgymnasium until 1948. From 1946 he also took piano lessons with Hans Sittner, later
+                president of the Academy for Music and Performing Arts in Vienna, and music theory lessons with Leo
+                Lehner, the founder of the choir "Jung-Wien". In 1947 he entered the Academy of Music and Performing
+                Arts in Vienna. There he studied piano with Grete Hinterhofer, music theory with Joseph Marx (later with
+                Alfred Uhl) and conducting in the Kapellmeister class of Hans Swarowsky from 1950. In 1952 he completed
+                his studies with distinction and a graduation prize. From 1954 to 1996 Gabriel taught at the Vienna
+                Academy of Music, first as a répétiteur in the vocal department, then as an assistant to Ernst Reichert and
+                finally as head of an opera class. From 1960 to 2007 he was also the artistic director of the Academic
+                Orchestra Association. As a conductor, he has appeared with the Vienna Symphony Orchestra, the Lower
+                Austrian Tonkünstler, the ORF Symphony Orchestra and several Hungarian orchestras, among others. In the
+                1950s he directed the newly founded Orchestra of Jeunesses Musicales for several years. From 1988
+                to 2011 Wolfgang Gabriel was artistic director of the Bachgemeinde Wien. Gabriel composed more than 100
+                works, including several orchestral and instrumental concertos, chamber music (including several string
+                quartets)piano works and numerous song cycles. His tonal language was influened by Béla Bartók, Igor
+                Stravinsky and Alban Berg. He wrote several of his works for his second wife, the singer Susan Dennis,
+                and for his son Martin Gabriel, who is the principal oboist of the Vienna Philharmonic.
+                Source: <a href="https://de.wikipedia.org/wiki/Wolfgang_Gabriel" target="_blank">Wikipedia</a>
+            </em>
+        </p>
+    </div>
+
+    <div class="gabrielphoto col col-md-4">
+        <img class="img-fluid photo" src="images/gabriel.jpg" width="29%" height="30%" alt="Wolfgang Gabriel">
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-8">
+        <div th:insert="fragments/footer :: footer"></div>
+    </div>
+</div>
+
+
+<script th:src="@{webjars/jquery/3.5.1/jquery.js}"></script>
+<script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
+
+

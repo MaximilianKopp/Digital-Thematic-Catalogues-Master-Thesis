@@ -17,9 +17,14 @@
     <properties>
         <java.version>11</java.version>
         <kotlin.version>1.3.72</kotlin.version>
+        <font-awesome.version>5.14.0</font-awesome.version>
     </properties>
 
     <dependencies>
+
+        <!-- ==================== -->
+        <!--        Spring        -->
+        <!-- ==================== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -32,10 +37,30 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-hateoas -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+            <version>2.3.3.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>2.3.3.RELEASE</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--        Jackson       -->
+        <!-- ==================== -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
+
+        <!-- ==================== -->
+        <!--        Kotlin        -->
+        <!-- ==================== -->
         <dependency>
             <groupId>io.projectreactor.kotlin</groupId>
             <artifactId>reactor-kotlin-extensions</artifactId>
@@ -65,11 +90,77 @@
             <version>0.10.5</version>
         </dependency>
 
+        <!-- ==================== -->
+        <!--        MYSQL         -->
+        <!-- ==================== -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- ==================== -->
+        <!--        SWAGGER       -->
+        <!-- ==================== -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--        WebJars       -->
+        <!-- ==================== -->
+        <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.40</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--        Vue.js        -->
+        <!-- ==================== -->
+        <!-- https://mvnrepository.com/artifact/org.webjars/vue -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>vue</artifactId>
+            <version>2.6.11</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--        Axios         -->
+        <!-- ==================== -->
+        <!-- https://mvnrepository.com/artifact/org.webjars.npm/axios -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>axios</artifactId>
+            <version>0.20.0</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--        Bootstrap     -->
+        <!-- ==================== -->
+        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--     Miscellaneous    -->
+        <!-- ==================== -->
+        <!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.14.0</version>
+        </dependency>
+
+        <!-- ==================== -->
+        <!--        Testing       -->
+        <!-- ==================== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -81,10 +172,35 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-test-junit5 -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
+            <version>1.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.kotlintest/kotlintest-assertions-arrow -->
+        <dependency>
+            <groupId>io.kotlintest</groupId>
+            <artifactId>kotlintest-assertions-arrow</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.mockk/mockk -->
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk</artifactId>
+            <version>1.10.0</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
         </dependency>
     </dependencies>
 
@@ -119,6 +235,7 @@
                         <artifactId>kotlin-maven-noarg</artifactId>
                         <version>${kotlin.version}</version>
                     </dependency>
+
                 </dependencies>
             </plugin>
         </plugins>
