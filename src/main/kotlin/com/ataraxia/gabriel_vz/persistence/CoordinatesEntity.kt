@@ -10,8 +10,6 @@ class CoordinatesEntity(
         @Column(name = "latitude")
         var latitude: Double
 ) {
-
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is CoordinatesEntity) return false
@@ -23,6 +21,8 @@ class CoordinatesEntity(
     }
 
     override fun hashCode(): Int {
-        return 31
+        var result = longitude.hashCode()
+        result = 31 * result + latitude.hashCode()
+        return result
     }
 }

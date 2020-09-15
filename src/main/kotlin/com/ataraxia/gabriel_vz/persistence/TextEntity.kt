@@ -2,19 +2,18 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.GenericGenerator
+import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
 @Table(name = "text")
 class TextEntity(
-
-        @Id
-        @GeneratedValue(generator = "system-uuid")
-        @GenericGenerator(name = "system-uuid", strategy = "uuid")
-        val id: String? = null,
-        var title: String,
-        var author: String,
-        var excerpt: String,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
+        var author: String?,
+        var excerpt: String?,
 
         @JsonBackReference(value = "text-work")
         @OneToMany(
@@ -22,6 +21,11 @@ class TextEntity(
                 orphanRemoval = true
         )
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
+) : com.ataraxia.gabriel_vz.root.Entity(
+        id,
+        title,
+        created,
+        modified
 ) {
     fun addWork(workEntity: WorkEntity) {
         relatedWorks?.add(workEntity)
@@ -36,9 +40,8 @@ class TextEntity(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is TextEntity) return false
+        if (!super.equals(other)) return false
 
-        if (id != other.id) return false
-        if (title != other.title) return false
         if (author != other.author) return false
         if (excerpt != other.excerpt) return false
         if (relatedWorks != other.relatedWorks) return false
@@ -47,7 +50,10 @@ class TextEntity(
     }
 
     override fun hashCode(): Int {
-        return 31
+        var result = super.hashCode()
+        result = 31 * result + author.hashCode()
+        result = 31 * result + excerpt.hashCode()
+        return result
     }
-
+    
 }

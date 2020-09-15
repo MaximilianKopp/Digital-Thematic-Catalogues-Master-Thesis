@@ -1,15 +1,24 @@
 package com.ataraxia.gabriel_vz.model
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import com.ataraxia.gabriel_vz.root.Model
+import java.time.OffsetDateTime
 
 class Incipit(
-        override var id: String?,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
         var text: String,
         var keysig: String,
         var timesig: String,
         var score: String,
         var description: String
-) : AbstractEntity(id) {
+) : Model(
+        id,
+        title,
+        created,
+        modified
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -34,4 +43,5 @@ class Incipit(
         result = 31 * result + description.hashCode()
         return result
     }
+
 }

@@ -11,16 +11,23 @@
 </head>
 <body th:style="'background:url('+ @{../images/background.jpg} +')no-repeat center'">
 
-<div th:replace="fragments/header :: header"></div>
 
-<div class="row">
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <div th:replace="fragments/header :: header"></div>
+        </div>
+    </div>
+</div>
 
-    <div class="col col-md-2">
+
+<div class="row no-gutters">
+    <div class="col-md-2">
         <div th:replace="fragments/sidebar :: sidebar"></div>
     </div>
 
-    <div class="col col-md-6">
-        <h3>Biographie:</h3>
+    <div class="col-md-6 my-5">
+        <h1 class="text-center">Biography:</h1>
         <p class="biography">
             <em>Wolfgang Gabriel (* June 9, 1930 in Vienna) is an Austrian composer, conductor and music teacher. The
                 son of a psychiatrist and a teacher, played the piano already as a child. After WWII he
@@ -30,7 +37,8 @@
                 Arts in Vienna. There he studied piano with Grete Hinterhofer, music theory with Joseph Marx (later with
                 Alfred Uhl) and conducting in the Kapellmeister class of Hans Swarowsky from 1950. In 1952 he completed
                 his studies with distinction and a graduation prize. From 1954 to 1996 Gabriel taught at the Vienna
-                Academy of Music, first as a répétiteur in the vocal department, then as an assistant to Ernst Reichert and
+                Academy of Music, first as a répétiteur in the vocal department, then as an assistant to Ernst Reichert
+                and
                 finally as head of an opera class. From 1960 to 2007 he was also the artistic director of the Academic
                 Orchestra Association. As a conductor, he has appeared with the Vienna Symphony Orchestra, the Lower
                 Austrian Tonkünstler, the ORF Symphony Orchestra and several Hungarian orchestras, among others. In the
@@ -45,12 +53,12 @@
         </p>
     </div>
 
-    <div class="gabrielphoto col col-md-4">
-        <img class="img-fluid photo" src="images/gabriel.jpg" width="29%" height="30%" alt="Wolfgang Gabriel">
+    <div class="gabrielphoto col-md-4 my-5">
+        <img class="img-fluid gabrielphoto pl-4" src="images/gabriel.jpg" alt="Wolfgang Gabriel">
     </div>
 </div>
-<div class="row">
-    <div class="col col-md-8">
+<div class="row no-gutters">
+    <div class="col-md-12">
         <div th:insert="fragments/footer :: footer"></div>
     </div>
 </div>

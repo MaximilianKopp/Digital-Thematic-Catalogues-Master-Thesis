@@ -1,32 +1,21 @@
 package com.ataraxia.gabriel_vz.resource
 
+import com.ataraxia.gabriel_vz.root.Resource
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import io.swagger.annotations.ApiModelProperty.AccessMode.READ_ONLY
 import org.springframework.hateoas.Link
-import org.springframework.hateoas.RepresentationModel
+import org.springframework.http.CacheControl
+import org.springframework.http.MediaType
+import java.util.concurrent.TimeUnit
 
 @ApiModel(value = "WorkResource", description = "Represents a Work")
 class WorkResource(
-
-        @ApiModelProperty(
-                notes = "A link to the specific Resource",
-                accessMode = READ_ONLY
-        )
-        var self: Link?,
-        @ApiModelProperty(
-                notes = "A globally unique identifier",
-                accessMode = READ_ONLY,
-                example = "4028e3817478b2c7017478b2d0250000"
-        )
-        var id: String?,
-        @ApiModelProperty(
-                notes = "The title of a Work",
-                accessMode = READ_ONLY,
-                dataType = "String",
-                example = "Sonata in C-Dur"
-        )
-        var title: String,
+        self: Link?,
+        id: String?,
+        title: String?,
+        created: String?,
+        modified: String?,
         @ApiModelProperty(
                 notes = "Date when the Work was created",
                 accessMode = READ_ONLY,
@@ -118,14 +107,21 @@ class WorkResource(
                 example = "Susanne Hübner - Wolfgang Gabriel Leben und Werk"
         )
         var literatureList: MutableSet<LiteratureResource>
-) : RepresentationModel<WorkResource>() {
-
+) : Resource(
+        self,
+        id,
+        title,
+        created,
+        modified
+) {
+    override fun cacheControl(): CacheControl = CacheControl.maxAge(5, TimeUnit.MINUTES)
+    override fun contentType(): MediaType = MediaType("application", "com.ataraxia.gabriel-catalogue+json")
+    override fun eTag(): String = hashCode().toString()
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is WorkResource) return false
+        if (!super.equals(other)) return false
 
-        if (id != other.id) return false
-        if (title != other.title) return false
         if (dateOfCreation != other.dateOfCreation) return false
         if (dateOfPremiere != other.dateOfPremiere) return false
         if (placeOfPremiere != other.placeOfPremiere) return false
@@ -144,8 +140,7 @@ class WorkResource(
     }
 
     override fun hashCode(): Int {
-        var result = id?.hashCode() ?: 0
-        result = 31 * result + title.hashCode()
+        var result = super.hashCode()
         result = 31 * result + dateOfCreation.hashCode()
         result = 31 * result + dateOfPremiere.hashCode()
         result = 31 * result + (placeOfPremiere?.hashCode() ?: 0)
@@ -161,4 +156,5 @@ class WorkResource(
         result = 31 * result + literatureList.hashCode()
         return result
     }
+
 }

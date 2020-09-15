@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -24,6 +25,8 @@ internal class TextServiceTest {
 
     private fun simpleText() = Text(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
             author = "James Taylor",
             title = "The nine cats",
             excerpt = "Nine tiny little cats..."
@@ -31,6 +34,8 @@ internal class TextServiceTest {
 
     private fun simpleTextEntity() = TextEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
             author = "James Taylor",
             title = "The nine cats",
             excerpt = "Nine tiny little cats..."

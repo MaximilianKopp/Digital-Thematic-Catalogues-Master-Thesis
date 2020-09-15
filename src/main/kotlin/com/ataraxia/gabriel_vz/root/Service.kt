@@ -1,6 +1,7 @@
 package com.ataraxia.gabriel_vz.root
 
 import arrow.core.Either
+import org.springframework.data.domain.Page
 
 abstract class Service<M> {
 
@@ -15,4 +16,6 @@ abstract class Service<M> {
     abstract fun deleteAll(): Either<Exception, Unit>
 
     abstract fun delete(id: String): Either<Exception, Unit>
+
+    //abstract fun findPaginated(pageNo: Int, pageSize: Int): Page<M>
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -19,6 +20,8 @@ internal class DiscographyFactoryTest {
 
     private fun simpleDiscography() = Discography(
             id = discographyID,
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Wolfgang Gabriel - all Sonatas",
             musicians = mutableSetOf(),
             recordId = "1928-232",
@@ -29,6 +32,8 @@ internal class DiscographyFactoryTest {
     private fun simpleDiscographyEntity() = DiscographyEntity(
             id = discographyID,
             title = "Wolfgang Gabriel - all Sonatas",
+            created = OffsetDateTime.now(),
+            modified = null,
             musicians = mutableSetOf(),
             recordId = "1928-232",
             label = "Deutsche Gramophon",
@@ -38,6 +43,8 @@ internal class DiscographyFactoryTest {
     private fun simpleDiscographyResource() = DiscographyResource(
             self = null,
             id = discographyID,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
             title = "Wolfgang Gabriel - all Sonatas",
             musicians = mutableSetOf(),
             recordId = "1928-232",

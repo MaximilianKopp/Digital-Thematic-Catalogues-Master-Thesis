@@ -4,17 +4,28 @@ import arrow.core.Either
 import com.ataraxia.gabriel_vz.errorhandling.ResourceNotFoundException
 import com.ataraxia.gabriel_vz.factory.WorkFactory
 import com.ataraxia.gabriel_vz.model.Work
+import com.ataraxia.gabriel_vz.persistence.WorkEntity
+import com.ataraxia.gabriel_vz.repository.WorkRepository
 import com.ataraxia.gabriel_vz.resource.WorkResource
 import com.ataraxia.gabriel_vz.root.ApiController
 import com.ataraxia.gabriel_vz.service.WorkService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.json.JsonParseException
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
+
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.lang.StringBuilder
 
 @RestController
 @Api(value = "/works", description = "Operations about Works")
@@ -23,6 +34,35 @@ class WorkApiController(
         private val workFactory: WorkFactory,
         private val workService: WorkService
 ) : ApiController<Work>() {
+
+    @Autowired
+    lateinit var workRepository: WorkRepository
+
+
+    @GetMapping("/works2")
+    fun testPagination(pageable: Pageable, assembler: PagedResourcesAssembler<WorkEntity>): ResponseEntity<PagedModel<EntityModel<WorkEntity>>> {
+        val works = workRepository.findAll(pageable)
+        val pm: PagedModel<EntityModel<WorkEntity>> = assembler.toModel(works, linkTo(WorkApiController::class.java).slash("/works2").withSelfRel())
+        val responseHeaders: HttpHeaders = HttpHeaders()
+//                .apply {
+//                    add("Link", createLinkHeader(pm))
+//                }
+        return ResponseEntity(assembler.toModel(works, linkTo(WorkApiController::class.java).slash("/works").withSelfRel()), responseHeaders, HttpStatus.OK)
+    }
+
+    fun createLinkHeader(pm: PagedModel<EntityModel<WorkEntity>>): String {
+        val linkheader = StringBuilder()
+                .apply {
+                    append(buildLinkHeader(pm.getLinks("first")[0].href, "first"))
+                    append(", ")
+                    append(buildLinkHeader(pm.getLinks("next")[0].href, "next"))
+                }
+        return linkheader.toString()
+    }
+
+    fun buildLinkHeader(uri: String, rel: String): String {
+        return "<$uri>; rel=\"$rel\""
+    }
 
     @GetMapping("/works")
     @ApiOperation(

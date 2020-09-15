@@ -5,8 +5,14 @@ import arrow.core.left
 import arrow.core.right
 import com.ataraxia.gabriel_vz.factory.WorkFactory
 import com.ataraxia.gabriel_vz.model.Work
+import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.repository.WorkRepository
 import com.ataraxia.gabriel_vz.root.Service
+import io.kotlintest.matchers.string.shouldBeEqualIgnoringCase
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 
 @org.springframework.stereotype.Service
 class WorkService(
@@ -76,5 +82,16 @@ class WorkService(
         workRepository.deleteById(id).right()
     } catch (e: Exception) {
         e.left()
+    }
+
+    fun findPaginated(pageNo: Int, pageSize: Int, sortField: String, sortDirection: String): Page<WorkEntity> {
+        val sort =
+                if (sortDirection.equals(Sort.Direction.ASC.name, ignoreCase = true))
+                    Sort.by(sortField).ascending()
+                else
+                    Sort.by(sortField).descending()
+
+        val pageable: Pageable = PageRequest.of(pageNo - 1, pageSize, sort)
+        return workRepository.findAll(pageable)
     }
 }

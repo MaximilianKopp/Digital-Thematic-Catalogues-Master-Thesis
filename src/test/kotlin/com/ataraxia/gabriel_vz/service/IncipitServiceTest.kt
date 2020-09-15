@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -24,6 +25,9 @@ internal class IncipitServiceTest {
 
     private fun simpleIncipit() = Incipit(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
             score = "f-a-g",
@@ -33,6 +37,9 @@ internal class IncipitServiceTest {
 
     private fun simpleIncipitEntity() = IncipitEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
             score = "f-a-g",

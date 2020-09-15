@@ -7,6 +7,7 @@ import io.kotlintest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -19,6 +20,9 @@ internal class PersonFactoryTest {
 
     private fun simplePerson() = Person(
             id = personID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Person",
             description = "Pianist",
             name = "Alberto",
             relatedWorks = mutableSetOf(),
@@ -29,6 +33,9 @@ internal class PersonFactoryTest {
 
     private fun simplePersonEntity() = PersonEntity(
             id = personID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Person",
             description = "Pianist",
             name = "Alberto",
             relatedWorks = mutableSetOf(),
@@ -40,6 +47,9 @@ internal class PersonFactoryTest {
     private fun simplePersonResource() = PersonResource(
             self = null,
             id = personID,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
+            title = "Person",
             description = "Pianist",
             name = "Alberto",
             relatedWorks = mutableSetOf(),

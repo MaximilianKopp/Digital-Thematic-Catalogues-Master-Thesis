@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -24,6 +25,9 @@ internal class PersonServiceTest {
 
     private fun simplePerson() = Person(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Person",
             description = "Pianist",
             name = "Alberto",
             relatedWorks = mutableSetOf(),
@@ -34,6 +38,9 @@ internal class PersonServiceTest {
 
     private fun simplePersonEntity() = PersonEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Person",
             description = "Pianist",
             name = "Alberto",
             relatedWorks = mutableSetOf(),

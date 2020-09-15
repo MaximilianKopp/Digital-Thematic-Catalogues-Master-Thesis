@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
+import java.time.OffsetDateTime
 
 @SpringBootApplication
 class GabrielVzApplication {
@@ -17,6 +18,8 @@ class GabrielVzApplication {
 
         val testDiscography = DiscographyEntity(
                 id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
                 recordId = "222",
                 label = "Superdibummel",
                 dateOfPublishing = "23.12.22",
@@ -25,6 +28,9 @@ class GabrielVzApplication {
 
         testDiscography.addMusicians(PersonEntity(
                 id = null,
+                title = "Murks",
+                created = OffsetDateTime.now(),
+                modified = null,
                 name = "Maria",
                 description = "Versucherin",
                 pnd = "232",
@@ -33,7 +39,9 @@ class GabrielVzApplication {
 
         val testWork = WorkEntity(
                 id = null,
-                title = "Sonata C-Dur",
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "PianoSonata G-Dur",
                 category = "Klaviermusik",
                 commentary = "Tolles Werk",
                 dateOfCreation = "23.12.1989",
@@ -41,6 +49,9 @@ class GabrielVzApplication {
                 dedication = "Für mich",
                 placeOfPremiere = PlaceEntity(
                         id = null,
+                        created = OffsetDateTime.now(),
+                        modified = null,
+                        title = "Place",
                         name = "Holländer",
                         locality = "Ballsaal",
                         country = "Deutschland",
@@ -53,6 +64,8 @@ class GabrielVzApplication {
                 editor = "Max",
                 relatedText = TextEntity(
                         id = null,
+                        created = OffsetDateTime.now(),
+                        modified = null,
                         title = "Ode an die Freude",
                         author = "Schiller",
                         excerpt = "Freude mimimi"
@@ -62,6 +75,9 @@ class GabrielVzApplication {
 
         testWork.addIncipit(incipit = IncipitEntity(
                 id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "Incipit",
                 description = "hihi",
                 keysig = "g",
                 score = "f-g-a-b",
@@ -71,6 +87,8 @@ class GabrielVzApplication {
 
         testWork.addDiscography(DiscographyEntity(
                 id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
                 title = "Collection",
                 dateOfPublishing = "22.23.29",
                 label = "Gramophon",
@@ -82,6 +100,8 @@ class GabrielVzApplication {
 
         testWork.addDiscography(DiscographyEntity(
                 id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
                 title = "Musicial",
                 dateOfPublishing = "22.10.19",
                 label = "UDEMY",
@@ -90,6 +110,9 @@ class GabrielVzApplication {
 
         testWork.addLiterature(LiteratureEntity(
                 id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "Work",
                 author = "Schiller",
                 isbn = "232323",
                 yearOfPublishing = "20.02.1989"
@@ -97,6 +120,9 @@ class GabrielVzApplication {
 
         testWork.addPerson(PersonEntity(
                 id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "Work",
                 name = "Maximilian",
                 description = "Versucher",
                 pnd = "232",
@@ -108,7 +134,6 @@ class GabrielVzApplication {
         workRepository.save(testWork)
 
     }
-
 
 }
 

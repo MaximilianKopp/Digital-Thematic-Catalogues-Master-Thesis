@@ -1,14 +1,23 @@
 package com.ataraxia.gabriel_vz.model
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import com.ataraxia.gabriel_vz.root.Model
+import java.time.OffsetDateTime
 
 class Place(
-        override var id: String?,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
         var name: String,
         var locality: String,
         var country: String,
         var coordinates: Coordinates
-) : AbstractEntity(id) {
+) : Model(
+        id,
+        title,
+        created,
+        modified
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
