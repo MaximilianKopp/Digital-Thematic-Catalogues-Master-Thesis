@@ -5,9 +5,8 @@
  */
 
 /*Set Font*/
-
-h1,h2,h3,h4,p,title {
-    font-family: "Font Awesome 5 Free", serif ;
+h1, h2, h3, h4, p, title {
+    font-family: "Font Awesome 5 Free", serif;
 }
 
 span.fa {
@@ -20,7 +19,7 @@ span.fa {
 }
 
 #sidebar-wrapper {
-    min-height: 100vh;
+    min-height: 87vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
@@ -56,12 +55,19 @@ span.fa {
 /* Biography */
 .biography {
     background-color: antiquewhite;
-    opacity: 80%;
+    opacity: 90%;
+    border-style: solid;
+    border-width: thin;
+    font-weight: bold;
     line-height: 2.0;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .gabrielphoto {
-    padding-top: 40px;
+    padding-top: 43px;
+    width: 241px;
+    height: 342px;
 }
 
 @media (min-width: 100px) {
