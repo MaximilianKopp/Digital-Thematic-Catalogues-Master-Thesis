@@ -1,5 +1,6 @@
 package com.ataraxia.gabriel_vz.factory
 
+import arrow.core.Option
 import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
@@ -7,6 +8,7 @@ import com.ataraxia.gabriel_vz.resource.WorkResource
 import com.ataraxia.gabriel_vz.root.Factory
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
+import java.time.OffsetDateTime
 
 @Component
 class WorkFactory(
@@ -20,6 +22,8 @@ class WorkFactory(
     override fun modelFromEntity(entity: WorkEntity): Work = Work(
             id = entity.id,
             title = entity.title,
+            created = entity.created,
+            modified = entity.modified,
             relatedText = entity.relatedText?.let { textFactory.modelFromEntity(it) },
             discographies = entity.discographies.map(
                     discographyFactory::modelFromEntity
@@ -44,6 +48,8 @@ class WorkFactory(
     override fun entityFromModel(model: Work): WorkEntity = WorkEntity(
             id = model.id,
             title = model.title,
+            created = model.created,
+            modified = model.modified,
             relatedText = model.relatedText?.let { textFactory.entityFromModel(it) },
             discographies = model.discographies.map(
                     discographyFactory::entityFromModel
@@ -68,6 +74,8 @@ class WorkFactory(
     override fun modelFromResource(resource: WorkResource): Work = Work(
             id = resource.id,
             title = resource.title,
+            created = resource.created?.let { OffsetDateTime.parse(it) },
+            modified = resource.modified?.let { OffsetDateTime.parse(it) },
             relatedText = resource.relatedText?.let { textFactory.modelFromResource(it) },
             discographies = resource.discographies.map(
                     discographyFactory::modelFromResource
@@ -90,14 +98,15 @@ class WorkFactory(
     )
 
     override fun resourceFromModel(model: Work): WorkResource = WorkResource(
-            self = WebMvcLinkBuilder
-                    .linkTo(WebMvcLinkBuilder
-                            .methodOn(WorkApiController::class.java)
-                            .one(model.id!!))
-                    .withSelfRel()
-                    .withTitle(model.title),
+            self = null,
             id = model.id,
             title = model.title,
+            created = Option.fromNullable(model.created)
+                    .map(OffsetDateTime::toString)
+                    .orNull(),
+            modified = Option.fromNullable(model.modified)
+                    .map(OffsetDateTime::toString)
+                    .orNull(),
             relatedText = model.relatedText?.let { textFactory.resourceFromModel(it) },
             discographies = model.discographies.map(
                     discographyFactory::resourceFromModel
