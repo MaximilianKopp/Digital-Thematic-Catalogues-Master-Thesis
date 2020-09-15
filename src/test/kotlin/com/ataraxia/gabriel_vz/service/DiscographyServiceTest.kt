@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -24,6 +25,8 @@ internal class DiscographyServiceTest {
 
     private fun simpleDiscography() = Discography(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Wolfgang Gabriel - all Sonatas",
             musicians = mutableSetOf(),
             recordId = "1928-232",
@@ -33,6 +36,8 @@ internal class DiscographyServiceTest {
 
     private fun simpleDiscographyEntity() = DiscographyEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Wolfgang Gabriel - all Sonatas",
             musicians = mutableSetOf(),
             recordId = "1928-232",

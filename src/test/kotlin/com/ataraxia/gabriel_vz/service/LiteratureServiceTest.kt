@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -24,6 +25,9 @@ internal class LiteratureServiceTest {
 
     private fun simpleLiterature() = Literature(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
             yearOfPublishing = "2014"
@@ -31,6 +35,9 @@ internal class LiteratureServiceTest {
 
     private fun simpleLiteratureEntity() = LiteratureEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
             yearOfPublishing = "2014"

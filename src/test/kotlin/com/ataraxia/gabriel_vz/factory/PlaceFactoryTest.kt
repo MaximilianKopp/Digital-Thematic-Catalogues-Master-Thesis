@@ -10,6 +10,7 @@ import io.kotlintest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -24,6 +25,9 @@ internal class PlaceFactoryTest {
 
     private fun simplePlace() = Place(
             id = placeUID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Place",
             locality = "Wiener Opernhaus",
             country = "Wien",
             name = "Beethovensaal",
@@ -35,6 +39,9 @@ internal class PlaceFactoryTest {
 
     private fun simpleEntity() = PlaceEntity(
             id = placeUID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Place",
             locality = "Wiener Opernhaus",
             country = "Wien",
             name = "Beethovensaal",
@@ -46,6 +53,9 @@ internal class PlaceFactoryTest {
 
     private fun simplePlaceResource() = PlaceResource(
             self = null,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
+            title = "Place",
             id = placeUID,
             locality = "Wiener Opernhaus",
             country = "Wien",

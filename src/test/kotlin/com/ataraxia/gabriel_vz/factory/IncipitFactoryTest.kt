@@ -7,6 +7,7 @@ import io.kotlintest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -18,6 +19,9 @@ internal class IncipitFactoryTest {
 
     private fun simpleIncipit() = Incipit(
             id = incipitID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
             score = "f-a-g",
@@ -27,6 +31,9 @@ internal class IncipitFactoryTest {
 
     private fun simpleIncipitEntity() = IncipitEntity(
             id = incipitID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
             score = "f-a-g",
@@ -37,6 +44,9 @@ internal class IncipitFactoryTest {
     private fun simpleIncipitResource() = IncipitResource(
             self = null,
             id = incipitID,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
+            title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
             score = "f-a-g",

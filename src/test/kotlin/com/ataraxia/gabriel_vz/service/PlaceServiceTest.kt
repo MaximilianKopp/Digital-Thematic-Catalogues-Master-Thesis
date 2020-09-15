@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -26,6 +27,9 @@ internal class PlaceServiceTest {
 
     private fun simplePlace(): Place = Place(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Place",
             name = "Test",
             locality = "Test",
             country = "Test",
@@ -34,6 +38,9 @@ internal class PlaceServiceTest {
 
     private fun simplePlaceEntity(): PlaceEntity = PlaceEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Place",
             name = "Test",
             locality = "Test",
             country = "Test",

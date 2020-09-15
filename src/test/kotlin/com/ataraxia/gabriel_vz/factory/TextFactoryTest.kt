@@ -7,6 +7,7 @@ import io.kotlintest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -19,6 +20,8 @@ internal class TextFactoryTest {
 
     private fun simpleText() = Text(
             id = textID,
+            created = OffsetDateTime.now(),
+            modified = null,
             author = "James Taylor",
             title = "The nine cats",
             excerpt = "Nine tiny little cats..."
@@ -26,6 +29,8 @@ internal class TextFactoryTest {
 
     private fun simpleTextEntity() = TextEntity(
             id = textID,
+            created = OffsetDateTime.now(),
+            modified = null,
             author = "James Taylor",
             title = "The nine cats",
             excerpt = "Nine tiny little cats..."
@@ -33,6 +38,8 @@ internal class TextFactoryTest {
 
     private fun simpleTextResource() = TextResource(
             self = null,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
             id = textID,
             author = "James Taylor",
             title = "The nine cats",

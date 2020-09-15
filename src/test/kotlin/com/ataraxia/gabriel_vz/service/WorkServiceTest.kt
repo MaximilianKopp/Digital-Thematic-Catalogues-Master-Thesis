@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 
 @TestInstance(PER_CLASS)
@@ -24,6 +25,8 @@ internal class WorkServiceTest {
 
     private fun simpleWork() = Work(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Sonata C-Dur",
             category = "Klaviermusik",
             commentary = "Tolles Werk",
@@ -42,6 +45,8 @@ internal class WorkServiceTest {
 
     private fun simpleWorkEntity() = WorkEntity(
             id = "",
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Sonata C-Dur",
             category = "Klaviermusik",
             commentary = "Tolles Werk",

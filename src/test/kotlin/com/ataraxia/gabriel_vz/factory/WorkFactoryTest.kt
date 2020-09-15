@@ -4,9 +4,11 @@ import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.resource.WorkResource
 import io.kotlintest.matchers.types.shouldBeInstanceOf
+import io.mockk.InternalPlatformDsl.toStr
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -31,6 +33,8 @@ internal class WorkFactoryTest {
 
     private fun simpleWork() = Work(
             id = workID,
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Sonata C-Dur",
             category = "Klaviermusik",
             commentary = "Tolles Werk",
@@ -49,6 +53,8 @@ internal class WorkFactoryTest {
 
     private fun simpleWorkEntity() = WorkEntity(
             id = workID,
+            created = OffsetDateTime.now(),
+            modified = null,
             title = "Sonata C-Dur",
             category = "Klaviermusik",
             commentary = "Tolles Werk",
@@ -68,6 +74,8 @@ internal class WorkFactoryTest {
     private fun simpleWorkResource() = WorkResource(
             self = null,
             id = workID,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
             title = "Sonata C-Dur",
             category = "Klaviermusik",
             commentary = "Tolles Werk",

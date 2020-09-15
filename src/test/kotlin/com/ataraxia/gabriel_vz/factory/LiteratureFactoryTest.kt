@@ -7,6 +7,7 @@ import io.kotlintest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.time.OffsetDateTime
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -19,6 +20,9 @@ internal class LiteratureFactoryTest {
 
     private fun simpleLiterature() = Literature(
             id = literatureID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
             yearOfPublishing = "2014"
@@ -26,6 +30,9 @@ internal class LiteratureFactoryTest {
 
     private fun simpleLiteratureEntity() = LiteratureEntity(
             id = literatureID,
+            created = OffsetDateTime.now(),
+            modified = null,
+            title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
             yearOfPublishing = "2014"
@@ -34,6 +41,9 @@ internal class LiteratureFactoryTest {
     private fun simpleLiteratureResource() = LiteratureResource(
             self = null,
             id = literatureID,
+            created = OffsetDateTime.now().toString(),
+            modified = null,
+            title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
             yearOfPublishing = "2014"
