@@ -2,17 +2,16 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.GenericGenerator
+import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
 @Table(name = "work")
 class WorkEntity(
-
-        @Id
-        @GeneratedValue(generator = "system-uuid")
-        @GenericGenerator(name = "system-uuid", strategy = "uuid")
-        val id: String? = "",
-        var title: String,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
         var dateOfCreation: String,
         var dateOfPremiere: String,
 
@@ -76,6 +75,11 @@ class WorkEntity(
                     CascadeType.REMOVE
                 ], orphanRemoval = true)
         var literatureList: MutableSet<LiteratureEntity>? = mutableSetOf()
+) : com.ataraxia.gabriel_vz.root.Entity(
+        id,
+        title,
+        created,
+        modified
 ) {
     fun addDiscography(discographyEntity: DiscographyEntity) {
         discographies.add(discographyEntity)
@@ -115,23 +119,38 @@ class WorkEntity(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is WorkEntity) return false
+        if (!super.equals(other)) return false
 
-        if (id != other.id) return false
-        if (title != other.title) return false
         if (dateOfCreation != other.dateOfCreation) return false
         if (dateOfPremiere != other.dateOfPremiere) return false
         if (placeOfPremiere != other.placeOfPremiere) return false
+        if (incipit != other.incipit) return false
         if (commentary != other.commentary) return false
         if (dedication != other.dedication) return false
         if (instrumentation != other.instrumentation) return false
         if (category != other.category) return false
         if (duration != other.duration) return false
         if (editor != other.editor) return false
+        if (relatedText != other.relatedText) return false
+        if (discographies != other.discographies) return false
+        if (relatedPersons != other.relatedPersons) return false
+        if (literatureList != other.literatureList) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return 31
+        var result = super.hashCode()
+        result = 31 * result + dateOfCreation.hashCode()
+        result = 31 * result + dateOfPremiere.hashCode()
+        result = 31 * result + commentary.hashCode()
+        result = 31 * result + dedication.hashCode()
+        result = 31 * result + instrumentation.hashCode()
+        result = 31 * result + category.hashCode()
+        result = 31 * result + duration.hashCode()
+        result = 31 * result + editor.hashCode()
+        result = 31 * result + discographies.hashCode()
+        return result
     }
+
 }

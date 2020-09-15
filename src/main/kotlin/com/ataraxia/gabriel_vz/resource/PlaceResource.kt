@@ -1,25 +1,22 @@
 package com.ataraxia.gabriel_vz.resource
 
+import com.ataraxia.gabriel_vz.root.Resource
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import io.swagger.annotations.ApiModelProperty.AccessMode.READ_ONLY
 import org.springframework.hateoas.Link
 import org.springframework.hateoas.RepresentationModel
+import org.springframework.http.CacheControl
+import org.springframework.http.MediaType
+import java.util.concurrent.TimeUnit
 
 @ApiModel(value = "PlaceResource", description = "Represents a Place")
 class PlaceResource(
-
-        @ApiModelProperty(
-                notes = "A link to the specific Resource",
-                accessMode = READ_ONLY
-        )
-        var self: Link?,
-        @ApiModelProperty(
-                notes = "A globally unique identifier",
-                accessMode = READ_ONLY,
-                example = "4028e3817478b2c7017478b2d0250000"
-        )
-        var id: String?,
+        self: Link?,
+        id: String?,
+        title: String?,
+        created: String?,
+        modified: String?,
         @ApiModelProperty(
                 notes = "Name of this Place",
                 accessMode = READ_ONLY,
@@ -48,14 +45,21 @@ class PlaceResource(
                 example = "Longitude: 33.22, Latitude: 22.13"
         )
         var coordinates: CoordinatesResource
-) : RepresentationModel<PlaceResource>() {
-
+) : Resource(
+        self,
+        id,
+        title,
+        created,
+        modified
+) {
+    override fun cacheControl(): CacheControl = CacheControl.maxAge(5, TimeUnit.MINUTES)
+    override fun contentType(): MediaType = MediaType("application", "com.ataraxia.gabriel-catalogue+json")
+    override fun eTag(): String = hashCode().toString()
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is PlaceResource) return false
         if (!super.equals(other)) return false
 
-        if (id != other.id) return false
         if (name != other.name) return false
         if (locality != other.locality) return false
         if (country != other.country) return false
@@ -66,8 +70,6 @@ class PlaceResource(
 
     override fun hashCode(): Int {
         var result = super.hashCode()
-        result = 31 * result + (self?.hashCode() ?: 0)
-        result = 31 * result + (id?.hashCode() ?: 0)
         result = 31 * result + name.hashCode()
         result = 31 * result + locality.hashCode()
         result = 31 * result + country.hashCode()

@@ -1,13 +1,22 @@
 package com.ataraxia.gabriel_vz.model
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import com.ataraxia.gabriel_vz.root.Model
+import java.time.OffsetDateTime
 
 class Literature(
-        override var id: String?,
-        var author: String,
-        var isbn: String,
-        var yearOfPublishing: String
-) : AbstractEntity(id) {
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
+        var author: String?,
+        var isbn: String?,
+        var yearOfPublishing: String?
+) : Model(
+        id,
+        title,
+        created,
+        modified
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -19,6 +19,4 @@ class CoordinatesResource(
         result = 31 * result + latitude.hashCode()
         return result
     }
-
-
 }

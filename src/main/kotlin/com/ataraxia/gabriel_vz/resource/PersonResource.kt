@@ -1,25 +1,22 @@
 package com.ataraxia.gabriel_vz.resource
 
+import com.ataraxia.gabriel_vz.root.Resource
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import io.swagger.annotations.ApiModelProperty.AccessMode.READ_ONLY
 import org.springframework.hateoas.Link
 import org.springframework.hateoas.RepresentationModel
+import org.springframework.http.CacheControl
+import org.springframework.http.MediaType
+import java.util.concurrent.TimeUnit
 
 @ApiModel(value = "PersonResource", description = "Represents a Person")
 class PersonResource(
-
-        @ApiModelProperty(
-                notes = "A link to the specific Resource",
-                accessMode = READ_ONLY
-        )
-        var self: Link?,
-        @ApiModelProperty(
-                notes = "A globally unique identifier",
-                accessMode = READ_ONLY,
-                example = "4028e3817478b2c7017478b2d0250000"
-        )
-        var id: String?,
+        self: Link?,
+        id: String?,
+        title: String?,
+        created: String?,
+        modified: String?,
         @ApiModelProperty(
                 notes = "The name of a Person",
                 accessMode = READ_ONLY,
@@ -62,31 +59,40 @@ class PersonResource(
                 example = "Wolfgang Gabriel - All Violin-Sonatas"
         )
         var relatedDiscographies: MutableSet<DiscographyResource>? = mutableSetOf()
-) : RepresentationModel<PersonResource>() {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is PersonResource) return false
+) : Resource(
+        self,
+        id,
+        title,
+        created,
+        modified
+) {
+        override fun cacheControl(): CacheControl = CacheControl.maxAge(5, TimeUnit.MINUTES)
+        override fun contentType(): MediaType = MediaType("application", "com.ataraxia.gabriel-catalogue+json")
+        override fun eTag(): String = hashCode().toString()
+        override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (other !is PersonResource) return false
+                if (!super.equals(other)) return false
 
-        if (id != other.id) return false
-        if (name != other.name) return false
-        if (pnd != other.pnd) return false
-        if (role != other.role) return false
-        if (description != other.description) return false
-        if (relatedWorks != other.relatedWorks) return false
-        if (relatedDiscographies != other.relatedDiscographies) return false
+                if (name != other.name) return false
+                if (pnd != other.pnd) return false
+                if (role != other.role) return false
+                if (description != other.description) return false
+                if (relatedWorks != other.relatedWorks) return false
+                if (relatedDiscographies != other.relatedDiscographies) return false
 
-        return true
-    }
+                return true
+        }
 
-    override fun hashCode(): Int {
-        var result = self?.hashCode() ?: 0
-        result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + name.hashCode()
-        result = 31 * result + pnd.hashCode()
-        result = 31 * result + role.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + relatedWorks.hashCode()
-        result = 31 * result + relatedDiscographies.hashCode()
-        return result
-    }
+        override fun hashCode(): Int {
+                var result = super.hashCode()
+                result = 31 * result + name.hashCode()
+                result = 31 * result + pnd.hashCode()
+                result = 31 * result + role.hashCode()
+                result = 31 * result + description.hashCode()
+                result = 31 * result + (relatedWorks?.hashCode() ?: 0)
+                result = 31 * result + (relatedDiscographies?.hashCode() ?: 0)
+                return result
+        }
+
 }

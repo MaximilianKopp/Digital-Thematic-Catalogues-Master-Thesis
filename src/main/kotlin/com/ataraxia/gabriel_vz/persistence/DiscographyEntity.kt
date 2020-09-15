@@ -2,21 +2,20 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
-import org.hibernate.annotations.GenericGenerator
+import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "discography")
 class DiscographyEntity(
-
-        @Id
-        @GeneratedValue(generator = "system-uuid")
-        @GenericGenerator(name = "system-uuid", strategy = "uuid")
-        val id: String? = null,
-        var title: String,
-        var label: String,
-        var recordId: String,
-        var dateOfPublishing: String,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
+        var label: String?,
+        var recordId: String?,
+        var dateOfPublishing: String?,
 
         @JsonManagedReference
         @ManyToMany(mappedBy = "relatedDiscographies",
@@ -39,6 +38,11 @@ class DiscographyEntity(
                 joinColumns = [JoinColumn(name = "discography_id", referencedColumnName = "id")],
                 inverseJoinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")])
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
+) : com.ataraxia.gabriel_vz.root.Entity(
+        id,
+        title,
+        created,
+        modified
 ) {
     fun addMusicians(personEntity: PersonEntity) {
         musicians?.add(personEntity)

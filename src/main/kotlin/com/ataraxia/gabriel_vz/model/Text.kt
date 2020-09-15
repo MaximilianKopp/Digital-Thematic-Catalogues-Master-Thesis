@@ -1,13 +1,21 @@
 package com.ataraxia.gabriel_vz.model
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import com.ataraxia.gabriel_vz.root.Model
+import java.time.OffsetDateTime
 
 class Text(
-        override var id: String?,
-        var title: String,
-        var author: String,
-        var excerpt: String
-) : AbstractEntity(id) {
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
+        var author: String?,
+        var excerpt: String?
+) : Model(
+        id,
+        title,
+        created,
+        modified
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

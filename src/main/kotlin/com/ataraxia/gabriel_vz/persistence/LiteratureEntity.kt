@@ -2,37 +2,47 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.GenericGenerator
+import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Table
 @Entity(name = "literature")
 class LiteratureEntity(
-
-        @Id
-        @GeneratedValue(generator = "system-uuid")
-        @GenericGenerator(name = "system-uuid", strategy = "uuid")
-        val id: String? = null,
-        var author: String,
-        var isbn: String,
-        var yearOfPublishing: String,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
+        var author: String?,
+        var isbn: String?,
+        var yearOfPublishing: String?,
 
         @JsonBackReference
         @ManyToOne(fetch = FetchType.LAZY)
         var relatedWork: WorkEntity? = null
+) : com.ataraxia.gabriel_vz.root.Entity(
+        id,
+        title,
+        created,
+        modified
 ) {
-        override fun equals(other: Any?): Boolean {
-                if (this === other) return true
-                if (other !is LiteratureEntity) return false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is LiteratureEntity) return false
+        if (!super.equals(other)) return false
 
-                if (id != other.id) return false
-                if (author != other.author) return false
-                if (isbn != other.isbn) return false
-                if (yearOfPublishing != other.yearOfPublishing) return false
+        if (author != other.author) return false
+        if (isbn != other.isbn) return false
+        if (yearOfPublishing != other.yearOfPublishing) return false
+        if (relatedWork != other.relatedWork) return false
 
-                return true
-        }
+        return true
+    }
 
-        override fun hashCode(): Int {
-                return 31
-        }
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + author.hashCode()
+        result = 31 * result + isbn.hashCode()
+        result = 31 * result + yearOfPublishing.hashCode()
+        return result
+    }
 }

@@ -1,10 +1,13 @@
 package com.ataraxia.gabriel_vz.model
 
-import com.ataraxia.gabriel_vz.root.AbstractEntity
+import com.ataraxia.gabriel_vz.root.Model
+import java.time.OffsetDateTime
 
 class Work(
-        override var id: String?,
-        var title: String,
+        id: String?,
+        title: String?,
+        created: OffsetDateTime?,
+        modified: OffsetDateTime?,
         var dateOfCreation: String,
         var dateOfPremiere: String,
         var placeOfPremiere: Place?,
@@ -18,7 +21,12 @@ class Work(
         var discographies: MutableSet<Discography>,
         var relatedPersons: MutableSet<Person>,
         var literatureList: MutableSet<Literature>
-) : AbstractEntity(id) {
+) : Model(
+        id,
+        title,
+        created,
+        modified
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
