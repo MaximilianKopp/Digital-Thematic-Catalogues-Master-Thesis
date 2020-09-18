@@ -3,6 +3,8 @@ package com.ataraxia.gabriel_vz.service
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.ataraxia.gabriel_vz.controller.paging.Paged
+import com.ataraxia.gabriel_vz.controller.paging.Paging
 import com.ataraxia.gabriel_vz.factory.WorkFactory
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
@@ -84,14 +86,20 @@ class WorkService(
         e.left()
     }
 
-    fun findPaginated(pageNo: Int, pageSize: Int, sortField: String, sortDirection: String): Page<WorkEntity> {
-        val sort =
-                if (sortDirection.equals(Sort.Direction.ASC.name, ignoreCase = true))
-                    Sort.by(sortField).ascending()
-                else
-                    Sort.by(sortField).descending()
+//    fun findPaginated(pageNo: Int, pageSize: Int, sortField: String, sortDirection: String): Page<WorkEntity> {
+//        val sort =
+//                if (sortDirection.equals(Sort.Direction.ASC.name, ignoreCase = true))
+//                    Sort.by(sortField).ascending()
+//                else
+//                    Sort.by(sortField).descending()
+//
+//        val pageable: Pageable = PageRequest.of(pageNo - 1, pageSize, sort)
+//        return workRepository.findAll(pageable)
+//    }
 
-        val pageable: Pageable = PageRequest.of(pageNo - 1, pageSize, sort)
-        return workRepository.findAll(pageable)
+    fun getPage(pageNumber: Int, size: Int): Paged<WorkEntity> {
+        val request: PageRequest = PageRequest.of(pageNumber - 1, size, Sort.Direction.ASC, "id")
+        val workPage = workRepository.findAll(request)
+        return Paged(workPage, Paging.of(workPage.totalPages, pageNumber, size))
     }
 }
