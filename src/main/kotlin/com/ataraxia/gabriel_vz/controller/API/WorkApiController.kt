@@ -14,10 +14,14 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.json.JsonParseException
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.data.web.PagedResourcesAssembler
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.PagedModel
+import org.springframework.hateoas.server.EntityLinks
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 
 import org.springframework.http.HttpHeaders
@@ -37,32 +41,6 @@ class WorkApiController(
 
     @Autowired
     lateinit var workRepository: WorkRepository
-
-
-    @GetMapping("/works2")
-    fun testPagination(pageable: Pageable, assembler: PagedResourcesAssembler<WorkEntity>): ResponseEntity<PagedModel<EntityModel<WorkEntity>>> {
-        val works = workRepository.findAll(pageable)
-        val pm: PagedModel<EntityModel<WorkEntity>> = assembler.toModel(works, linkTo(WorkApiController::class.java).slash("/works2").withSelfRel())
-        val responseHeaders: HttpHeaders = HttpHeaders()
-//                .apply {
-//                    add("Link", createLinkHeader(pm))
-//                }
-        return ResponseEntity(assembler.toModel(works, linkTo(WorkApiController::class.java).slash("/works").withSelfRel()), responseHeaders, HttpStatus.OK)
-    }
-
-    fun createLinkHeader(pm: PagedModel<EntityModel<WorkEntity>>): String {
-        val linkheader = StringBuilder()
-                .apply {
-                    append(buildLinkHeader(pm.getLinks("first")[0].href, "first"))
-                    append(", ")
-                    append(buildLinkHeader(pm.getLinks("next")[0].href, "next"))
-                }
-        return linkheader.toString()
-    }
-
-    fun buildLinkHeader(uri: String, rel: String): String {
-        return "<$uri>; rel=\"$rel\""
-    }
 
     @GetMapping("/works")
     @ApiOperation(
