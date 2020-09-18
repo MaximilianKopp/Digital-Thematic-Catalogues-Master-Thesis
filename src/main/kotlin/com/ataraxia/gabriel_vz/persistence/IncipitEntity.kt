@@ -44,7 +44,6 @@ class IncipitEntity(
         if (timesig != other.timesig) return false
         if (score != other.score) return false
         if (description != other.description) return false
-        if (relatedWork != other.relatedWork) return false
 
         return true
     }
