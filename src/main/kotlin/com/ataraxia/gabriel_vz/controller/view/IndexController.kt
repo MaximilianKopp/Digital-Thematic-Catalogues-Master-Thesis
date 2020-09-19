@@ -1,12 +1,9 @@
 package com.ataraxia.gabriel_vz.controller.view
 
-import arrow.core.getOrElse
-import arrow.core.right
 import com.ataraxia.gabriel_vz.service.WorkService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
@@ -16,21 +13,21 @@ class IndexController(
         private val workService: WorkService
 ) {
 
-    @GetMapping("/works2")
-    fun index2(): String {
-        return "index3"
+    @GetMapping
+    fun index(): String {
+        return "index"
     }
 
 //    @GetMapping("/works")
 //    fun index(model: Model): String {
-//        return findPaginated(1,"title", "asc", model)
+//        return findPaginated(1, "title", "asc", model)
 //    }
-
+//
 //    @GetMapping("works/page/{pageNo}")
 //    fun findPaginated(@PathVariable("pageNo") pageNo: Int,
 //                      @RequestParam("sortField") sortfield: String,
 //                      @RequestParam("sortDir") sortDir: String, model: Model): String {
-//        val pageSize = 10
+//        val pageSize = 8
 //
 //        val page = workService.findPaginated(pageNo, pageSize, sortfield, sortDir)
 //        val works = page.content
@@ -46,7 +43,15 @@ class IndexController(
 //                })
 //
 //        model.addAttribute("works", works)
-//        return "index3"
+//        return "works"
 //    }
+
+    @GetMapping("/works")
+    fun all(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
+            @RequestParam(value = "size", required = false, defaultValue = "10") size: Int,
+            model: Model): String? {
+        model.addAttribute("works", workService.getPage(pageNumber, size))
+        return "works2"
+    }
 
 }

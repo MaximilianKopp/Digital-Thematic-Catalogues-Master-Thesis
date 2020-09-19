@@ -124,7 +124,6 @@ class WorkEntity(
         if (dateOfCreation != other.dateOfCreation) return false
         if (dateOfPremiere != other.dateOfPremiere) return false
         if (placeOfPremiere != other.placeOfPremiere) return false
-        if (incipit != other.incipit) return false
         if (commentary != other.commentary) return false
         if (dedication != other.dedication) return false
         if (instrumentation != other.instrumentation) return false

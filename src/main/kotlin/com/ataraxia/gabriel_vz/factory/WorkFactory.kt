@@ -98,7 +98,10 @@ class WorkFactory(
     )
 
     override fun resourceFromModel(model: Work): WorkResource = WorkResource(
-            self = null,
+            self = WebMvcLinkBuilder.linkTo(WorkApiController::class.java)
+                    .slash("works/" + model.id)
+                    .withSelfRel()
+                    .withTitle(model.title!!),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)

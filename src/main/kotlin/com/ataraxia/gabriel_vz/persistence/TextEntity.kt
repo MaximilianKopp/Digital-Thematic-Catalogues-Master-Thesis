@@ -1,9 +1,10 @@
 package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "text")

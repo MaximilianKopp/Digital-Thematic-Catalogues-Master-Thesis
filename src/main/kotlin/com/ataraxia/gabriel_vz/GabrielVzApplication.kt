@@ -41,7 +41,7 @@ class GabrielVzApplication {
                 id = null,
                 created = OffsetDateTime.now(),
                 modified = null,
-                title = "PianoSonata G-Dur",
+                title = "Violinsonata G-Dur",
                 category = "Klaviermusik",
                 commentary = "Tolles Werk",
                 dateOfCreation = "23.12.1989",
