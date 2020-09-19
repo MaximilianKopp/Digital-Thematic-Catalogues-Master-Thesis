@@ -1,10 +1,13 @@
 package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
+import com.ataraxia.gabriel_vz.controller.API.PlaceApiController
+import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Place
 import com.ataraxia.gabriel_vz.persistence.PlaceEntity
 import com.ataraxia.gabriel_vz.resource.PlaceResource
 import com.ataraxia.gabriel_vz.root.Factory
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 
@@ -48,7 +51,13 @@ class PlaceFactory(
     )
 
     override fun resourceFromModel(model: Place): PlaceResource = PlaceResource(
-            self = null,
+            self = WebMvcLinkBuilder.linkTo(PlaceApiController::class.java)
+                    .slash("places/" + model.id)
+                    .withSelfRel()
+                    .withTitle(model.title!!),
+            collection = WebMvcLinkBuilder.linkTo(PlaceApiController::class.java)
+                    .slash("places")
+                    .withSelfRel(),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)

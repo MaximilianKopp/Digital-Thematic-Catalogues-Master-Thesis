@@ -42,6 +42,7 @@ internal class DiscographyFactoryTest {
 
     private fun simpleDiscographyResource() = DiscographyResource(
             self = null,
+            collection = null,
             id = discographyID,
             created = OffsetDateTime.now().toString(),
             modified = null,

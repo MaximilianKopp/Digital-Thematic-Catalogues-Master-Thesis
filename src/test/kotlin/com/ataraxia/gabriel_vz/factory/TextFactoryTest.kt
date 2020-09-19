@@ -38,6 +38,7 @@ internal class TextFactoryTest {
 
     private fun simpleTextResource() = TextResource(
             self = null,
+            collection = null,
             created = OffsetDateTime.now().toString(),
             modified = null,
             id = textID,

@@ -1,10 +1,13 @@
 package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
+import com.ataraxia.gabriel_vz.controller.API.IncipitApiController
+import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Incipit
 import com.ataraxia.gabriel_vz.persistence.IncipitEntity
 import com.ataraxia.gabriel_vz.resource.IncipitResource
 import com.ataraxia.gabriel_vz.root.Factory
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 
@@ -48,7 +51,13 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
     )
 
     override fun resourceFromModel(model: Incipit): IncipitResource = IncipitResource(
-            self = null,
+            self = WebMvcLinkBuilder.linkTo(IncipitApiController::class.java)
+                    .slash("incipits/" + model.id)
+                    .withSelfRel()
+                    .withTitle(model.title!!),
+            collection = WebMvcLinkBuilder.linkTo(IncipitApiController::class.java)
+                    .slash("incipits")
+                    .withSelfRel(),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)

@@ -1,10 +1,13 @@
 package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
+import com.ataraxia.gabriel_vz.controller.API.LiteratureApiController
+import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Literature
 import com.ataraxia.gabriel_vz.persistence.LiteratureEntity
 import com.ataraxia.gabriel_vz.resource.LiteratureResource
 import com.ataraxia.gabriel_vz.root.Factory
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 
@@ -41,7 +44,13 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
     )
 
     override fun resourceFromModel(model: Literature): LiteratureResource = LiteratureResource(
-            self = null,
+            self = WebMvcLinkBuilder.linkTo(LiteratureApiController::class.java)
+                    .slash("literature/" + model.id)
+                    .withSelfRel()
+                    .withTitle(model.title!!),
+            collection = WebMvcLinkBuilder.linkTo(LiteratureApiController::class.java)
+                    .slash("literature")
+                    .withSelfRel(),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)

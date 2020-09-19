@@ -73,6 +73,7 @@ internal class WorkFactoryTest {
 
     private fun simpleWorkResource() = WorkResource(
             self = null,
+            collection = null,
             id = workID,
             created = OffsetDateTime.now().toString(),
             modified = null,

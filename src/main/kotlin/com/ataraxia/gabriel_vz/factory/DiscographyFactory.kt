@@ -1,10 +1,13 @@
 package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
+import com.ataraxia.gabriel_vz.controller.API.DiscographyApiController
+import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Discography
 import com.ataraxia.gabriel_vz.persistence.DiscographyEntity
 import com.ataraxia.gabriel_vz.resource.DiscographyResource
 import com.ataraxia.gabriel_vz.root.Factory
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 
@@ -53,7 +56,13 @@ class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyRe
     )
 
     override fun resourceFromModel(model: Discography): DiscographyResource = DiscographyResource(
-            self = null,
+            self = WebMvcLinkBuilder.linkTo(DiscographyApiController::class.java)
+                    .slash("discographies/" + model.id)
+                    .withSelfRel()
+                    .withTitle(model.title!!),
+            collection = WebMvcLinkBuilder.linkTo(DiscographyApiController::class.java)
+                    .slash("discographies")
+                    .withSelfRel(),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)

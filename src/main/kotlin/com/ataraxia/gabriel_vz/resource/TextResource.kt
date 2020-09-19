@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 @ApiModel(value = "TextResource", description = "Represents a Text")
 class TextResource(
         self: Link?,
+        collection: Link?,
         id: String?,
         title: String?,
         created: String?,
@@ -33,6 +34,7 @@ class TextResource(
         var excerpt: String?
 ) : Resource(
         self,
+        collection,
         id,
         title,
         created,

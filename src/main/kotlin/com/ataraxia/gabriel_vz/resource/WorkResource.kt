@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
 @ApiModel(value = "WorkResource", description = "Represents a Work")
 class WorkResource(
         self: Link?,
+        collection: Link?,
         id: String?,
         title: String?,
         created: String?,
@@ -109,6 +110,7 @@ class WorkResource(
         var literatureList: MutableSet<LiteratureResource>
 ) : Resource(
         self,
+        collection,
         id,
         title,
         created,

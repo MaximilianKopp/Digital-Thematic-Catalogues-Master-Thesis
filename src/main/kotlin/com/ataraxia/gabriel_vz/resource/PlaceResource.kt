@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 @ApiModel(value = "PlaceResource", description = "Represents a Place")
 class PlaceResource(
         self: Link?,
+        collection: Link?,
         id: String?,
         title: String?,
         created: String?,
@@ -47,6 +48,7 @@ class PlaceResource(
         var coordinates: CoordinatesResource
 ) : Resource(
         self,
+        collection,
         id,
         title,
         created,

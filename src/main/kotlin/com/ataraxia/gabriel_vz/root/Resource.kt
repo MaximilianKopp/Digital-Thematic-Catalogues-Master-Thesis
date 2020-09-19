@@ -25,6 +25,11 @@ abstract class Resource(
                 notes = "A Link to this very Resource"
         )
         open val self: Link?,
+
+        @ApiModelProperty(
+                notes = "A link to the overall Collection"
+        )
+        open val collection: Link?,
         @ApiModelProperty(
                 notes = "A globally unique identifier.",
                 example = "urn:ard:examples:123e4567-e89b-12d3-a456-426655440000",

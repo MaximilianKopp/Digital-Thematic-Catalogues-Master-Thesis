@@ -1,10 +1,13 @@
 package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
+import com.ataraxia.gabriel_vz.controller.API.TextApiController
+import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Text
 import com.ataraxia.gabriel_vz.persistence.TextEntity
 import com.ataraxia.gabriel_vz.resource.TextResource
 import com.ataraxia.gabriel_vz.root.Factory
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 
@@ -38,7 +41,13 @@ class TextFactory : Factory<Text, TextEntity, TextResource>() {
     )
 
     override fun resourceFromModel(model: Text): TextResource = TextResource(
-            self = null,
+            self = WebMvcLinkBuilder.linkTo(TextApiController::class.java)
+                    .slash("texts/" + model.id)
+                    .withSelfRel()
+                    .withTitle(model.title!!),
+            collection = WebMvcLinkBuilder.linkTo(TextApiController::class.java)
+                    .slash("texts")
+                    .withSelfRel(),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)
