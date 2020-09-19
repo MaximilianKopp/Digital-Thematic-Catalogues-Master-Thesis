@@ -102,6 +102,9 @@ class WorkFactory(
                     .slash("works/" + model.id)
                     .withSelfRel()
                     .withTitle(model.title!!),
+            collection = WebMvcLinkBuilder.linkTo(WorkApiController::class.java)
+                    .slash("works")
+                    .withSelfRel(),
             id = model.id,
             title = model.title,
             created = Option.fromNullable(model.created)

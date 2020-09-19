@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 @ApiModel(value = "PersonResource", description = "Represents a Person")
 class PersonResource(
         self: Link?,
+        collection: Link?,
         id: String?,
         title: String?,
         created: String?,
@@ -61,6 +62,7 @@ class PersonResource(
         var relatedDiscographies: MutableSet<DiscographyResource>? = mutableSetOf()
 ) : Resource(
         self,
+        collection,
         id,
         title,
         created,

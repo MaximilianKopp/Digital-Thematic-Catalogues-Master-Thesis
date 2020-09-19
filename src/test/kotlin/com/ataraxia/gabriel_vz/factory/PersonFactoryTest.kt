@@ -46,6 +46,7 @@ internal class PersonFactoryTest {
 
     private fun simplePersonResource() = PersonResource(
             self = null,
+            collection = null,
             id = personID,
             created = OffsetDateTime.now().toString(),
             modified = null,

@@ -40,6 +40,7 @@ internal class LiteratureFactoryTest {
 
     private fun simpleLiteratureResource() = LiteratureResource(
             self = null,
+            collection = null,
             id = literatureID,
             created = OffsetDateTime.now().toString(),
             modified = null,

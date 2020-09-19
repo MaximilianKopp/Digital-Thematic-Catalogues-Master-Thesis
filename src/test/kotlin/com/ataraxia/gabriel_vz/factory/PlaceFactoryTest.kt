@@ -53,6 +53,7 @@ internal class PlaceFactoryTest {
 
     private fun simplePlaceResource() = PlaceResource(
             self = null,
+            collection = null,
             created = OffsetDateTime.now().toString(),
             modified = null,
             title = "Place",

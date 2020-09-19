@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
 @ApiModel(value = "LiteratureResource", description = "Represents a Literature")
 class LiteratureResource(
         self: Link?,
+        collection: Link?,
         id: String?,
         title: String?,
         created: String?,
@@ -39,6 +40,7 @@ class LiteratureResource(
         var yearOfPublishing: String?
 ) : Resource(
         self,
+        collection,
         id,
         title,
         created,

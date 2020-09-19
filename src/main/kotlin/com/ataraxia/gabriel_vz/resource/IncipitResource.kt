@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 @ApiModel(value = "IncipitResource", description = "Represents a Incipit")
 class IncipitResource(
         self: Link?,
+        collection: Link?,
         id: String?,
         title: String?,
         created: String?,
@@ -54,6 +55,7 @@ class IncipitResource(
         var description: String
 ) : Resource(
         self,
+        collection,
         id,
         title,
         created,

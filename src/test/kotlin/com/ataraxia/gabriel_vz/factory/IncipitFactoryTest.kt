@@ -43,6 +43,7 @@ internal class IncipitFactoryTest {
 
     private fun simpleIncipitResource() = IncipitResource(
             self = null,
+            collection = null,
             id = incipitID,
             created = OffsetDateTime.now().toString(),
             modified = null,
