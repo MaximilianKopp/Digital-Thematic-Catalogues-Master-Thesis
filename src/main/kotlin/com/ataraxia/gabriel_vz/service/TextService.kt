@@ -3,10 +3,14 @@ package com.ataraxia.gabriel_vz.service
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.ataraxia.gabriel_vz.controller.paging.Paged
+import com.ataraxia.gabriel_vz.controller.paging.Paging
 import com.ataraxia.gabriel_vz.factory.TextFactory
 import com.ataraxia.gabriel_vz.model.Text
 import com.ataraxia.gabriel_vz.repository.TextRepository
 import com.ataraxia.gabriel_vz.root.Service
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 
 @org.springframework.stereotype.Service
 class TextService(
@@ -72,5 +76,12 @@ class TextService(
                 .right()
     } catch (e: Exception) {
         e.left()
+    }
+
+    override fun getPage(pageNumber: Int, size: Int): Paged<Text> {
+        val request: PageRequest = PageRequest.of(pageNumber - 1, size, Sort.Direction.ASC, "id")
+        val textPage = textRepository.findAll(request)
+                .map(textFactory::modelFromEntity)
+        return Paged(textPage, Paging.of(textPage.totalPages, pageNumber, size))
     }
 }

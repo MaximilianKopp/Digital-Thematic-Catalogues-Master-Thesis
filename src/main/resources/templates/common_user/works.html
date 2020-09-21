@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of Compositions</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{../styles.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-lg-2">
+            <div th:replace="fragments/sidebar :: sidebar"></div>
+        </div>
+        <div class="col-lg-10">
+            <table id="works" class="table table-bordered table-responsive-sm">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date of creation</th>
+                    <th>Date of Premiere</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="work : ${works.page}">
+                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${work.id}}"
+                           th:text="${work.title}"></a></td>
+                    <td th:text="${work.dateOfCreation}">title</td>
+                    <td th:text="${work.dateOfPremiere}">body</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation" class="paging">
+                <ul class="pagination" th:if="${works.page.totalPages > 1}">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{'?pageNumber=' + ${works.paging.pageNumber - 1}}"
+                           tabindex="-1">Previous</a>
+                    </li>
+                    <th:block th:each="item : ${works.paging.getItems()}">
+                        <li class="page-item" th:classappend="${item.index == works.paging.pageNumber? 'active' : ''}"
+                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                            <a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}"></a>
+                        </li>
+                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{'?pageNumber=' + ${works.paging.pageNumber + 1}}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

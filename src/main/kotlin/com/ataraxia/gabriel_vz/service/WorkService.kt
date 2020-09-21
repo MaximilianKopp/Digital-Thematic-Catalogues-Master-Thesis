@@ -10,10 +10,7 @@ import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.repository.WorkRepository
 import com.ataraxia.gabriel_vz.root.Service
-import io.kotlintest.matchers.string.shouldBeEqualIgnoringCase
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 
 @org.springframework.stereotype.Service
@@ -97,9 +94,10 @@ class WorkService(
 //        return workRepository.findAll(pageable)
 //    }
 
-    fun getPage(pageNumber: Int, size: Int): Paged<WorkEntity> {
+    override fun getPage(pageNumber: Int, size: Int): Paged<Work> {
         val request: PageRequest = PageRequest.of(pageNumber - 1, size, Sort.Direction.ASC, "id")
         val workPage = workRepository.findAll(request)
+                .map(workFactory::modelFromEntity)
         return Paged(workPage, Paging.of(workPage.totalPages, pageNumber, size))
     }
 }

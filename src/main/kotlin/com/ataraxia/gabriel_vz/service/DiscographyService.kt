@@ -3,10 +3,14 @@ package com.ataraxia.gabriel_vz.service
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.ataraxia.gabriel_vz.controller.paging.Paged
+import com.ataraxia.gabriel_vz.controller.paging.Paging
 import com.ataraxia.gabriel_vz.factory.DiscographyFactory
 import com.ataraxia.gabriel_vz.model.Discography
 import com.ataraxia.gabriel_vz.repository.DiscographyRepository
 import com.ataraxia.gabriel_vz.root.Service
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 
 @org.springframework.stereotype.Service
 class DiscographyService(
@@ -74,5 +78,12 @@ class DiscographyService(
                 .right()
     } catch (e: Exception) {
         e.left()
+    }
+
+    override fun getPage(pageNumber: Int, size: Int): Paged<Discography> {
+        val request: PageRequest = PageRequest.of(pageNumber - 1, size, Sort.Direction.ASC, "id")
+        val discographyPage = discographyRepository.findAll(request)
+                .map(discographyFactory::modelFromEntity)
+        return Paged(discographyPage, Paging.of(discographyPage.totalPages, pageNumber, size))
     }
 }
