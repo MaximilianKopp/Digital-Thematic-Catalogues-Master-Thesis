@@ -3,10 +3,14 @@ package com.ataraxia.gabriel_vz.service
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.ataraxia.gabriel_vz.controller.paging.Paged
+import com.ataraxia.gabriel_vz.controller.paging.Paging
 import com.ataraxia.gabriel_vz.factory.PlaceFactory
 import com.ataraxia.gabriel_vz.model.Place
 import com.ataraxia.gabriel_vz.repository.PlaceRepository
 import com.ataraxia.gabriel_vz.root.Service
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 
 @org.springframework.stereotype.Service
 class PlaceService(
@@ -73,5 +77,12 @@ class PlaceService(
                 .right()
     } catch (e: Exception) {
         e.left()
+    }
+
+    override fun getPage(pageNumber: Int, size: Int): Paged<Place> {
+        val request: PageRequest = PageRequest.of(pageNumber - 1, size, Sort.Direction.ASC, "id")
+        val placePage = placeRepository.findAll(request)
+                .map(placeFactory::modelFromEntity)
+        return Paged(placePage, Paging.of(placePage.totalPages, pageNumber, size))
     }
 }
