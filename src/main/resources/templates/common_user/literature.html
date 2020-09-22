@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="reference : ${literature.page}">
-                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${reference.id}}"
+                    <td><a href="index.html" th:href="@{'reference/?id=' + ${reference.id}}"
                            th:text="${reference.title}"></a></td>
                     <td th:text="${reference.author}">id</td>
                     <td th:text="${reference.isbn}">title</td>

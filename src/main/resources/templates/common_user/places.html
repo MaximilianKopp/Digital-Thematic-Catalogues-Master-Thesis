@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="place : ${places.page}">
-                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${place.id}}"
+                    <td><a href="index.html" th:href="@{'place/?id=' + ${place.id}}"
                            th:text="${place.title}"></a></td>
                     <td th:text="${place.name}">id</td>
                     <td th:text="${place.locality}">title</td>
