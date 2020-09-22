@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="incipit : ${incipits.page}">
-                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${incipit.id}}"
+                    <td><a href="index.html" th:href="@{'incipit/?id=' + ${incipit.id}}"
                            th:text="${incipit.title}"></a></td>
                     <td th:text="${incipit.description}">id</td>
                     <td th:text="${incipit.score}">title</td>

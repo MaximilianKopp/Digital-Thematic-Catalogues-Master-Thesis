@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="work : ${works.page}">
-                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${work.id}}"
+                    <td><a href="workdetails.html" th:href="@{'work?id='+ ${work.id}}"
                            th:text="${work.title}"></a></td>
                     <td th:text="${work.dateOfCreation}">title</td>
                     <td th:text="${work.dateOfPremiere}">body</td>

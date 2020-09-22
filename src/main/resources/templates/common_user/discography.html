@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="discography : ${discographies.page}">
-                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${discography.id}}"
+                    <td><a href="index.html" th:href="@{'record/?id=' + ${discography.id}}"
                            th:text="${discography.title}"></a></td>
                     <td th:text="${discography.label}">id</td>
                     <td th:text="${discography.recordId}">title</td>

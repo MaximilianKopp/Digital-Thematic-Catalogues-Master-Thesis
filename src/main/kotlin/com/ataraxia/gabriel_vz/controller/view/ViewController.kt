@@ -1,11 +1,15 @@
 package com.ataraxia.gabriel_vz.controller.view
 
+import arrow.core.right
 import com.ataraxia.gabriel_vz.service.*
+import org.springframework.expression.spel.SpelEvaluationException
+import org.springframework.expression.spel.SpelMessage
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.thymeleaf.exceptions.TemplateProcessingException
 
 @Controller
 @RequestMapping("/")
@@ -65,12 +69,56 @@ class ViewController(
         return "common_user/works"
     }
 
+    @GetMapping("/work")
+    fun oneWork(@RequestParam("id") id: String, model: Model): String? {
+        val work = workService.get(id)
+        model.addAttribute("work", work
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/workdetails"
+    }
+
+    @GetMapping("/incipits")
+    fun allIncipits(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
+                    @RequestParam(value = "size", required = false, defaultValue = "10") size: Int,
+                    model: Model): String? {
+        model.addAttribute("incipits", incipitService.getPage(pageNumber, size))
+        return "common_user/incipits"
+    }
+
+    @GetMapping("/incipit")
+    fun oneIncipit(@RequestParam("id") id: String, model: Model): String? {
+        val incipit = incipitService.get(id)
+        model.addAttribute("incipit", incipit
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/incipitdetails"
+    }
+
     @GetMapping("/literature")
     fun allLiterature(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
                       @RequestParam(value = "size", required = false, defaultValue = "10") size: Int,
                       model: Model): String? {
         model.addAttribute("literature", literatureService.getPage(pageNumber, size))
         return "common_user/literature"
+    }
+
+    @GetMapping("/reference")
+    fun oneReference(@RequestParam("id") id: String, model: Model): String? {
+        val reference = literatureService.get(id)
+        model.addAttribute("reference", reference
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/literaturedetails"
     }
 
     @GetMapping("/texts")
@@ -81,12 +129,36 @@ class ViewController(
         return "common_user/texts"
     }
 
+    @GetMapping("/text")
+    fun oneText(@RequestParam("id") id: String, model: Model): String? {
+        val text = textService.get(id)
+        model.addAttribute("text", text
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/textdetails"
+    }
+
     @GetMapping("/places")
     fun allPlaces(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
                   @RequestParam(value = "size", required = false, defaultValue = "10") size: Int,
                   model: Model): String? {
         model.addAttribute("places", placeService.getPage(pageNumber, size))
         return "common_user/places"
+    }
+
+    @GetMapping("/place")
+    fun onePlace(@RequestParam("id") id: String, model: Model): String? {
+        val place = placeService.get(id)
+        model.addAttribute("place", place
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/placedetails"
     }
 
     @GetMapping("/discography")
@@ -97,6 +169,18 @@ class ViewController(
         return "common_user/discography"
     }
 
+    @GetMapping("/record")
+    fun oneDiscography(@RequestParam("id") id: String, model: Model): String? {
+        val discography = discographyService.get(id)
+        model.addAttribute("discography", discography
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/discographydetails"
+    }
+
     @GetMapping("/persons")
     fun allPersons(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
                    @RequestParam(value = "size", required = false, defaultValue = "10") size: Int,
@@ -105,12 +189,17 @@ class ViewController(
         return "common_user/persons"
     }
 
-    @GetMapping("/incipits")
-    fun allIncipits(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
-                    @RequestParam(value = "size", required = false, defaultValue = "10") size: Int,
-                    model: Model): String? {
-        model.addAttribute("incipits", incipitService.getPage(pageNumber, size))
-        return "common_user/incipits"
+    @GetMapping("/person")
+    fun onePerson(@RequestParam("id") id: String, model: Model): String? {
+        val persons = personService.get(id)
+        model.addAttribute("persons", persons
+                .fold(
+                        ifLeft = { throw  SpelEvaluationException(SpelMessage.PROPERTY_OR_FIELD_NOT_READABLE_ON_NULL) },
+                        ifRight = { it }
+                )
+        )
+        return "common_user/persondetails"
     }
+
 
 }

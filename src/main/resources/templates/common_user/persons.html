@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="person : ${persons.page}">
-                    <td><a href="index.html" th:href="@{'workdetails/?id=' + ${person.id}}"
+                    <td><a href="index.html" th:href="@{'person/?id=' + ${person.id}}"
                            th:text="${person.title}"></a></td>
                     <td th:text="${person.name}">id</td>
                     <td th:text="${person.pnd}">title</td>
