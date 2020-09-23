@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin=""/>
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
@@ -24,66 +23,78 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="container-fluid p-0">
     <div class="row no-gutters">
-        <div class="col-lg-2">
+        <div class="col col-1">
             <div th:replace="fragments/sidebar :: sidebar"></div>
         </div>
-        <div class="col-lg-1 mt-3">
-            <a href="workdetails.html" th:href="@{/works}" class="fas fa-arrow-alt-circle-left fa-lg"></a>
+        <div class="col col-4 ml-3 mt-3">
+            <table class="table table-bordered table-responsive-sm table-hover small">
+                <tbody>
+                <tr>
+                    <th>Title: <a href="workdetails.html" th:href="@{/works}"
+                                  class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
+                    <td th:text="${work.title}"></td>
+                </tr>
+                <tr>
+                    <th>Incipit</th>
+                    <td id="svg_output">
+                </tr>
+                <tr>
+                    <th>Opus:</th>
+                    <td th:text="${work.opus}"></td>
+                </tr>
+                <tr>
+                    <th>Date of Creation:</th>
+                    <td th:text="${work.dateOfCreation}"></td>
+                </tr>
+                <tr>
+                    <th>Date of Premiere:</th>
+                    <td th:text="${work.dateOfPremiere}"></td>
+                </tr>
+                <tr>
+                    <th>Place of Premiere:</th>
+                    <td th:text="${work.placeOfPremiere.title}"></td>
+                </tr>
+                <tr>
+                    <th>Locality:</th>
+                    <td th:text="${work.placeOfPremiere.locality}"></td>
+                </tr>
+                <tr>
+                    <th>Country:</th>
+                    <td th:text="${work.placeOfPremiere.country}"></td>
+                </tr>
+                <tr>
+                    <th>Commentary:</th>
+                    <td th:text="${work.commentary}"></td>
+                </tr>
+                <tr>
+                    <th>Dedication:</th>
+                    <td th:text="${work.dedication}"></td>
+                </tr>
+                <tr>
+                    <th>Formation:</th>
+                    <td th:text="${work.instrumentation}"></td>
+                </tr>
+                <tr>
+                    <th>Category:</th>
+                    <td th:text="${work.category}"></td>
+                </tr>
+                <tr>
+                    <th>Duration:</th>
+                    <td th:text="${work.duration}"></td>
+                </tr>
+                <tr>
+                    <th>Author:</th>
+                    <td th:text="${work.relatedText.author}"></td>
+                </tr>
+                <tr>
+                    <th>Excerpt:</th>
+                    <td th:text="${work.relatedText.excerpt}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-lg-2 mt-3">
-            <h4 th:text="${work.title}"></h4>
-            <ul>
-                <li th:text="'Opus: ' + ${work.opus}"></li>
-                <li th:text="'Kompositionsdatum: ' + ${work.dateOfCreation }"></li>
-                <li th:text="'Datum der Uraufführung: ' + ${work.dateOfPremiere }"></li>
-                <li th:text="'Ort der Uraufführung: ' + ${work.placeOfPremiere.title}"></li>
-                <ul>
-                    <li th:text="${work.placeOfPremiere.locality}"></li>
-                    <li th:text="${work.placeOfPremiere.country}"></li>
-                </ul>
-                <li th:text="'Kommentar: ' + ${work.commentary}"></li>
-                <li th:if="${work.dedication != null}"
-                    th:text="'Widmung: ' + ${work.dedication}"></li>
-                <li th:text="'Besetzung: ' + ${work.instrumentation}"></li>
-                <li th:text="'Kategorie: ' + ${work.category}"></li>
-                <li th:text="'Dauer: ' + ${work.duration}"></li>
-                <li th:text="'Text: ' + ${work.relatedText.title}"></li>
-                <ul>
-                    <li th:text="'Autor: ' + ${work.relatedText.author}"></li>
-                    <li th:text="'Exzerpt: ' + ${work.relatedText.excerpt}"></li>
-                </ul>
-            </ul>
-            <details>
-                <summary th:text="Aufnahmen"></summary>
-                <ul th:each="record : ${work.discographies}">
-                    <li th:text="${record.title} + ' ' + ${record.dateOfPublishing}"></li>
-                </ul>
-            </details>
 
-            <details>
-                <summary th:text="Personen"></summary>
-                <ul th:each="person : ${work.relatedPersons}">
-                    <li th:text="${person.name} + ' Role: ' + ${person.role}"></li>
-                    <li><a th:href="@{${person.pnd}}" th:target="blanket" th:text="${person.pnd}"></a></li>
-                </ul>
-            </details>
-
-            <details>
-                <summary th:text="References"></summary>
-                <ul th:each="reference : ${work.literatureList}">
-                    <li th:text="${reference.title} + ' ISBN: ' + ${reference.isbn}"></li>
-                </ul>
-            </details>
-            <p th:text="'Editor: ' + ${work.editor}"></p>
-        </div>
-
-        <div class="col-lg-5 mt-3">
-            <h4>Incipit</h4>
-            <ul>
-                <li th:text="${work.incipit.title}"></li>
-                <div id="svg_output"></div>
-                <li th:text="${work.incipit.description}"></li>
-            </ul>
+        <div class="col col-3 mt-3 ml-2">
             <div id="map">
                 <script th:inline="javascript">
 
@@ -97,24 +108,47 @@
                     var marker = new L.marker([longitude, latitude]).addTo(map);
                 </script>
             </div>
-        </div>
+            <div class="collections pt-1">
+                <details>
+                    <summary th:text="Records"></summary>
+                    <ul class="list-group" th:each="record : ${work.discographies}">
+                        <li class="list-group-item" th:text="${record.title} + ' ' + ${record.dateOfPublishing}"></li>
+                    </ul>
+                </details>
 
+                <details>
+                    <summary th:text="Persons"></summary>
+                    <ul class="list-group" th:each="person : ${work.relatedPersons}">
+                        <li class="list-group-item" th:text="${person.name} + ' Role: ' + ${person.role}"></li>
+                        <li class="list-group-item"><a th:href="@{${person.pnd}}" th:target="blanket" th:text="${person.pnd}"></a></li>
+                    </ul>
+                </details>
+
+                <details>
+                    <summary th:text="References"></summary>
+                    <ul class="list-group" th:each="reference : ${work.literatureList}">
+                        <li class="list-group-item" th:text="${reference.title} + ' ISBN: ' + ${reference.isbn}"></li>
+                    </ul>
+                </details>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <div th:insert="fragments/footer :: footer"></div>
 
 <script type="text/javascript" th:inline="javascript">
 
     var vrvToolkit = new verovio.toolkit();
-    var zoom = 50;
-    var pageHeight = 2970;
-    var pageWidth = 2100;
+    var zoom = 20;
+    var pageHeight = 100;
+    var pageWidth = 100;
 
     function setOptions() {
 
-        pageHeight = $(document).height() * 100 / zoom;
-        pageWidth = $(window).width() * 100 / zoom;
+        pageHeight = $(document).height();
+        pageWidth = $(window).width();
         options = {
             pageHeight: pageHeight,
             pageWidth: pageWidth,
@@ -124,7 +158,7 @@
         vrvToolkit.setOptions(options);
     }
 
-    function loadData(data) {
+    function loadData() {
         setOptions();
         var clef = /*[[${work.incipit.clef}]]*/ 'default';
         var keysig = /*[[${work.incipit.keysig}]]*/ 'default';
