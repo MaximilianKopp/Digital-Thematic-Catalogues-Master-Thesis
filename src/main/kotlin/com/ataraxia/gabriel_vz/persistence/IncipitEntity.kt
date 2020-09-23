@@ -12,11 +12,12 @@ class IncipitEntity(
         title: String?,
         created: OffsetDateTime?,
         modified: OffsetDateTime?,
-        var text: String,
-        var keysig: String,
-        var timesig: String,
-        var score: String,
-        var description: String,
+        var text: String?,
+        var clef: String?,
+        var keysig: String?,
+        var timesig: String?,
+        var score: String?,
+        var description: String?,
 
         @JsonBackReference
         @OneToOne(cascade = [CascadeType.ALL])

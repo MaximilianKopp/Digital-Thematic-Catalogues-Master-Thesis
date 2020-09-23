@@ -12,6 +12,7 @@ class WorkEntity(
         title: String?,
         created: OffsetDateTime?,
         modified: OffsetDateTime?,
+        var opus: String?,
         var dateOfCreation: String,
         var dateOfPremiere: String,
 

@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import io.swagger.annotations.ApiModelProperty.AccessMode.READ_ONLY
 import org.springframework.hateoas.Link
-import org.springframework.hateoas.RepresentationModel
 import org.springframework.http.CacheControl
 import org.springframework.http.MediaType
 import java.util.concurrent.TimeUnit
@@ -24,35 +23,42 @@ class IncipitResource(
                 dataType = "String",
                 example = "The nine cats are brats.."
         )
-        var text: String,
+        var text: String?,
         @ApiModelProperty(
                 notes = "The key of a piece",
                 accessMode = READ_ONLY,
                 dataType = "String",
                 example = "G"
         )
-        var keysig: String,
+        var keysig: String?,
+        @ApiModelProperty(
+                notes = "The clef of a piece",
+                accessMode = READ_ONLY,
+                dataType = "String",
+                example = "Violin"
+        )
+        var clef: String?,
         @ApiModelProperty(
                 notes = "The timesignature of a piece",
                 accessMode = READ_ONLY,
                 dataType = "String",
                 example = "2/4"
         )
-        var timesig: String,
+        var timesig: String?,
         @ApiModelProperty(
                 notes = "The incipit of a piece (written in Plaine & Easie Code",
                 accessMode = READ_ONLY,
                 dataType = "String",
                 example = "f-a-c-d-e"
         )
-        var score: String,
+        var score: String?,
         @ApiModelProperty(
                 notes = "Further Information of this piece",
                 accessMode = READ_ONLY,
                 dataType = "String",
                 example = "This work was written in Gabriels early period"
         )
-        var description: String
+        var description: String?
 ) : Resource(
         self,
         collection,

@@ -15,6 +15,7 @@ class WorkFactory(
         val discographyFactory: DiscographyFactory,
         val literatureFactory: LiteratureFactory,
         val personFactory: PersonFactory,
+        val incipitFactory: IncipitFactory,
         val textFactory: TextFactory,
         val placeFactory: PlaceFactory
 ) : Factory<Work, WorkEntity, WorkResource>() {
@@ -22,6 +23,7 @@ class WorkFactory(
     override fun modelFromEntity(entity: WorkEntity): Work = Work(
             id = entity.id,
             title = entity.title,
+            opus = entity.opus,
             created = entity.created,
             modified = entity.modified,
             relatedText = entity.relatedText?.let { textFactory.modelFromEntity(it) },
@@ -35,6 +37,7 @@ class WorkFactory(
             dedication = entity.dedication,
             dateOfPremiere = entity.dateOfPremiere,
             dateOfCreation = entity.dateOfCreation,
+            incipit = entity.incipit?.let { incipitFactory.modelFromEntity(it) },
             commentary = entity.commentary,
             category = entity.category,
             literatureList = entity.literatureList?.map(
@@ -48,6 +51,7 @@ class WorkFactory(
     override fun entityFromModel(model: Work): WorkEntity = WorkEntity(
             id = model.id,
             title = model.title,
+            opus = model.opus,
             created = model.created,
             modified = model.modified,
             relatedText = model.relatedText?.let { textFactory.entityFromModel(it) },
@@ -74,6 +78,7 @@ class WorkFactory(
     override fun modelFromResource(resource: WorkResource): Work = Work(
             id = resource.id,
             title = resource.title,
+            opus = resource.opus,
             created = resource.created?.let { OffsetDateTime.parse(it) },
             modified = resource.modified?.let { OffsetDateTime.parse(it) },
             relatedText = resource.relatedText?.let { textFactory.modelFromResource(it) },
@@ -87,6 +92,7 @@ class WorkFactory(
             dedication = resource.dedication,
             dateOfPremiere = resource.dateOfPremiere,
             dateOfCreation = resource.dateOfCreation,
+            incipit = resource.incipit?.let { incipitFactory.modelFromResource(it) },
             commentary = resource.commentary,
             category = resource.category,
             literatureList = resource.literatureList.map(
@@ -107,6 +113,7 @@ class WorkFactory(
                     .withSelfRel(),
             id = model.id,
             title = model.title,
+            opus = model.opus,
             created = Option.fromNullable(model.created)
                     .map(OffsetDateTime::toString)
                     .orNull(),
@@ -124,6 +131,7 @@ class WorkFactory(
             dedication = model.dedication,
             dateOfPremiere = model.dateOfPremiere,
             dateOfCreation = model.dateOfCreation,
+            incipit = model.incipit?.let { incipitFactory.resourceFromModel(it) },
             commentary = model.commentary,
             category = model.category,
             literatureList = model.literatureList.map(

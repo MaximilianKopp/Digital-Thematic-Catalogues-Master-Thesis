@@ -24,6 +24,7 @@ internal class IncipitFactoryTest {
             title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
+            clef = "Violin",
             score = "f-a-g",
             timesig = "2/4",
             keysig = "g"
@@ -36,6 +37,7 @@ internal class IncipitFactoryTest {
             title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
+            clef = "Violin",
             score = "f-a-g",
             timesig = "2/4",
             keysig = "g"
@@ -50,6 +52,7 @@ internal class IncipitFactoryTest {
             title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
+            clef = "Violin",
             score = "f-a-g",
             timesig = "2/4",
             keysig = "g"
