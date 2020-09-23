@@ -99,6 +99,28 @@ class GabrielVzApplication {
                 recordId = "2323"
         ))
 
+        testWork.addDiscography(DiscographyEntity(
+                id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "F",
+                dateOfPublishing = "22.23.29",
+                label = "Gramophon",
+                musicians = null,
+                recordId = "2323"
+        ))
+
+        testWork.addDiscography(DiscographyEntity(
+                id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "G",
+                dateOfPublishing = "22.23.29",
+                label = "Gramophon",
+                musicians = null,
+                recordId = "2323"
+        ))
+
         testWork.addDiscography(testDiscography)
 
         testWork.addDiscography(DiscographyEntity(
@@ -127,6 +149,17 @@ class GabrielVzApplication {
                 modified = null,
                 title = "Work",
                 name = "Maximilian",
+                description = "Versucher",
+                pnd = "232",
+                role = "User"
+        ))
+
+        testWork.addPerson(PersonEntity(
+                id = null,
+                created = OffsetDateTime.now(),
+                modified = null,
+                title = "Work",
+                name = "Luise",
                 description = "Versucher",
                 pnd = "232",
                 role = "User"
