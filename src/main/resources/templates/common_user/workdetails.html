@@ -5,9 +5,19 @@
     <title>List of Compositions</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+    <script src="http://www.verovio.org/javascript/latest/verovio-toolkit.js"></script>
     <link th:rel="stylesheet" th:href="@{../styles.css}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
           type="text/css"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
@@ -17,13 +27,124 @@
         <div class="col-lg-2">
             <div th:replace="fragments/sidebar :: sidebar"></div>
         </div>
+        <div class="col-lg-1 mt-3">
+            <a href="workdetails.html" th:href="@{/works}" class="fas fa-arrow-alt-circle-left fa-lg"></a>
+        </div>
+        <div class="col-lg-2 mt-3">
+            <h4 th:text="${work.title}"></h4>
+            <ul>
+                <li th:text="'Opus: ' + ${work.opus}"></li>
+                <li th:text="'Kompositionsdatum: ' + ${work.dateOfCreation }"></li>
+                <li th:text="'Datum der Uraufführung: ' + ${work.dateOfPremiere }"></li>
+                <li th:text="'Ort der Uraufführung: ' + ${work.placeOfPremiere.title}"></li>
+                <ul>
+                    <li th:text="${work.placeOfPremiere.locality}"></li>
+                    <li th:text="${work.placeOfPremiere.country}"></li>
+                </ul>
+                <li th:text="'Kommentar: ' + ${work.commentary}"></li>
+                <li th:if="${work.dedication != null}"
+                    th:text="'Widmung: ' + ${work.dedication}"></li>
+                <li th:text="'Besetzung: ' + ${work.instrumentation}"></li>
+                <li th:text="'Kategorie: ' + ${work.category}"></li>
+                <li th:text="'Dauer: ' + ${work.duration}"></li>
+                <li th:text="'Text: ' + ${work.relatedText.title}"></li>
+                <ul>
+                    <li th:text="'Autor: ' + ${work.relatedText.author}"></li>
+                    <li th:text="'Exzerpt: ' + ${work.relatedText.excerpt}"></li>
+                </ul>
+            </ul>
+            <details>
+                <summary th:text="Aufnahmen"></summary>
+                <ul th:each="record : ${work.discographies}">
+                    <li th:text="${record.title} + ' ' + ${record.dateOfPublishing}"></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary th:text="Personen"></summary>
+                <ul th:each="person : ${work.relatedPersons}">
+                    <li th:text="${person.name} + ' Role: ' + ${person.role}"></li>
+                    <li><a th:href="@{${person.pnd}}" th:target="blanket" th:text="${person.pnd}"></a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary th:text="References"></summary>
+                <ul th:each="reference : ${work.literatureList}">
+                    <li th:text="${reference.title} + ' ISBN: ' + ${reference.isbn}"></li>
+                </ul>
+            </details>
+            <p th:text="'Editor: ' + ${work.editor}"></p>
+        </div>
+
+        <div class="col-lg-5 mt-3">
+            <h4>Incipit</h4>
+            <ul>
+                <li th:text="${work.incipit.title}"></li>
+                <div id="svg_output"></div>
+                <li th:text="${work.incipit.description}"></li>
+            </ul>
+            <div id="map">
+                <script th:inline="javascript">
+
+                    var longitude = /*[[${work.placeOfPremiere.coordinates.longitude}]]*/ 'default';
+                    var latitude = /*[[${work.placeOfPremiere.coordinates.latitude}]]*/ 'default';
+                    var map = new L.map('map').setView([longitude, latitude], 18)
+                    var layer = new L.TileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=LObS2t5fDJqjqBxJS6Q7', {
+                        attribution: '<a href="https://www.maptiler.com/copyright/" ' + 'target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>'
+                    }).addTo(map);
+
+                    var marker = new L.marker([longitude, latitude]).addTo(map);
+                </script>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <div th:insert="fragments/footer :: footer"></div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script src="http://www.verovio.org/javascript/latest/verovio-toolkit.js"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    var vrvToolkit = new verovio.toolkit();
+    var zoom = 50;
+    var pageHeight = 2970;
+    var pageWidth = 2100;
+
+    function setOptions() {
+
+        pageHeight = $(document).height() * 100 / zoom;
+        pageWidth = $(window).width() * 100 / zoom;
+        options = {
+            pageHeight: pageHeight,
+            pageWidth: pageWidth,
+            scale: zoom,
+            adjustPageHeight: true
+        };
+        vrvToolkit.setOptions(options);
+    }
+
+    function loadData(data) {
+        setOptions();
+        var clef = /*[[${work.incipit.clef}]]*/ 'default';
+        var keysig = /*[[${work.incipit.keysig}]]*/ 'default';
+        var timesig = /*[[${work.incipit.timesig}]]*/ 'default';
+        var score = /*[[${work.incipit.score}]]*/ 'default';
+        var data = "@clef:" + clef + "\n" + "@keysig:" + keysig + "\n" + "@timesig:" + timesig + "\n" + "@data:" + score;
+        vrvToolkit.loadData(data);
+        svg = vrvToolkit.renderToSVG(1, {});
+        $("#svg_output").html(svg);
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            dataType: "text"
+            , success: function (data) {
+                loadData(data);
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
