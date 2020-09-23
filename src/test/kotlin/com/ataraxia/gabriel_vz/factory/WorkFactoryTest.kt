@@ -22,12 +22,14 @@ internal class WorkFactoryTest {
     private var discographyFactory = DiscographyFactory()
     private val coordinatesFactory = CoordinatesFactory()
     private val textFactory = TextFactory()
+    private val incipitFactory = IncipitFactory()
     private val placeFactory = PlaceFactory(coordinatesFactory)
     private var workFactory = WorkFactory(
             discographyFactory = discographyFactory,
             literatureFactory = literatureFactory,
             personFactory = personFactory,
             textFactory = textFactory,
+            incipitFactory = incipitFactory,
             placeFactory = placeFactory
     )
 
@@ -36,7 +38,9 @@ internal class WorkFactoryTest {
             created = OffsetDateTime.now(),
             modified = null,
             title = "Sonata C-Dur",
+            opus = "Opus 20",
             category = "Klaviermusik",
+            incipit = null,
             commentary = "Tolles Werk",
             dateOfCreation = "23.12.1989",
             dateOfPremiere = "26.09.2010",
@@ -56,6 +60,7 @@ internal class WorkFactoryTest {
             created = OffsetDateTime.now(),
             modified = null,
             title = "Sonata C-Dur",
+            opus = "Opus 20",
             category = "Klaviermusik",
             commentary = "Tolles Werk",
             dateOfCreation = "23.12.1989",
@@ -78,7 +83,9 @@ internal class WorkFactoryTest {
             created = OffsetDateTime.now().toString(),
             modified = null,
             title = "Sonata C-Dur",
+            opus = "Opus 20",
             category = "Klaviermusik",
+            incipit = null,
             commentary = "Tolles Werk",
             dateOfCreation = "23.12.1989",
             dateOfPremiere = "26.09.2010",

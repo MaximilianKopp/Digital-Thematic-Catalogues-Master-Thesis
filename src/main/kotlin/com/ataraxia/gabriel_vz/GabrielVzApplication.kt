@@ -42,6 +42,7 @@ class GabrielVzApplication {
                 created = OffsetDateTime.now(),
                 modified = null,
                 title = "Violinsonata G-Dur",
+                opus = "opus 20",
                 category = "Klaviermusik",
                 commentary = "Tolles Werk",
                 dateOfCreation = "23.12.1989",
@@ -56,9 +57,10 @@ class GabrielVzApplication {
                         locality = "Ballsaal",
                         country = "Deutschland",
                         coordinates = CoordinatesEntity(
-                                longitude = 23.12,
-                                latitude = 22.11
+                                longitude = 48.200683,
+                                latitude = 16.372793
                         )
+                       
                 ),
                 duration = "2 Minuten",
                 editor = "Max",
@@ -78,11 +80,12 @@ class GabrielVzApplication {
                 created = OffsetDateTime.now(),
                 modified = null,
                 title = "Incipit",
+                clef = "G-2",
                 description = "hihi",
-                keysig = "g",
-                score = "f-g-a-b",
+                keysig = "xF",
+                score = "'6{DD,AA}'{DDFF}{DD,AA}'{DDFF}/{D,AB'C}{DEFG}{FFDD}{FFAA}/{FFDD}{FFAA}{8F6GA}{B''CDE}",
                 text = "Mimimi",
-                timesig = "2/3"
+                timesig = "4/4"
         ))
 
         testWork.addDiscography(DiscographyEntity(

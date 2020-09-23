@@ -18,6 +18,13 @@ class WorkResource(
         created: String?,
         modified: String?,
         @ApiModelProperty(
+                notes = "Given Opus number",
+                accessMode = READ_ONLY,
+                dataType = "String",
+                example = "Opus 20"
+        )
+        var opus: String?,
+        @ApiModelProperty(
                 notes = "Date when the Work was created",
                 accessMode = READ_ONLY,
                 dataType = "String",
@@ -38,6 +45,13 @@ class WorkResource(
                 example = "2015-09-21"
         )
         var placeOfPremiere: PlaceResource?,
+        @ApiModelProperty(
+                notes = "Incipit of this work",
+                accessMode = READ_ONLY,
+                dataType = "String",
+                example = "f-a-c (rendered by Verovio)"
+        )
+        var incipit: IncipitResource?,
         @ApiModelProperty(
                 notes = "Further information about a Work",
                 accessMode = READ_ONLY,
