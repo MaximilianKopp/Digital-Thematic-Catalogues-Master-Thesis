@@ -8,21 +8,101 @@
     <link th:rel="stylesheet" th:href="@{../styles.css}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
           type="text/css"/>
+    <script src="http://www.verovio.org/javascript/latest/verovio-toolkit.js"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"></div>
-<div class="container-fluid p-0">
-    <div class="row no-gutters">
-        <div class="col-lg-2">
-            <div th:replace="fragments/sidebar :: sidebar"></div>
+<div class="content">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col col-1">
+                <div th:replace="fragments/sidebar :: sidebar"></div>
+            </div>
+            <div class="col col-4 ml-3 mt-3">
+                <h4>Incipit</h4>
+                <table class="table table-bordered table-responsive-sm table-hover small">
+                    <tbody>
+                    <tr>
+                        <th>Title: <a href="incipitdetails.html" th:href="@{/incipits}"
+                                      class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
+                        <td th:text="${incipit.title}"></td>
+                    </tr>
+                    <tr>
+                        <th>Incipit</th>
+                        <td class="svg_output">
+                    </tr>
+                    <tr>
+                        <th>Clef:</th>
+                        <td th:text="${incipit.clef}"></td>
+                    </tr>
+                    <tr>
+                        <th>Key Signature:</th>
+                        <td th:text="${incipit.keysig}"></td>
+                    </tr>
+                    <tr>
+                        <th>Time Signature:</th>
+                        <td th:text="${incipit.timesig}"></td>
+                    </tr>
+                    <tr>
+                        <th>Text:</th>
+                        <td th:text="${incipit.text}"></td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td th:text="${incipit.description}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <div th:insert="fragments/footer :: footer"></div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    var vrvToolkit = new verovio.toolkit();
+    var zoom = 20;
+    var pageHeight = 100;
+    var pageWidth = 100;
+
+    function setOptions() {
+
+        pageHeight = $(document).height();
+        pageWidth = $(window).width();
+        options = {
+            pageHeight: pageHeight,
+            pageWidth: pageWidth,
+            scale: zoom,
+            adjustPageHeight: true
+        };
+        vrvToolkit.setOptions(options);
+    }
+
+    function loadData() {
+        setOptions();
+        var clef = /*[[${incipit.clef}]]*/ 'default';
+        var keysig = /*[[${incipit.keysig}]]*/ 'default';
+        var timesig = /*[[${incipit.timesig}]]*/ 'default';
+        var score = /*[[${incipit.score}]]*/ 'default';
+        var data = "@clef:" + clef + "\n" + "@keysig:" + keysig + "\n" + "@timesig:" + timesig + "\n" + "@data:" + score;
+        vrvToolkit.loadData(data);
+        svg = vrvToolkit.renderToSVG(1, {});
+        $(".svg_output").html(svg);
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            dataType: "text"
+            , success: function (data) {
+                loadData(data);
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
