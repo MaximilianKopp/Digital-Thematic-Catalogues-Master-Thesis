@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of Compositions</title>
+    <title>Place</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{../styles.css}">
@@ -10,12 +10,42 @@
           type="text/css"/>
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"></div>
-<div class="container-fluid p-0">
-    <div class="row no-gutters">
-        <div class="col-lg-2">
-            <div th:replace="fragments/sidebar :: sidebar"></div>
+<div class="content">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col col-1">
+                <div th:replace="fragments/sidebar :: sidebar"></div>
+            </div>
+            <div class="col col-4 ml-3 mt-3">
+                <h4>Place</h4>
+                <table class="table table-bordered table-responsive-sm table-hover small">
+                    <tbody>
+                    <tr>
+                        <th>Title: <a href="places.html" th:href="@{/places}"
+                                      class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
+                        <td th:text="${place.name}"></td>
+                    </tr>
+                    <tr th:each="mapEntry : ${place.relatedWorks}">
+                        <th>Related Work:</th>
+                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
+                               th:text="${mapEntry.value}"></a></td>
+                    </tr>
+                    <tr>
+                        <th>Locality:</th>
+                        <td th:text="${place.locality}"></td>
+                    </tr>
+                    <tr>
+                        <th>Country:</th>
+                        <td th:text="${place.country}"></td>
+                    </tr>
+                    <tr>
+                        <th>Coordinates:</th>
+                        <td th:text="${'X: ' + place.coordinates.longitude + ' ' + 'Y: ' + place.coordinates.latitude + ' (ESRI)'}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

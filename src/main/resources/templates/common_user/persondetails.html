@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of Compositions</title>
+    <title>Person</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{../styles.css}">
@@ -10,12 +10,51 @@
           type="text/css"/>
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"></div>
-<div class="container-fluid p-0">
-    <div class="row no-gutters">
-        <div class="col-lg-2">
-            <div th:replace="fragments/sidebar :: sidebar"></div>
+<div class="content">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col col-1">
+                <div th:replace="fragments/sidebar :: sidebar"></div>
+            </div>
+            <div class="col col-4 ml-3 mt-3">
+                <h4>Person</h4>
+                <table class="table table-bordered table-responsive-sm table-hover small">
+                    <tbody>
+                    <tr>
+                        <th>Title: <a href="persons.html" th:href="@{/persons}"
+                                      class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
+                        <td th:text="${persons.title}"></td>
+                    </tr>
+                    <tr th:each="mapEntry : ${persons.relatedWorks}">
+                        <th>Related Work:</th>
+                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
+                               th:text="${mapEntry.value}"></a></td>
+                    </tr>
+                    <tr th:each="mapEntry : ${persons.relatedDiscographies}">
+                        <th>Related Discography:</th>
+                        <td><a href="discography.html" th:href="@{'../discography?id='+ ${mapEntry.key}}"
+                               th:text="${mapEntry.value}"></a></td>
+                    </tr>
+                    <tr>
+                        <th>Author:</th>
+                        <td th:text="${persons.name}"></td>
+                    </tr>
+                    <tr>
+                        <th>PND:</th>
+                        <td th:text="${persons.pnd}"></td>
+                    </tr>
+                    <tr>
+                        <th>Role:</th>
+                        <td th:text="${persons.role}"></td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td th:text="${persons.description}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

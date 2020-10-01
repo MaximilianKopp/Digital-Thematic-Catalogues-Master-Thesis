@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of Compositions</title>
+    <title>Composition</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -19,7 +19,6 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"></div>
 <div class="content">
     <div class="container-fluid p-0">
@@ -37,7 +36,8 @@
                         <td th:text="${work.title}"></td>
                     </tr>
                     <tr>
-                        <th>Incipit</th>
+                        <th>Incipit: <a href="workdetails.html" th:href="@{'../incipit?id='+ ${work.incipit.id}}"
+                                        class="fas fa-arrow-alt-circle-right fa-lg"></a></th>
                         <td class="svg_output">
                     </tr>
                     <tr>

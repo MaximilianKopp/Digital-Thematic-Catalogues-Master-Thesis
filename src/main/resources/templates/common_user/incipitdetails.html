@@ -29,8 +29,13 @@
                                       class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
                         <td th:text="${incipit.title}"></td>
                     </tr>
+                    <tr th:each="mapEntry : ${incipit.relatedWork}">
+                        <th>Related Work:</th>
+                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
+                               th:text="${mapEntry.value}"></a></td>
+                    </tr>
                     <tr>
-                        <th>Incipit</th>
+                        <th>Incipit:</th>
                         <td class="svg_output">
                     </tr>
                     <tr>
