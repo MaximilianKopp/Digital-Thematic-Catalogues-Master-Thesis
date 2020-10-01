@@ -9,7 +9,8 @@ class Text(
         created: OffsetDateTime?,
         modified: OffsetDateTime?,
         var author: String?,
-        var excerpt: String?
+        var excerpt: String?,
+        var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,

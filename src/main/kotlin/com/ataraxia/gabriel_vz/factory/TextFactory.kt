@@ -2,7 +2,6 @@ package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
 import com.ataraxia.gabriel_vz.controller.API.TextApiController
-import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Text
 import com.ataraxia.gabriel_vz.persistence.TextEntity
 import com.ataraxia.gabriel_vz.resource.TextResource
@@ -19,7 +18,8 @@ class TextFactory : Factory<Text, TextEntity, TextResource>() {
             created = entity.created,
             modified = entity.modified,
             author = entity.author,
-            excerpt = entity.excerpt
+            excerpt = entity.excerpt,
+            relatedWorks = entity.relatedWorks?.map { Pair(it.id, it.title) }!!.toMap()
     )
 
     override fun entityFromModel(model: Text): TextEntity = TextEntity(

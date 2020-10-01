@@ -25,8 +25,8 @@ internal class PersonFactoryTest {
             title = "Person",
             description = "Pianist",
             name = "Alberto",
-            relatedWorks = mutableSetOf(),
-            relatedDiscographies = mutableSetOf(),
+            relatedWorks = emptyMap(),
+            relatedDiscographies = emptyMap(),
             pnd = "DNB-2312",
             role = "Musician"
     )
@@ -53,8 +53,8 @@ internal class PersonFactoryTest {
             title = "Person",
             description = "Pianist",
             name = "Alberto",
-            relatedWorks = mutableSetOf(),
-            relatedDiscographies = mutableSetOf(),
+            relatedWorks = emptyMap(),
+            relatedDiscographies = emptyMap(),
             pnd = "DNB-2312",
             role = "Musician"
     )

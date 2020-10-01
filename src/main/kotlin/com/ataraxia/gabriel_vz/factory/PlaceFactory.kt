@@ -25,7 +25,8 @@ class PlaceFactory(
             name = entity.name,
             coordinates = coordinatesFactory.modelFromEntity(entity.coordinates),
             country = entity.country,
-            locality = entity.locality
+            locality = entity.locality,
+            relatedWorks = entity.relatedWorks?.map { Pair(it.id, it.title) }!!.toMap()
     )
 
     override fun entityFromModel(model: Place): PlaceEntity = PlaceEntity(
@@ -69,6 +70,7 @@ class PlaceFactory(
             name = model.name,
             coordinates = coordinatesFactory.resourceFromModel(model.coordinates),
             country = model.country,
-            locality = model.locality
+            locality = model.locality,
+            relatedWorks = model.relatedWorks
     )
 }

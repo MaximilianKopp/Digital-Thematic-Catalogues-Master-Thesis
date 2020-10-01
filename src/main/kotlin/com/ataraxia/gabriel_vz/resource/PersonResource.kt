@@ -52,14 +52,14 @@ class PersonResource(
                 dataType = "String",
                 example = "Sonata C-Dur"
         )
-        var relatedWorks: MutableSet<WorkResource>? = mutableSetOf(),
+        var relatedWorks: Map<String?, String?>,
         @ApiModelProperty(
                 notes = "The list of related Discographies",
                 accessMode = READ_ONLY,
                 dataType = "String",
                 example = "Wolfgang Gabriel - All Violin-Sonatas"
         )
-        var relatedDiscographies: MutableSet<DiscographyResource>? = mutableSetOf()
+        var relatedDiscographies: Map<String?, String?>?
 ) : Resource(
         self,
         collection,
@@ -68,33 +68,33 @@ class PersonResource(
         created,
         modified
 ) {
-        override fun cacheControl(): CacheControl = CacheControl.maxAge(5, TimeUnit.MINUTES)
-        override fun contentType(): MediaType = MediaType("application", "com.ataraxia.gabriel-catalogue+json")
-        override fun eTag(): String = hashCode().toString()
-        override fun equals(other: Any?): Boolean {
-                if (this === other) return true
-                if (other !is PersonResource) return false
-                if (!super.equals(other)) return false
+    override fun cacheControl(): CacheControl = CacheControl.maxAge(5, TimeUnit.MINUTES)
+    override fun contentType(): MediaType = MediaType("application", "com.ataraxia.gabriel-catalogue+json")
+    override fun eTag(): String = hashCode().toString()
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PersonResource) return false
+        if (!super.equals(other)) return false
 
-                if (name != other.name) return false
-                if (pnd != other.pnd) return false
-                if (role != other.role) return false
-                if (description != other.description) return false
-                if (relatedWorks != other.relatedWorks) return false
-                if (relatedDiscographies != other.relatedDiscographies) return false
+        if (name != other.name) return false
+        if (pnd != other.pnd) return false
+        if (role != other.role) return false
+        if (description != other.description) return false
+        if (relatedWorks != other.relatedWorks) return false
+        if (relatedDiscographies != other.relatedDiscographies) return false
 
-                return true
-        }
+        return true
+    }
 
-        override fun hashCode(): Int {
-                var result = super.hashCode()
-                result = 31 * result + name.hashCode()
-                result = 31 * result + pnd.hashCode()
-                result = 31 * result + role.hashCode()
-                result = 31 * result + description.hashCode()
-                result = 31 * result + (relatedWorks?.hashCode() ?: 0)
-                result = 31 * result + (relatedDiscographies?.hashCode() ?: 0)
-                return result
-        }
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + pnd.hashCode()
+        result = 31 * result + role.hashCode()
+        result = 31 * result + description.hashCode()
+        result = 31 * result + relatedWorks.hashCode()
+        result = 31 * result + relatedDiscographies.hashCode()
+        return result
+    }
 
 }

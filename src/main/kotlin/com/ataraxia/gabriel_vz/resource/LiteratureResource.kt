@@ -37,7 +37,14 @@ class LiteratureResource(
                 dataType = "String",
                 example = "2010-06-12"
         )
-        var yearOfPublishing: String?
+        var yearOfPublishing: String?,
+        @ApiModelProperty(
+                notes = "Related Work",
+                accessMode = READ_ONLY,
+                dataType = "String"
+        )
+        var relatedWork: MutableMap<String?, String?> = mutableMapOf()
+
 ) : Resource(
         self,
         collection,

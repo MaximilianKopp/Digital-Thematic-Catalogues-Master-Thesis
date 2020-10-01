@@ -12,8 +12,8 @@ class Person(
         var pnd: String,
         var role: String,
         var description: String,
-        var relatedWorks: MutableSet<Work>? = mutableSetOf(),
-        var relatedDiscographies: MutableSet<Discography>? = mutableSetOf()
+        var relatedWorks: Map<String?, String?>,
+        var relatedDiscographies: Map<String?, String?>?
 ) : Model(
         id,
         title,

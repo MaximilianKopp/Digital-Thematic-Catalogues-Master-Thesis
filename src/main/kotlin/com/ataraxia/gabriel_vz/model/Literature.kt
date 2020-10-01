@@ -10,7 +10,8 @@ class Literature(
         modified: OffsetDateTime?,
         var author: String?,
         var isbn: String?,
-        var yearOfPublishing: String?
+        var yearOfPublishing: String?,
+        var relatedWork: MutableMap<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,

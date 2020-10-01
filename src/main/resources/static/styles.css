@@ -18,6 +18,11 @@ span.fa {
     overflow-x: hidden;
 }
 
+#map {
+    width: 450px;
+    height: 460px;
+}
+
 #sidebar-wrapper {
     min-height: 87vh;
     margin-left: -15rem;

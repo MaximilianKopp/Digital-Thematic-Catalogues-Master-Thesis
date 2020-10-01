@@ -22,8 +22,9 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             description = entity.description,
             role = entity.role,
             name = entity.name,
-            pnd = entity.pnd
-
+            pnd = entity.pnd,
+            relatedWorks = emptyMap(),
+            relatedDiscographies = emptyMap()
     )
 
     override fun entityFromModel(model: Person): PersonEntity = PersonEntity(
@@ -45,7 +46,9 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             description = resource.description,
             role = resource.role,
             name = resource.name,
-            pnd = resource.pnd
+            pnd = resource.pnd,
+            relatedWorks = emptyMap(),
+            relatedDiscographies = emptyMap()
     )
 
     override fun resourceFromModel(model: Person): PersonResource = PersonResource(
@@ -67,6 +70,8 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             description = model.description,
             role = model.role,
             name = model.name,
-            pnd = model.pnd
+            pnd = model.pnd,
+            relatedWorks = emptyMap(),
+            relatedDiscographies = emptyMap()
     )
 }

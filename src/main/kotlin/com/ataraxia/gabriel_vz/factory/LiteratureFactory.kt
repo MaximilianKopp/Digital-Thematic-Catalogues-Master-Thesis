@@ -20,7 +20,8 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             modified = entity.modified,
             yearOfPublishing = entity.yearOfPublishing,
             isbn = entity.isbn,
-            author = entity.author
+            author = entity.author,
+            relatedWork = mutableMapOf(Pair(entity.relatedWork!!.id, entity.relatedWork!!.title))
     )
 
     override fun entityFromModel(model: Literature): LiteratureEntity = LiteratureEntity(
@@ -40,7 +41,8 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             modified = resource.modified?.let { OffsetDateTime.parse(it) },
             yearOfPublishing = resource.yearOfPublishing,
             isbn = resource.isbn,
-            author = resource.author
+            author = resource.author,
+            relatedWork = resource.relatedWork
     )
 
     override fun resourceFromModel(model: Literature): LiteratureResource = LiteratureResource(
@@ -61,6 +63,7 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
                     .orNull(),
             yearOfPublishing = model.yearOfPublishing,
             isbn = model.isbn,
-            author = model.author
+            author = model.author,
+            relatedWork = model.relatedWork
     )
 }

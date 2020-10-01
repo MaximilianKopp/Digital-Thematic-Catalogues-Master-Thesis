@@ -11,7 +11,8 @@ class Place(
         var name: String,
         var locality: String,
         var country: String,
-        var coordinates: Coordinates
+        var coordinates: Coordinates,
+        var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,

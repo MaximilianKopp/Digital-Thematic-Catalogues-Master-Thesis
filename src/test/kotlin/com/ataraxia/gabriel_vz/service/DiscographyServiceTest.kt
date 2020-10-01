@@ -31,7 +31,8 @@ internal class DiscographyServiceTest {
             musicians = mutableSetOf(),
             recordId = "1928-232",
             label = "Deutsche Gramophon",
-            dateOfPublishing = "12.02.2018"
+            dateOfPublishing = "12.02.2018",
+            relatedWorks = emptyMap()
     )
 
     private fun simpleDiscographyEntity() = DiscographyEntity(

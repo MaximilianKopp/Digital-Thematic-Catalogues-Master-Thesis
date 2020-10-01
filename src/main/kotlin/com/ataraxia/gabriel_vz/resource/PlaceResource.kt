@@ -45,7 +45,14 @@ class PlaceResource(
                 dataType = "String",
                 example = "Longitude: 33.22, Latitude: 22.13"
         )
-        var coordinates: CoordinatesResource
+        var coordinates: CoordinatesResource,
+
+        @ApiModelProperty(
+                notes = "Related Works",
+                accessMode = READ_ONLY,
+                dataType = "String"
+        )
+        var relatedWorks: Map<String?, String?>
 ) : Resource(
         self,
         collection,
