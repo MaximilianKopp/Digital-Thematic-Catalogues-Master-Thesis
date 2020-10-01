@@ -34,7 +34,8 @@ internal class PlaceFactoryTest {
             coordinates = Coordinates(
                     longitude = 44.23212,
                     latitude = 53.19827
-            )
+            ),
+            relatedWorks = emptyMap()
     )
 
     private fun simpleEntity() = PlaceEntity(
@@ -64,7 +65,8 @@ internal class PlaceFactoryTest {
             coordinates = CoordinatesResource(
                     longitude = 44.23212,
                     latitude = 53.19827
-            )
+            ),
+            relatedWorks = emptyMap()
     )
 
     @Test
