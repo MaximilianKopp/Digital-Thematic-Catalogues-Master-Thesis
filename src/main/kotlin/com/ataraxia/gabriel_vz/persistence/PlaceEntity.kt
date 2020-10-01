@@ -66,5 +66,5 @@ class PlaceEntity(
         result = 31 * result + coordinates.hashCode()
         return result
     }
-    
+
 }

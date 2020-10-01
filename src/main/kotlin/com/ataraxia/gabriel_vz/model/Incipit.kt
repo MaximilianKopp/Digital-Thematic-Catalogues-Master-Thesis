@@ -13,7 +13,8 @@ class Incipit(
         var keysig: String?,
         var timesig: String?,
         var score: String?,
-        var description: String?
+        var description: String?,
+        var relatedWork: MutableMap<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,

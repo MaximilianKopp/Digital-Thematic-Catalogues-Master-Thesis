@@ -58,7 +58,14 @@ class IncipitResource(
                 dataType = "String",
                 example = "This work was written in Gabriels early period"
         )
-        var description: String?
+        var description: String?,
+
+        @ApiModelProperty(
+                notes = "Related Work that owns this Incipit",
+                accessMode = READ_ONLY,
+                dataType = "String"
+        )
+        var relatedWork: MutableMap<String?, String?> = mutableMapOf()
 ) : Resource(
         self,
         collection,

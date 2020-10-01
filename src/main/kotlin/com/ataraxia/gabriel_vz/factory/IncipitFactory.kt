@@ -2,7 +2,6 @@ package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
 import com.ataraxia.gabriel_vz.controller.API.IncipitApiController
-import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Incipit
 import com.ataraxia.gabriel_vz.persistence.IncipitEntity
 import com.ataraxia.gabriel_vz.resource.IncipitResource
@@ -24,7 +23,8 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
             keysig = entity.keysig,
             timesig = entity.timesig,
             score = entity.score,
-            description = entity.description
+            description = entity.description,
+            relatedWork = mutableMapOf(Pair(entity.relatedWork!!.id, entity.relatedWork!!.title))
     )
 
     override fun entityFromModel(model: Incipit): IncipitEntity = IncipitEntity(
@@ -50,7 +50,8 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
             keysig = resource.keysig,
             timesig = resource.timesig,
             score = resource.score,
-            description = resource.description
+            description = resource.description,
+            relatedWork = resource.relatedWork
     )
 
     override fun resourceFromModel(model: Incipit): IncipitResource = IncipitResource(
@@ -74,6 +75,7 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
             clef = model.clef,
             timesig = model.timesig,
             score = model.score,
-            description = model.description
+            description = model.description,
+            relatedWork = model.relatedWork
     )
 }

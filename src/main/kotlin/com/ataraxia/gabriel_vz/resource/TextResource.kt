@@ -31,7 +31,15 @@ class TextResource(
                 dataType = "String",
                 example = "Nine little cats are tiny little brags"
         )
-        var excerpt: String?
+        var excerpt: String?,
+
+        @ApiModelProperty(
+                notes = "Related Work",
+                accessMode = READ_ONLY,
+                dataType = "String",
+                example = "Nine little cats are tiny little brags"
+        )
+        var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Resource(
         self,
         collection,

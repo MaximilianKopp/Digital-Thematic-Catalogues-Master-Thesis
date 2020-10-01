@@ -26,9 +26,10 @@ class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyRe
             recordId = entity.recordId,
             musicians = entity.musicians?.map(
                     personFactory::modelFromEntity
-            )!!.toMutableSet()
+            )!!.toMutableSet(),
+            relatedWorks = entity.relatedWorks?.map { Pair(it.id, it.title) }!!.toMap()
     )
-    
+
     override fun entityFromModel(model: Discography): DiscographyEntity = DiscographyEntity(
             id = model.id,
             title = model.title,
@@ -52,7 +53,8 @@ class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyRe
             recordId = resource.recordId,
             musicians = resource.musicians?.map(
                     personFactory::modelFromResource
-            )!!.toMutableSet()
+            )!!.toMutableSet(),
+            relatedWorks = resource.relatedWorks
     )
 
     override fun resourceFromModel(model: Discography): DiscographyResource = DiscographyResource(
@@ -76,6 +78,7 @@ class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyRe
             recordId = model.recordId,
             musicians = model.musicians?.map(
                     personFactory::resourceFromModel
-            )!!.toMutableSet()
+            )!!.toMutableSet(),
+            relatedWorks = model.relatedWorks
     )
 }

@@ -47,7 +47,13 @@ class DiscographyResource(
                 dataType = "String",
                 example = "Hans Werner"
         )
-        var musicians: MutableSet<PersonResource>?
+        var musicians: MutableSet<PersonResource>?,
+        @ApiModelProperty(
+                notes = "Related Works",
+                accessMode = ApiModelProperty.AccessMode.READ_ONLY,
+                dataType = "String"
+        )
+        var relatedWorks: Map<String?, String?>
 ) : Resource(
         self,
         collection,

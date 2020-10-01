@@ -11,7 +11,8 @@ class Discography(
         var label: String?,
         var recordId: String?,
         var dateOfPublishing: String?,
-        var musicians: MutableSet<Person>?
+        var musicians: MutableSet<Person>?,
+        var relatedWorks: Map<String?, String?>
 ) : Model(
         id,
         title,
