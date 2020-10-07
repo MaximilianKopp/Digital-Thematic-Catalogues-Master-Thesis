@@ -24,7 +24,7 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
             timesig = entity.timesig,
             score = entity.score,
             description = entity.description,
-            relatedWork = mutableMapOf(Pair(entity.relatedWork!!.id, entity.relatedWork!!.title))
+            relatedWork = mutableMapOf(Pair(entity.relatedWork?.id, entity.relatedWork?.title))
     )
 
     override fun entityFromModel(model: Incipit): IncipitEntity = IncipitEntity(

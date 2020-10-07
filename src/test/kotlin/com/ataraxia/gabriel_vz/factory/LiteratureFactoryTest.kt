@@ -35,7 +35,8 @@ internal class LiteratureFactoryTest {
             title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
-            yearOfPublishing = "2014"
+            yearOfPublishing = "2014",
+            relatedWork = null
     )
 
     private fun simpleLiteratureResource() = LiteratureResource(
