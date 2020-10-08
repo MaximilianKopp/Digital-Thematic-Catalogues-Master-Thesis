@@ -167,6 +167,7 @@
             <groupId>org.rism.verovio</groupId>
             <artifactId>VerovioToolkit</artifactId>
             <version>3.0.0-dev</version>
+            <type>jar</type>
         </dependency>
 
         <!-- ==================== -->
