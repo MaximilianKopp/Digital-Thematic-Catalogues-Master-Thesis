@@ -175,7 +175,6 @@
             <groupId>org.rism.verovio</groupId>
             <artifactId>VerovioToolkit</artifactId>
             <version>3.0.0-dev</version>
-            <type>jar</type>
         </dependency>
 
         <!-- ==================== -->
@@ -233,6 +232,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.3</version>
+            </plugin>
+            <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <configuration>
@@ -255,10 +259,16 @@
                         <artifactId>kotlin-maven-noarg</artifactId>
                         <version>${kotlin.version}</version>
                     </dependency>
-
                 </dependencies>
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <!--other repositories if any-->
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
+        </repository>
+    </repositories>
 </project>
