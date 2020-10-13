@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.rism.verovio</groupId>
+  <artifactId>VerovioToolkit</artifactId>
+  <versioning>
+    <release>3.0.0-dev</release>
+    <versions>
+      <version>3.0.0-dev</version>
+    </versions>
+    <lastUpdated>20201009075258</lastUpdated>
+  </versioning>
+</metadata>

@@ -40,7 +40,8 @@ class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyRe
             recordId = model.recordId,
             musicians = model.musicians?.map(
                     personFactory::entityFromModel
-            )!!.toMutableSet()
+            )!!.toMutableSet(),
+            relatedWorks = mutableSetOf()
     )
 
     override fun modelFromResource(resource: DiscographyResource): Discography = Discography(

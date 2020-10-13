@@ -5,6 +5,7 @@ import com.ataraxia.gabriel_vz.controller.API.LiteratureApiController
 import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Literature
 import com.ataraxia.gabriel_vz.persistence.LiteratureEntity
+import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.resource.LiteratureResource
 import com.ataraxia.gabriel_vz.root.Factory
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
@@ -21,7 +22,7 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             yearOfPublishing = entity.yearOfPublishing,
             isbn = entity.isbn,
             author = entity.author,
-            relatedWork = mutableMapOf(Pair(entity.relatedWork!!.id, entity.relatedWork!!.title))
+            relatedWork = mutableMapOf(Pair(entity.relatedWork?.id, entity.relatedWork?.title))
     )
 
     override fun entityFromModel(model: Literature): LiteratureEntity = LiteratureEntity(

@@ -1,5 +1,6 @@
 package com.ataraxia.gabriel_vz.persistence
 
+import arrow.core.Option
 import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
@@ -18,7 +19,7 @@ class LiteratureEntity(
 
         @JsonBackReference
         @ManyToOne(fetch = FetchType.LAZY)
-        var relatedWork: WorkEntity? = null
+        var relatedWork: WorkEntity? = Option.empty<WorkEntity?>().orNull()
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,

@@ -65,6 +65,7 @@ class WorkFactory(
             dedication = model.dedication,
             dateOfPremiere = model.dateOfPremiere,
             dateOfCreation = model.dateOfCreation,
+            incipit = model.incipit?.let { incipitFactory.entityFromModel(it) },
             commentary = model.commentary,
             category = model.category,
             literatureList = model.literatureList.map(

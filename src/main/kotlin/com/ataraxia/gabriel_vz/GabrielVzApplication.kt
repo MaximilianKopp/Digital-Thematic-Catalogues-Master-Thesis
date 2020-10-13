@@ -140,7 +140,8 @@ class GabrielVzApplication {
                 title = "Work",
                 author = "Schiller",
                 isbn = "232323",
-                yearOfPublishing = "20.02.1989"
+                yearOfPublishing = "20.02.1989",
+                relatedWork = null
         ))
 
         testWork.addPerson(PersonEntity(

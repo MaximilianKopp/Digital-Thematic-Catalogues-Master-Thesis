@@ -106,6 +106,14 @@
         </dependency>
 
         <!-- ==================== -->
+        <!--        POSTGRES         -->
+        <!-- ==================== -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- ==================== -->
         <!--        SWAGGER       -->
         <!-- ==================== -->
         <dependency>
@@ -201,7 +209,7 @@
         <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk</artifactId>
-            <version>1.10.0</version>
+            <version>1.10.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -222,6 +230,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.3</version>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -246,10 +259,16 @@
                         <artifactId>kotlin-maven-noarg</artifactId>
                         <version>${kotlin.version}</version>
                     </dependency>
-
                 </dependencies>
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <!--other repositories if any-->
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
+        </repository>
+    </repositories>
 </project>
