@@ -36,7 +36,7 @@
                         <td th:text="${work.title}"></td>
                     </tr>
                     <tr>
-                        <th>Incipit: <a href="workdetails.html" th:href="@{'../incipit?id='+ ${work.incipit.id}}"
+                        <th>Incipit: <a href="workdetails.html" th:href="@{'../incipit?id='+ ${work?.incipit?.id}}"
                                         class="fas fa-arrow-alt-circle-right fa-lg"></a></th>
                         <td class="svg_output">
                     </tr>
@@ -54,15 +54,15 @@
                     </tr>
                     <tr>
                         <th>Place of Premiere:</th>
-                        <td th:text="${work.placeOfPremiere.title}"></td>
+                        <td th:text="${work?.placeOfPremiere?.title}"></td>
                     </tr>
                     <tr>
                         <th>Locality:</th>
-                        <td th:text="${work.placeOfPremiere.locality}"></td>
+                        <td th:text="${work?.placeOfPremiere?.locality}"></td>
                     </tr>
                     <tr>
                         <th>Country:</th>
-                        <td th:text="${work.placeOfPremiere.country}"></td>
+                        <td th:text="${work?.placeOfPremiere?.country}"></td>
                     </tr>
                     <tr>
                         <th>Commentary:</th>
@@ -86,11 +86,11 @@
                     </tr>
                     <tr>
                         <th>Author:</th>
-                        <td th:text="${work.relatedText.author}"></td>
+                        <td th:text="${work?.relatedText?.author}"></td>
                     </tr>
                     <tr>
                         <th>Excerpt:</th>
-                        <td th:text="${work.relatedText.excerpt}"></td>
+                        <td th:text="${work?.relatedText?.excerpt}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -107,11 +107,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="record : ${work.discographies}">
-                        <td><a href="discographydetails.html" th:href="@{'record?id'+ ${record.id}}"
-                               th:text="${record.title}"></a></td>
-                        <td th:text="${record.label}"></td>
-                        <td th:text="${record.dateOfPublishing}"></td>
+                    <tr th:each="record : ${work?.discographies}">
+                        <td><a href="discographydetails.html" th:href="@{'record?id='+ ${record?.id}}"
+                               th:text="${record?.title}"></a></td>
+                        <td th:text="${record?.label}"></td>
+                        <td th:text="${record?.dateOfPublishing}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -125,11 +125,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="person : ${work.relatedPersons}">
-                        <td><a href="persons.html" th:href="@{'person?id'+ ${person.id}}"
-                               th:text="${person.name}"></a></td>
-                        <td th:text="${person.pnd}"></td>
-                        <td th:text="${person.role}"></td>
+                    <tr th:each="person : ${work?.relatedPersons}">
+                        <td><a href="persons.html" th:href="@{'person?id='+ ${person?.id}}"
+                               th:text="${person?.name}"></a></td>
+                        <td th:text="${person?.pnd}"></td>
+                        <td th:text="${person?.role}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -142,10 +142,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="reference : ${work.literatureList}">
-                        <td><a href="persons.html" th:href="@{'person?id'+ ${reference.id}}"
-                               th:text="${reference.title}"></a></td>
-                        <td th:text="${reference.isbn}"></td>
+                    <tr th:each="reference : ${work?.literatureList}">
+                        <td><a href="persons.html" th:href="@{'reference?id='+ ${reference?.id}}"
+                               th:text="${reference?.title}"></a></td>
+                        <td th:text="${reference?.isbn}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -155,8 +155,8 @@
                 <div id="map">
                     <script th:inline="javascript">
 
-                        var longitude = /*[[${work.placeOfPremiere.coordinates.longitude}]]*/ 'default';
-                        var latitude = /*[[${work.placeOfPremiere.coordinates.latitude}]]*/ 'default';
+                        var longitude = /*[[${work?.placeOfPremiere?.coordinates?.longitude}]]*/ 'default';
+                        var latitude = /*[[${work?.placeOfPremiere?.coordinates?.latitude}]]*/ 'default';
                         var map = new L.map('map').setView([longitude, latitude], 18)
                         var layer = new L.TileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=LObS2t5fDJqjqBxJS6Q7', {
                             attribution: '<a href="https://www.maptiler.com/copyright/" ' + 'target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>'
@@ -195,10 +195,10 @@
 
     function loadData() {
         setOptions();
-        var clef = /*[[${work.incipit.clef}]]*/ 'default';
-        var keysig = /*[[${work.incipit.keysig}]]*/ 'default';
-        var timesig = /*[[${work.incipit.timesig}]]*/ 'default';
-        var score = /*[[${work.incipit.score}]]*/ 'default';
+        var clef = /*[[${work?.incipit?.clef}]]*/ 'default';
+        var keysig = /*[[${work?.incipit?.keysig}]]*/ 'default';
+        var timesig = /*[[${work?.incipit?.timesig}]]*/ 'default';
+        var score = /*[[${work?.incipit?.score}]]*/ 'default';
         var data = "@clef:" + clef + "\n" + "@keysig:" + keysig + "\n" + "@timesig:" + timesig + "\n" + "@data:" + score;
         vrvToolkit.loadData(data);
         svg = vrvToolkit.renderToSVG(1, {});

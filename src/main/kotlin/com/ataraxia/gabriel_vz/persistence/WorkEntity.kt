@@ -55,7 +55,7 @@ class WorkEntity(
                     CascadeType.REMOVE
                 ]
         )
-        var discographies: MutableSet<DiscographyEntity> = mutableSetOf(),
+        var discographies: MutableSet<DiscographyEntity>? = mutableSetOf(),
 
         @JsonManagedReference
         @ManyToMany(
@@ -83,12 +83,12 @@ class WorkEntity(
         modified
 ) {
     fun addDiscography(discographyEntity: DiscographyEntity) {
-        discographies.add(discographyEntity)
+        discographies?.add(discographyEntity)
         discographyEntity.relatedWorks?.add(this)
     }
 
     fun removeDiscography(discographyEntity: DiscographyEntity) {
-        discographies.remove(discographyEntity)
+        discographies?.remove(discographyEntity)
         discographyEntity.relatedWorks?.remove(this)
     }
 
