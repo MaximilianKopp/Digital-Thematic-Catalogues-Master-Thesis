@@ -35,11 +35,7 @@ class EditorWorkController(
         if (bindingResult.hasErrors()) {
             return "common_user/workdetails"
         }
-        //workService.create(work)
-
-
-
-        workRepository.save(workFactory.entityFromModel(work))
+        workService.create(work)
         return "editor/addWork"
     }
 }
