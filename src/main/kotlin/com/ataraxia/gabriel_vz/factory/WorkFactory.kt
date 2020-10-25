@@ -27,9 +27,9 @@ class WorkFactory(
             created = entity.created,
             modified = entity.modified,
             relatedText = entity.relatedText?.let { textFactory.modelFromEntity(it) },
-            discographies = entity.discographies.map(
+            discographies = entity.discographies?.map(
                     discographyFactory::modelFromEntity
-            ).toMutableSet(),
+            )!!.toMutableSet(),
             instrumentation = entity.instrumentation,
             editor = entity.editor,
             duration = entity.duration,
@@ -55,9 +55,9 @@ class WorkFactory(
             created = model.created,
             modified = model.modified,
             relatedText = model.relatedText?.let { textFactory.entityFromModel(it) },
-            discographies = model.discographies.map(
+            discographies = model.discographies?.map(
                     discographyFactory::entityFromModel
-            ).toMutableSet(),
+            )!!.toMutableSet(),
             instrumentation = model.instrumentation,
             editor = model.editor,
             duration = model.duration,
@@ -68,12 +68,12 @@ class WorkFactory(
             incipit = model.incipit?.let { incipitFactory.entityFromModel(it) },
             commentary = model.commentary,
             category = model.category,
-            literatureList = model.literatureList.map(
+            literatureList = model.literatureList?.map(
                     literatureFactory::entityFromModel
-            ).toMutableSet(),
-            relatedPersons = model.relatedPersons.map(
+            )!!.toMutableSet(),
+            relatedPersons = model.relatedPersons?.map(
                     personFactory::entityFromModel
-            ).toMutableSet()
+            )!!.toMutableSet()
     )
 
     override fun modelFromResource(resource: WorkResource): Work = Work(
@@ -122,9 +122,9 @@ class WorkFactory(
                     .map(OffsetDateTime::toString)
                     .orNull(),
             relatedText = model.relatedText?.let { textFactory.resourceFromModel(it) },
-            discographies = model.discographies.map(
+            discographies = model.discographies?.map(
                     discographyFactory::resourceFromModel
-            ).toMutableSet(),
+            )!!.toMutableSet(),
             instrumentation = model.instrumentation,
             editor = model.editor,
             duration = model.duration,
@@ -135,11 +135,11 @@ class WorkFactory(
             incipit = model.incipit?.let { incipitFactory.resourceFromModel(it) },
             commentary = model.commentary,
             category = model.category,
-            literatureList = model.literatureList.map(
+            literatureList = model.literatureList?.map(
                     literatureFactory::resourceFromModel
-            ).toMutableSet(),
-            relatedPersons = model.relatedPersons.map(
+            )!!.toMutableSet(),
+            relatedPersons = model.relatedPersons?.map(
                     personFactory::resourceFromModel
-            ).toMutableSet()
+            )!!.toMutableSet()
     )
 }
