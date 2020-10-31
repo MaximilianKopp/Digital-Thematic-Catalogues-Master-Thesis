@@ -41,8 +41,8 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
     override fun modelFromResource(resource: PersonResource): Person = Person(
             id = resource.id,
             title = resource.title,
-            created = resource.created?.let { OffsetDateTime.parse(it) },
-            modified = resource.modified?.let { OffsetDateTime.parse(it) },
+            created = OffsetDateTime.now(),
+            modified = OffsetDateTime.now(),
             description = resource.description,
             role = resource.role,
             name = resource.name,

@@ -4,14 +4,14 @@ import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
 class Place(
-        id: String?,
-        title: String?,
-        created: OffsetDateTime?,
-        modified: OffsetDateTime?,
-        var name: String,
-        var locality: String,
-        var country: String,
-        var coordinates: Coordinates,
+        id: String? = null,
+        title: String? = null,
+        created: OffsetDateTime = OffsetDateTime.now(),
+        modified: OffsetDateTime = OffsetDateTime.now(),
+        var name: String? = null,
+        var locality: String? = null,
+        var country: String? = null,
+        var coordinates: Coordinates? = Coordinates(),
         var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,

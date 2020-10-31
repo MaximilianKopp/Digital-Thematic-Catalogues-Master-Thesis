@@ -21,7 +21,7 @@ internal class DiscographyFactoryTest {
     private fun simpleDiscography() = Discography(
             id = discographyID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Wolfgang Gabriel - all Sonatas",
             musicians = mutableSetOf(),
             recordId = "1928-232",
@@ -34,7 +34,7 @@ internal class DiscographyFactoryTest {
             id = discographyID,
             title = "Wolfgang Gabriel - all Sonatas",
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             musicians = mutableSetOf(),
             recordId = "1928-232",
             label = "Deutsche Gramophon",

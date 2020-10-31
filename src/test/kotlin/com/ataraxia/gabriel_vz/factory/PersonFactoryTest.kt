@@ -21,7 +21,7 @@ internal class PersonFactoryTest {
     private fun simplePerson() = Person(
             id = personID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Person",
             description = "Pianist",
             name = "Alberto",
@@ -34,7 +34,7 @@ internal class PersonFactoryTest {
     private fun simplePersonEntity() = PersonEntity(
             id = personID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Person",
             description = "Pianist",
             name = "Alberto",

@@ -21,7 +21,7 @@ internal class LiteratureFactoryTest {
     private fun simpleLiterature() = Literature(
             id = literatureID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",
@@ -31,7 +31,7 @@ internal class LiteratureFactoryTest {
     private fun simpleLiteratureEntity() = LiteratureEntity(
             id = literatureID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Literature",
             author = "Ulrike Schneider",
             isbn = "9312342321237",

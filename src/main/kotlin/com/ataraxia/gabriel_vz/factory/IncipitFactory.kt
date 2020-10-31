@@ -43,8 +43,8 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
     override fun modelFromResource(resource: IncipitResource): Incipit = Incipit(
             id = resource.id,
             title = resource.title,
-            created = resource.created?.let { OffsetDateTime.parse(it) },
-            modified = resource.modified?.let { OffsetDateTime.parse(it) },
+            created = OffsetDateTime.now(),
+            modified = OffsetDateTime.now(),
             text = resource.text,
             clef = resource.clef,
             keysig = resource.keysig,

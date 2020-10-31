@@ -23,7 +23,7 @@ class PlaceFactory(
             created = entity.created,
             modified = entity.modified,
             name = entity.name,
-            coordinates = coordinatesFactory.modelFromEntity(entity.coordinates),
+            coordinates = entity.coordinates?.let { coordinatesFactory.modelFromEntity(it) },
             country = entity.country,
             locality = entity.locality,
             relatedWorks = entity.relatedWorks?.map { Pair(it.id, it.title) }!!.toMap()
@@ -35,7 +35,7 @@ class PlaceFactory(
             created = model.created,
             modified = model.modified,
             name = model.name,
-            coordinates = coordinatesFactory.entityFromModel(model.coordinates),
+            coordinates = model.coordinates?.let { coordinatesFactory.entityFromModel(it) },
             country = model.country,
             locality = model.locality
     )
@@ -43,8 +43,8 @@ class PlaceFactory(
     override fun modelFromResource(resource: PlaceResource): Place = Place(
             id = resource.id,
             title = resource.title,
-            created = resource.created?.let { OffsetDateTime.parse(it) },
-            modified = resource.modified?.let { OffsetDateTime.parse(it) },
+            created = OffsetDateTime.now(),
+            modified = OffsetDateTime.now(),
             name = resource.name,
             coordinates = coordinatesFactory.modelFromResource(resource.coordinates),
             country = resource.country,
@@ -67,10 +67,10 @@ class PlaceFactory(
             modified = Option.fromNullable(model.modified)
                     .map(OffsetDateTime::toString)
                     .orNull(),
-            name = model.name,
-            coordinates = coordinatesFactory.resourceFromModel(model.coordinates),
-            country = model.country,
-            locality = model.locality,
+            name = model.name!!,
+            coordinates = coordinatesFactory.resourceFromModel(model.coordinates!!),
+            country = model.country!!,
+            locality = model.locality!!,
             relatedWorks = model.relatedWorks
     )
 }

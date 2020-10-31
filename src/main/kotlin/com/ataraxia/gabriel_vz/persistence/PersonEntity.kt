@@ -10,8 +10,8 @@ import javax.persistence.*
 class PersonEntity(
         id: String?,
         title: String?,
-        created: OffsetDateTime?,
-        modified: OffsetDateTime?,
+        created: OffsetDateTime = OffsetDateTime.now(),
+        modified: OffsetDateTime = OffsetDateTime.now(),
         var name: String,
         var pnd: String,
         var role: String,

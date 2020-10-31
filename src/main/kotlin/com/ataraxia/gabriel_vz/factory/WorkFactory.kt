@@ -30,16 +30,16 @@ class WorkFactory(
             discographies = entity.discographies?.map(
                     discographyFactory::modelFromEntity
             )!!.toMutableSet(),
-            instrumentation = entity.instrumentation,
-            editor = entity.editor,
-            duration = entity.duration,
+            instrumentation = entity.instrumentation!!,
+            editor = entity.editor!!,
+            duration = entity.duration!!,
             placeOfPremiere = entity.placeOfPremiere?.let { placeFactory.modelFromEntity(it) },
-            dedication = entity.dedication,
-            dateOfPremiere = entity.dateOfPremiere,
-            dateOfCreation = entity.dateOfCreation,
+            dedication = entity.dedication!!,
+            dateOfPremiere = entity.dateOfPremiere!!,
+            dateOfCreation = entity.dateOfCreation!!,
             incipit = entity.incipit?.let { incipitFactory.modelFromEntity(it) },
-            commentary = entity.commentary,
-            category = entity.category,
+            commentary = entity.commentary!!,
+            category = entity.category!!,
             literatureList = entity.literatureList?.map(
                     literatureFactory::modelFromEntity
             )!!.toMutableSet(),
@@ -80,8 +80,8 @@ class WorkFactory(
             id = resource.id,
             title = resource.title,
             opus = resource.opus,
-            created = resource.created?.let { OffsetDateTime.parse(it) },
-            modified = resource.modified?.let { OffsetDateTime.parse(it) },
+            created = OffsetDateTime.now(),
+            modified = OffsetDateTime.now(),
             relatedText = resource.relatedText?.let { textFactory.modelFromResource(it) },
             discographies = resource.discographies.map(
                     discographyFactory::modelFromResource
@@ -125,16 +125,16 @@ class WorkFactory(
             discographies = model.discographies?.map(
                     discographyFactory::resourceFromModel
             )!!.toMutableSet(),
-            instrumentation = model.instrumentation,
-            editor = model.editor,
-            duration = model.duration,
+            instrumentation = model.instrumentation!!,
+            editor = model.editor!!,
+            duration = model.duration!!,
             placeOfPremiere = model.placeOfPremiere?.let { placeFactory.resourceFromModel(it) },
-            dedication = model.dedication,
-            dateOfPremiere = model.dateOfPremiere,
-            dateOfCreation = model.dateOfCreation,
+            dedication = model.dedication!!,
+            dateOfPremiere = model.dateOfPremiere!!,
+            dateOfCreation = model.dateOfCreation!!,
             incipit = model.incipit?.let { incipitFactory.resourceFromModel(it) },
-            commentary = model.commentary,
-            category = model.category,
+            commentary = model.commentary!!,
+            category = model.category!!,
             literatureList = model.literatureList?.map(
                     literatureFactory::resourceFromModel
             )!!.toMutableSet(),

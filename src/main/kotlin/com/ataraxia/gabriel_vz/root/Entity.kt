@@ -13,8 +13,8 @@ abstract class Entity(
         @GenericGenerator(name = "system-uuid", strategy = "uuid")
         open var id: String?,
         open var title: String?,
-        open var created: OffsetDateTime?,
-        open var modified: OffsetDateTime?
+        open var created: OffsetDateTime,
+        open var modified: OffsetDateTime
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

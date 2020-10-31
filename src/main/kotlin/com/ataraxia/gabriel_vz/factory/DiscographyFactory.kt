@@ -47,8 +47,8 @@ class DiscographyFactory : Factory<Discography, DiscographyEntity, DiscographyRe
     override fun modelFromResource(resource: DiscographyResource): Discography = Discography(
             id = resource.id,
             title = resource.title,
-            created = resource.created?.let { OffsetDateTime.parse(it) },
-            modified = resource.modified?.let { OffsetDateTime.parse(it) },
+            created = OffsetDateTime.now(),
+            modified = OffsetDateTime.now(),
             dateOfPublishing = resource.dateOfPublishing,
             label = resource.label,
             recordId = resource.recordId,

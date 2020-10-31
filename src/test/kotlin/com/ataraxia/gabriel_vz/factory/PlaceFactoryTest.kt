@@ -26,7 +26,7 @@ internal class PlaceFactoryTest {
     private fun simplePlace() = Place(
             id = placeUID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Place",
             locality = "Wiener Opernhaus",
             country = "Wien",
@@ -41,7 +41,7 @@ internal class PlaceFactoryTest {
     private fun simpleEntity() = PlaceEntity(
             id = placeUID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Place",
             locality = "Wiener Opernhaus",
             country = "Wien",
@@ -73,15 +73,15 @@ internal class PlaceFactoryTest {
     fun `placeModel from placeEntity`() {
         val placeEntity = simpleEntity()
         val place = placeFactory.modelFromEntity(placeEntity)
-        val coordinates = coordinatesFactory.modelFromEntity(placeEntity.coordinates)
+        val coordinates = coordinatesFactory.modelFromEntity(placeEntity.coordinates!!)
 
         assertNotNull(place)
         assertEquals(place.id, placeEntity.id)
         assertEquals(place.locality, placeEntity.locality)
         assertEquals(place.country, placeEntity.country)
         assertEquals(place.name, placeEntity.name)
-        assertEquals(place.coordinates.longitude, coordinates.longitude)
-        assertEquals(place.coordinates.latitude, coordinates.latitude)
+        assertEquals(place.coordinates?.longitude, coordinates.longitude)
+        assertEquals(place.coordinates?.latitude, coordinates.latitude)
         place.shouldBeInstanceOf<Place>()
     }
 
@@ -89,15 +89,15 @@ internal class PlaceFactoryTest {
     fun `placeEntity from placeModel `() {
         val place = simplePlace()
         val placeEntity = placeFactory.entityFromModel(place)
-        val coordinatesEntity = coordinatesFactory.entityFromModel(place.coordinates)
+        val coordinatesEntity = coordinatesFactory.entityFromModel(place.coordinates!!)
 
         assertNotNull(placeEntity)
         assertEquals(placeEntity.id, place.id)
         assertEquals(placeEntity.locality, place.locality)
         assertEquals(placeEntity.country, place.country)
         assertEquals(placeEntity.name, place.name)
-        assertEquals(placeEntity.coordinates.longitude, coordinatesEntity.longitude)
-        assertEquals(placeEntity.coordinates.latitude, coordinatesEntity.latitude)
+        assertEquals(placeEntity.coordinates?.longitude, coordinatesEntity.longitude)
+        assertEquals(placeEntity.coordinates?.latitude, coordinatesEntity.latitude)
         place.shouldBeInstanceOf<Place>()
     }
 
@@ -112,8 +112,8 @@ internal class PlaceFactoryTest {
         assertEquals(place.locality, placeResource.locality)
         assertEquals(place.country, placeResource.country)
         assertEquals(place.name, placeResource.name)
-        assertEquals(place.coordinates.longitude, coordinates.longitude)
-        assertEquals(place.coordinates.latitude, coordinates.latitude)
+        assertEquals(place.coordinates?.longitude, coordinates.longitude)
+        assertEquals(place.coordinates?.latitude, coordinates.latitude)
         place.shouldBeInstanceOf<Place>()
     }
 
@@ -121,7 +121,7 @@ internal class PlaceFactoryTest {
     fun `placeResource from place `() {
         val place = simplePlace()
         val placeResource = placeFactory.resourceFromModel(place)
-        val coordinates = coordinatesFactory.resourceFromModel(place.coordinates)
+        val coordinates = coordinatesFactory.resourceFromModel(place.coordinates!!)
 
         assertNotNull(place)
         assertEquals(placeResource.id, place.id)

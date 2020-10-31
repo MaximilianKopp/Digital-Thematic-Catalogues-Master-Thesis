@@ -34,8 +34,8 @@ class TextFactory : Factory<Text, TextEntity, TextResource>() {
     override fun modelFromResource(resource: TextResource): Text = Text(
             id = resource.id,
             title = resource.title,
-            created = resource.created?.let { OffsetDateTime.parse(it) },
-            modified = resource.modified?.let { OffsetDateTime.parse(it) },
+            created = OffsetDateTime.now(),
+            modified = OffsetDateTime.now(),
             author = resource.author,
             excerpt = resource.excerpt
     )
