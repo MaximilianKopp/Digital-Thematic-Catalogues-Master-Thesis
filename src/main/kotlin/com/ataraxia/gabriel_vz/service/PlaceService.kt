@@ -37,9 +37,10 @@ class PlaceService(
     }
 
     override fun create(m: Place): Either<Exception, Place> = try {
-        val textEntity = placeRepository.save(placeFactory.entityFromModel(m))
+        val place = placeFactory.entityFromModel(m)
+        placeRepository.save(place)
         placeFactory
-                .modelFromEntity(textEntity)
+                .modelFromEntity(place)
                 .right()
     } catch (e: Exception) {
         e.left()
