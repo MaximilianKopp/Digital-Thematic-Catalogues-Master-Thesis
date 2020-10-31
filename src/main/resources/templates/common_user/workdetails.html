@@ -33,7 +33,7 @@
                     <tr>
                         <th>Title: <a href="workdetails.html" th:href="@{/works}"
                                       class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
-                        <td th:text="${work.title}"></td>
+                        <td th:text="${work?.title}"></td>
                     </tr>
                     <tr>
                         <th>Incipit: <a href="workdetails.html" th:href="@{'../incipit?id='+ ${work?.incipit?.id}}"
@@ -42,15 +42,15 @@
                     </tr>
                     <tr>
                         <th>Opus:</th>
-                        <td th:text="${work.opus}"></td>
+                        <td th:text="${work?.opus}"></td>
                     </tr>
                     <tr>
                         <th>Date of Creation:</th>
-                        <td th:text="${work.dateOfCreation}"></td>
+                        <td th:text="${work?.dateOfCreation}"></td>
                     </tr>
                     <tr>
                         <th>Date of Premiere:</th>
-                        <td th:text="${work.dateOfPremiere}"></td>
+                        <td th:text="${work?.dateOfPremiere}"></td>
                     </tr>
                     <tr>
                         <th>Place of Premiere:</th>
@@ -66,23 +66,23 @@
                     </tr>
                     <tr>
                         <th>Commentary:</th>
-                        <td th:text="${work.commentary}"></td>
+                        <td th:text="${work?.commentary}"></td>
                     </tr>
                     <tr>
                         <th>Dedication:</th>
-                        <td th:text="${work.dedication}"></td>
+                        <td th:text="${work?.dedication}"></td>
                     </tr>
                     <tr>
                         <th>Formation:</th>
-                        <td th:text="${work.instrumentation}"></td>
+                        <td th:text="${work?.instrumentation}"></td>
                     </tr>
                     <tr>
                         <th>Category:</th>
-                        <td th:text="${work.category}"></td>
+                        <td th:text="${work?.category}"></td>
                     </tr>
                     <tr>
                         <th>Duration:</th>
-                        <td th:text="${work.duration}"></td>
+                        <td th:text="${work?.duration}"></td>
                     </tr>
                     <tr>
                         <th>Author:</th>
