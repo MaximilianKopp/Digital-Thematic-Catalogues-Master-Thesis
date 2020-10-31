@@ -6,9 +6,9 @@ import javax.persistence.Embeddable
 @Embeddable
 class CoordinatesEntity(
         @Column(name = "longitude")
-        var longitude: Double,
+        var longitude: Double? = null,
         @Column(name = "latitude")
-        var latitude: Double
+        var latitude: Double? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

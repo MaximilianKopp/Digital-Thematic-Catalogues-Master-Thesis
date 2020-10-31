@@ -6,8 +6,8 @@ import java.time.OffsetDateTime
 class Incipit(
         id: String?,
         title: String?,
-        created: OffsetDateTime?,
-        modified: OffsetDateTime?,
+        created: OffsetDateTime = OffsetDateTime.now(),
+        modified: OffsetDateTime = OffsetDateTime.now(),
         var text: String?,
         var clef: String?,
         var keysig: String?,

@@ -1,20 +1,19 @@
 package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
-import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
 @Table(name = "work")
 class WorkEntity(
-        id: String?,
-        title: String?,
-        created: OffsetDateTime?,
-        modified: OffsetDateTime?,
-        var opus: String?,
-        var dateOfCreation: String,
-        var dateOfPremiere: String,
+        id: String? = null,
+        title: String? = null,
+        created: OffsetDateTime = OffsetDateTime.now(),
+        modified: OffsetDateTime = OffsetDateTime.now(),
+        var opus: String? = null,
+        var dateOfCreation: String? = null,
+        var dateOfPremiere: String? = null,
 
         @JsonManagedReference
         @ManyToOne(
@@ -28,12 +27,12 @@ class WorkEntity(
                 cascade = [CascadeType.ALL],
                 fetch = FetchType.EAGER)
         var incipit: IncipitEntity? = null,
-        var commentary: String,
-        var dedication: String,
-        var instrumentation: String,
-        var category: String,
-        var duration: String,
-        var editor: String,
+        var commentary: String? = null,
+        var dedication: String? = null,
+        var instrumentation: String? = null,
+        var category: String? = null,
+        var duration: String? = null,
+        var editor: String? = null,
 
         @JsonManagedReference
         @ManyToOne(
@@ -44,7 +43,7 @@ class WorkEntity(
                     CascadeType.REMOVE
                 ]
         )
-        var relatedText: TextEntity?,
+        var relatedText: TextEntity? = null,
 
         @JsonManagedReference
         @ManyToMany(

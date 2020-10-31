@@ -1,27 +1,26 @@
 package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
 @Table(name = "place")
 class PlaceEntity(
-        id: String?,
-        title: String?,
-        created: OffsetDateTime?,
-        modified: OffsetDateTime?,
-        var name: String,
-        var locality: String,
-        var country: String,
+        id: String? = null,
+        title: String? = null,
+        created: OffsetDateTime  = OffsetDateTime.now(),
+        modified: OffsetDateTime = OffsetDateTime.now(),
+        var name: String? = null,
+        var locality: String? = null,
+        var country: String? = null,
 
         @Embedded
         @AttributeOverrides(
                 AttributeOverride(name = "latitude", column = Column(name = "latitude")),
                 AttributeOverride(name = "longitude", column = Column(name = "longitude"))
         )
-        var coordinates: CoordinatesEntity,
+        var coordinates: CoordinatesEntity? = CoordinatesEntity(),
 
         @JsonBackReference
         @OneToMany(

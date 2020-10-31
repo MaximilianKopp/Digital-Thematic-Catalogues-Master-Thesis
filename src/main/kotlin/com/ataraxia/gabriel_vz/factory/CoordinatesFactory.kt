@@ -25,7 +25,7 @@ class CoordinatesFactory : Factory<Coordinates, CoordinatesEntity, CoordinatesRe
     )
 
     override fun resourceFromModel(model: Coordinates): CoordinatesResource = CoordinatesResource(
-            longitude = model.longitude,
-            latitude = model.latitude
+            longitude = model.longitude!!,
+            latitude = model.latitude!!
     )
 }

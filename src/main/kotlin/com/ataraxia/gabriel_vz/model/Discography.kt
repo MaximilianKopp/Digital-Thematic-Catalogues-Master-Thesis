@@ -6,8 +6,8 @@ import java.time.OffsetDateTime
 class Discography(
         id: String?,
         title: String?,
-        created: OffsetDateTime?,
-        modified: OffsetDateTime?,
+        created: OffsetDateTime = OffsetDateTime.now(),
+        modified: OffsetDateTime = OffsetDateTime.now(),
         var label: String?,
         var recordId: String?,
         var dateOfPublishing: String?,

@@ -21,7 +21,7 @@ internal class TextFactoryTest {
     private fun simpleText() = Text(
             id = textID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             author = "James Taylor",
             title = "The nine cats",
             excerpt = "Nine tiny little cats..."
@@ -30,7 +30,7 @@ internal class TextFactoryTest {
     private fun simpleTextEntity() = TextEntity(
             id = textID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             author = "James Taylor",
             title = "The nine cats",
             excerpt = "Nine tiny little cats..."

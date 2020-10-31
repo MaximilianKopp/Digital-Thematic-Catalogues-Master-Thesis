@@ -1,8 +1,16 @@
 package com.ataraxia.gabriel_vz
 
+import com.ataraxia.gabriel_vz.factory.PlaceFactory
+import com.ataraxia.gabriel_vz.factory.WorkFactory
+import com.ataraxia.gabriel_vz.model.Coordinates
+import com.ataraxia.gabriel_vz.model.Place
+import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.*
 import com.ataraxia.gabriel_vz.repository.DiscographyRepository
+import com.ataraxia.gabriel_vz.repository.PlaceRepository
 import com.ataraxia.gabriel_vz.repository.WorkRepository
+import com.ataraxia.gabriel_vz.service.PlaceService
+import com.ataraxia.gabriel_vz.service.WorkService
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -13,9 +21,9 @@ import java.time.OffsetDateTime
 @SpringBootApplication
 class GabrielVzApplication {
 
-//    @Bean
-//    fun init(workRepository: WorkRepository, discographyRepository: DiscographyRepository) = CommandLineRunner {
-//
+    @Bean
+    fun init(workRepository: WorkRepository, discographyRepository: DiscographyRepository, placeRepository: PlaceRepository) = CommandLineRunner {
+
 //        val testDiscography = DiscographyEntity(
 //                id = null,
 //                created = OffsetDateTime.now(),
@@ -170,7 +178,16 @@ class GabrielVzApplication {
 //        testWork.relatedPersons?.elementAt(0)?.name = "Otto"
 //        workRepository.save(testWork)
 //
-//    }
+
+//        val workEntity = WorkEntity(null, "Ein Werk", null, null, null, "null", "null", null, null, "null", "null", "null", "null", "null", "null", null, null, null, null)
+//        val placeEntity = PlaceEntity(null, "Ein Ort", null, null, "null", "null", "null", CoordinatesEntity(22.2, 23.2), mutableSetOf())
+//
+//        placeEntity.addWork(workEntity)
+//        workRepository.save(workEntity)
+//        placeRepository.save(placeEntity)
+
+
+    }
 
 }
 

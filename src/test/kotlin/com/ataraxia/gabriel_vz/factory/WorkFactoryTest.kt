@@ -36,7 +36,7 @@ internal class WorkFactoryTest {
     private fun simpleWork() = Work(
             id = workID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Sonata C-Dur",
             opus = "Opus 20",
             category = "Klaviermusik",
@@ -58,7 +58,7 @@ internal class WorkFactoryTest {
     private fun simpleWorkEntity() = WorkEntity(
             id = workID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Sonata C-Dur",
             opus = "Opus 20",
             category = "Klaviermusik",

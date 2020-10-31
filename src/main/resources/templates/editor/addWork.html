@@ -22,24 +22,26 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="content">
     <div class="container-fluid p-0">
-        <form action="#" th:action="@{/editor/add}" th:object="${work}" method="post">
+        <form action="#" th:action="@{/editor/addWork}" th:object="${work}" method="post">
 
             <div class="row no-gutters">
                 <div class="col col-1">
                     <div th:replace="fragments/sidebar :: sidebar"></div>
                 </div>
 
-                <div class="col col-4 ml-3 mt-3">
+                <div class="col col-2 ml-3 mt-3">
                     <!-- Fields for Workdescription -->
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="Title">
+                        <input type="text" required="required" class="form-control" th:field="*{title}" id="title"
+                               placeholder="Title">
                         <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="opus">Opus</label>
-                        <input type="text" class="form-control" th:field="*{opus}" id="opus" placeholder="Opus">
+                        <input type="text" required="required" class="form-control" th:field="*{opus}" id="opus"
+                               placeholder="Opus">
                         <span th:if="${#fields.hasErrors('opus')}" th:errors="*{opus}"></span>
                     </div>
 
@@ -65,7 +67,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-                <div class="col col-4 ml-3 mt-3">
+                <div class="col col-2 ml-3 mt-3">
 
                     <div class="form-group">
                         <label for="dedication">Dedication</label>
@@ -101,6 +103,32 @@
                                placeholder="Editor">
                         <span th:if="${#fields.hasErrors('editor')}" th:errors="*{editor}"></span>
                     </div>
+                </div>
+
+                <div class="col col-2 ml-3 mt-3">
+                    <div class="form-group">
+                        <label for="places">Places</label>
+                        <select th:name="*{placeOfPremiere}" class="form-control" id="places" name="Place of Premiere">
+                            <option value="">Select Places</option>
+                            <option
+                                    th:each="place : ${places}"
+                                    th:value="${place}"
+                                    th:text="${place.name}">
+                            </option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('placeOfPremiere')}" th:errors="*{placeOfPremiere}"></span>
+                    </div>
+
+                    <label for="texts">Text</label>
+                    <select th:name="*{relatedText}" class="form-control" id="texts" name="Text">
+                        <option value="">Select Text</option>
+                        <option
+                                th:each="text : ${relatedText}"
+                                th:value="${relatedText}"
+                                th:text="${relatedText.title}">
+                        </option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{texts}"></span>
                 </div>
             </div>
         </form>

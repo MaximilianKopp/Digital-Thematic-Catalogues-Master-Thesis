@@ -20,7 +20,7 @@ internal class IncipitFactoryTest {
     private fun simpleIncipit() = Incipit(
             id = incipitID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
@@ -33,7 +33,7 @@ internal class IncipitFactoryTest {
     private fun simpleIncipitEntity() = IncipitEntity(
             id = incipitID,
             created = OffsetDateTime.now(),
-            modified = null,
+            modified = OffsetDateTime.now(),
             title = "Incipit",
             text = "Flowers in the field",
             description = "Text aus Gabriels Liederkreis",
