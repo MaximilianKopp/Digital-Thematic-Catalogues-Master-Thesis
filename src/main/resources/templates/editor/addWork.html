@@ -108,27 +108,16 @@
                 <div class="col col-2 ml-3 mt-3">
                     <div class="form-group">
                         <label for="places">Places</label>
-                        <select th:name="*{placeOfPremiere}" class="form-control" id="places" name="Place of Premiere">
+                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places" name="Place of Premiere" required="required">
                             <option value="">Select Places</option>
                             <option
                                     th:each="place : ${places}"
-                                    th:value="${place}"
-                                    th:text="${place.name}">
+                                    th:value="${place.id}"
+                                    th:text="${place.id}">
                             </option>
                         </select>
                         <span th:if="${#fields.hasErrors('placeOfPremiere')}" th:errors="*{placeOfPremiere}"></span>
                     </div>
-
-                    <label for="texts">Text</label>
-                    <select th:name="*{relatedText}" class="form-control" id="texts" name="Text">
-                        <option value="">Select Text</option>
-                        <option
-                                th:each="text : ${relatedText}"
-                                th:value="${relatedText}"
-                                th:text="${relatedText.title}">
-                        </option>
-                    </select>
-                    <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{texts}"></span>
                 </div>
             </div>
         </form>

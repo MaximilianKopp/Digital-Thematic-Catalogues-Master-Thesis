@@ -41,4 +41,10 @@ class Place(
         result = 31 * result + coordinates.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "Place(name=$name, locality=$locality, country=$country, coordinates=$coordinates, relatedWorks=$relatedWorks)"
+    }
+
+
 }
