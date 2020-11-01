@@ -1,8 +1,10 @@
 package com.ataraxia.gabriel_vz.controller.editor
 
 import com.ataraxia.gabriel_vz.factory.PlaceFactory
+import com.ataraxia.gabriel_vz.factory.TextFactory
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.service.PlaceService
+import com.ataraxia.gabriel_vz.service.TextService
 import com.ataraxia.gabriel_vz.service.WorkService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 class EditorWorkController(
         val workService: WorkService,
         val placeFactory: PlaceFactory,
-        val placeService: PlaceService
+        val placeService: PlaceService,
+        val textFactory: TextFactory,
+        val textService: TextService
 ) {
 
     @GetMapping("/createWork")
@@ -26,6 +30,7 @@ class EditorWorkController(
         placeList?.forEach { println("Hier ist es" + it.id) }
         model.addAttribute("work", Work())
         model.addAttribute("places", placeService.getAll().toOption().orNull())
+        model.addAttribute("texts", textService.getAll().toOption().orNull())
         return "editor/addWork"
     }
 

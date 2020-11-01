@@ -118,6 +118,20 @@
                         </select>
                         <span th:if="${#fields.hasErrors('placeOfPremiere')}" th:errors="*{placeOfPremiere}"></span>
                     </div>
+
+                    <div class="form-group">
+                        <label for="texts">Text</label>
+                        <select th:field="*{relatedText.id}" class="form-control" id="texts" name="Related Text" required="required">
+                            <option value="">Select Text</option>
+                            <option
+                                    th:each="text : ${texts}"
+                                    th:value="${text.id}"
+                                    th:text="${text.id}">
+                            </option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{relatedText}"></span>
+                    </div>
+
                 </div>
             </div>
         </form>

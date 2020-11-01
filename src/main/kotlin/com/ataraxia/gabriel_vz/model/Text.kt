@@ -4,12 +4,12 @@ import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
 class Text(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var author: String?,
-        var excerpt: String?,
+        var author: String? = null,
+        var excerpt: String? = null,
         var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,

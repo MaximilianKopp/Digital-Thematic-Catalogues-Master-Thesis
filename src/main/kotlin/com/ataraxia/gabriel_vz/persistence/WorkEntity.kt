@@ -37,11 +37,7 @@ class WorkEntity(
         @JsonManagedReference
         @ManyToOne(
                 fetch = FetchType.LAZY,
-                cascade = [
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
-                ]
+                cascade = [CascadeType.MERGE]
         )
         var relatedText: TextEntity? = null,
 
