@@ -66,4 +66,9 @@ class PlaceEntity(
         return result
     }
 
+    override fun toString(): String {
+        return "PlaceEntity(name=$name, locality=$locality, country=$country, coordinates=$coordinates, relatedWorks=$relatedWorks)"
+    }
+
+
 }

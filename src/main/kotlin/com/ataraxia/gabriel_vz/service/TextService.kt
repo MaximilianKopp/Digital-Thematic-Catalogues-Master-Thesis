@@ -38,9 +38,7 @@ class TextService(
 
     override fun create(m: Text): Either<Exception, Text> = try {
         val textEntity = textRepository.save(textFactory.entityFromModel(m))
-        textFactory
-                .modelFromEntity(textEntity)
-                .right()
+        textFactory.modelFromEntity(textEntity).right()
     } catch (e: Exception) {
         e.left()
     }

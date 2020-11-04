@@ -108,27 +108,30 @@
                 <div class="col col-2 ml-3 mt-3">
                     <div class="form-group">
                         <label for="places">Places</label>
-                        <select th:name="*{placeOfPremiere}" class="form-control" id="places" name="Place of Premiere">
+                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places" name="Place of Premiere">
                             <option value="">Select Places</option>
                             <option
                                     th:each="place : ${places}"
-                                    th:value="${place}"
-                                    th:text="${place.name}">
+                                    th:value="${place.id}"
+                                    th:text="${place.id}">
                             </option>
                         </select>
                         <span th:if="${#fields.hasErrors('placeOfPremiere')}" th:errors="*{placeOfPremiere}"></span>
                     </div>
 
-                    <label for="texts">Text</label>
-                    <select th:name="*{relatedText}" class="form-control" id="texts" name="Text">
-                        <option value="">Select Text</option>
-                        <option
-                                th:each="text : ${relatedText}"
-                                th:value="${relatedText}"
-                                th:text="${relatedText.title}">
-                        </option>
-                    </select>
-                    <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{texts}"></span>
+                    <div class="form-group">
+                        <label for="texts">Text</label>
+                        <select th:field="*{relatedText.id}" class="form-control" id="texts" name="Related Text">
+                            <option value="">Select Text</option>
+                            <option
+                                    th:each="text : ${texts}"
+                                    th:value="${text.id}"
+                                    th:text="${text.id}">
+                            </option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{relatedText}"></span>
+                    </div>
+
                 </div>
             </div>
         </form>

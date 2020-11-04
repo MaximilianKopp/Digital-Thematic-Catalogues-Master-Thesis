@@ -1,8 +1,10 @@
 package com.ataraxia.gabriel_vz.controller.editor
 
-import com.ataraxia.gabriel_vz.factory.WorkFactory
+import com.ataraxia.gabriel_vz.factory.PlaceFactory
+import com.ataraxia.gabriel_vz.factory.TextFactory
 import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.service.PlaceService
+import com.ataraxia.gabriel_vz.service.TextService
 import com.ataraxia.gabriel_vz.service.WorkService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -16,25 +18,45 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class EditorWorkController(
         val workService: WorkService,
-        val workFactory: WorkFactory,
-        val placeService: PlaceService
+        val placeFactory: PlaceFactory,
+        val placeService: PlaceService,
+        val textFactory: TextFactory,
+        val textService: TextService
 ) {
 
     @GetMapping("/createWork")
     fun createWork(model: Model): String {
-
+        val placeList = placeService.getAll().toOption().orNull()
+        placeList?.forEach { println("Hier ist es" + it.id) }
         model.addAttribute("work", Work())
         model.addAttribute("places", placeService.getAll().toOption().orNull())
+        model.addAttribute("texts", textService.getAll().toOption().orNull())
         return "editor/addWork"
     }
 
     @PostMapping(value = ["/addWork"])
     fun addWork(@Validated work: Work?, bindingResult: BindingResult): String {
         if (bindingResult.hasErrors()) {
-            return "common_user/workdetails"
+            print(bindingResult.allErrors)
         }
-        workFactory.entityFromModel(work!!).placeOfPremiere?.addWork(workFactory.entityFromModel(work))
-        workService.create(work)
+        println(work?.title + " das ist die Work name")
+        println(work?.placeOfPremiere?.id + "das ist der Place title")
+        //val place = placeService.get(work?.placeOfPremiere?.id!!).toOption().orNull()
+        //placeFactory.entityFromModel(place!!).addWork(workFactory.entityFromModel(work))
+        //workRepository.save(workFactory.entityFromModel(work!!))
+
+        work?.apply {
+            if (placeOfPremiere?.id == "") {
+                print("hier wird die id null")
+                this.placeOfPremiere = null
+            }
+            if (relatedText?.id == "") {
+                print("hier wird die Text id null")
+                this.relatedText = null
+            }
+        }
+
+        workService.create(work!!)
         return "editor/addWork"
     }
 }

@@ -9,17 +9,16 @@ import javax.persistence.Table
 @Entity
 @Table(name = "text")
 class TextEntity(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var author: String?,
-        var excerpt: String?,
+        var author: String? = null,
+        var excerpt: String? = null,
 
         @JsonBackReference(value = "text-work")
         @OneToMany(
-                mappedBy = "relatedText",
-                orphanRemoval = true
+                mappedBy = "relatedText"
         )
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
 ) : com.ataraxia.gabriel_vz.root.Entity(

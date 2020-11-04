@@ -30,7 +30,7 @@ class EditorPlaceController(
     @PostMapping("/addPlace")
     fun addPlace(@Valid place: Place, bindingResult: BindingResult): String {
         if (bindingResult.hasErrors()) {
-
+            print(bindingResult.allErrors)
         }
         placeService.create(place)
         return "editor/addPlace"

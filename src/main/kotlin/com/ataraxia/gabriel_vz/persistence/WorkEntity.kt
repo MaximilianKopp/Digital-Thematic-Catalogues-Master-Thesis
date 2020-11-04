@@ -18,7 +18,7 @@ class WorkEntity(
         @JsonManagedReference
         @ManyToOne(
                 fetch = FetchType.LAZY,
-                cascade = [CascadeType.ALL]
+                cascade = [CascadeType.MERGE]
         )
         var placeOfPremiere: PlaceEntity? = null,
 
@@ -37,11 +37,7 @@ class WorkEntity(
         @JsonManagedReference
         @ManyToOne(
                 fetch = FetchType.LAZY,
-                cascade = [
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
-                ]
+                cascade = [CascadeType.MERGE]
         )
         var relatedText: TextEntity? = null,
 
@@ -70,7 +66,6 @@ class WorkEntity(
         @JsonManagedReference
         @OneToMany(mappedBy = "relatedWork",
                 cascade = [
-                    CascadeType.PERSIST,
                     CascadeType.MERGE,
                     CascadeType.REMOVE
                 ], orphanRemoval = true)

@@ -71,4 +71,8 @@ class Work(
         result = 31 * result + literatureList.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "Work(opus=$opus, dateOfCreation=$dateOfCreation, dateOfPremiere=$dateOfPremiere, placeOfPremiere=$placeOfPremiere, incipit=$incipit, commentary=$commentary, dedication=$dedication, instrumentation=$instrumentation, category=$category, duration=$duration, editor=$editor, relatedText=$relatedText, discographies=$discographies, relatedPersons=$relatedPersons, literatureList=$literatureList)"
+    }
 }
