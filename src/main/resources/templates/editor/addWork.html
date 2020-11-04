@@ -108,7 +108,7 @@
                 <div class="col col-2 ml-3 mt-3">
                     <div class="form-group">
                         <label for="places">Places</label>
-                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places" name="Place of Premiere" required="required">
+                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places" name="Place of Premiere">
                             <option value="">Select Places</option>
                             <option
                                     th:each="place : ${places}"
@@ -121,7 +121,7 @@
 
                     <div class="form-group">
                         <label for="texts">Text</label>
-                        <select th:field="*{relatedText.id}" class="form-control" id="texts" name="Related Text" required="required">
+                        <select th:field="*{relatedText.id}" class="form-control" id="texts" name="Related Text">
                             <option value="">Select Text</option>
                             <option
                                     th:each="text : ${texts}"

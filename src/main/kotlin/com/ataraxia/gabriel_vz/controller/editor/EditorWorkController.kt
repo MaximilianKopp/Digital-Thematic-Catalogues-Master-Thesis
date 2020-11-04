@@ -41,9 +41,21 @@ class EditorWorkController(
         }
         println(work?.title + " das ist die Work name")
         println(work?.placeOfPremiere?.id + "das ist der Place title")
-//        val place = placeService.get(work?.placeOfPremiere?.id!!).toOption().orNull()
+        //val place = placeService.get(work?.placeOfPremiere?.id!!).toOption().orNull()
         //placeFactory.entityFromModel(place!!).addWork(workFactory.entityFromModel(work))
         //workRepository.save(workFactory.entityFromModel(work!!))
+
+        work?.apply {
+            if (placeOfPremiere?.id == "") {
+                print("hier wird die id null")
+                this.placeOfPremiere = null
+            }
+            if (relatedText?.id == "") {
+                print("hier wird die Text id null")
+                this.relatedText = null
+            }
+        }
+
         workService.create(work!!)
         return "editor/addWork"
     }
