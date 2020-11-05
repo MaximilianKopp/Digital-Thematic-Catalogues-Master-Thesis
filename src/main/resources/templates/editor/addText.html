@@ -27,7 +27,7 @@
                         <label for="textTitle">Title</label>
                         <input type="text" class="form-control" th:field="*{title}"
                                id="textTitle"
-                               placeholder="Ort der Uraufführung">
+                               placeholder="Title">
                         <span th:if="${#fields.hasErrors('title')}"
                               th:errors="*{title}"></span>
                     </div>
@@ -45,7 +45,7 @@
                         <label for="textExcerpt">Excerpt</label>
                         <input type="text" class="form-control" th:field="*{excerpt}"
                                id="textExcerpt"
-                               placeholder="Author">
+                               placeholder="Excerpt">
                         <span th:if="${#fields.hasErrors('excerpt')}"
                               th:errors="*{excerpt}"></span>
                     </div>

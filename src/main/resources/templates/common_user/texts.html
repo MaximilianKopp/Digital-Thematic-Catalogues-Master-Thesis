@@ -25,6 +25,7 @@
                     <th>Title</th>
                     <th>Author</th>
                     <th>Excerpt</th>
+                    <th>Actions <a href="/editor/createText" class="fas fa-plus-circle"></a> </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,8 @@
                            th:text="${text.title}"></a></td>
                     <td th:text="${text.author}">id</td>
                     <td th:text="${text.excerpt}">title</td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createText">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createText">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
