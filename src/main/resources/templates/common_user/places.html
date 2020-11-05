@@ -26,6 +26,7 @@
                     <th>Name</th>
                     <th>Locality</th>
                     <th>Country</th>
+                    <th>Actions <a href="/editor/createPlace" class="fas fa-plus-circle"></a> </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,8 @@
                     <td th:text="${place.name}">id</td>
                     <td th:text="${place.locality}">title</td>
                     <td th:text="${place.country}">body</td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createPlace">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createPlace">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

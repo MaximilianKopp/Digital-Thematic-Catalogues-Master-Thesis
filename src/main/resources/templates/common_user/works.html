@@ -25,6 +25,8 @@
                     <th>Title</th>
                     <th>Date of creation</th>
                     <th>Date of Premiere</th>
+                    <th>Actions <a href="/editor/createWork" class="fas fa-plus-circle"></a> </th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -33,6 +35,9 @@
                            th:text="${work?.title}"></a></td>
                     <td th:text="${work?.dateOfCreation}">title</td>
                     <td th:text="${work?.dateOfPremiere}">body</td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createWork">Edit</a>
+                    <a class="btn btn-danger btn-sm" role="button" href="/editor/createWork">Delete</a></td>
+
                 </tr>
                 </tbody>
             </table>

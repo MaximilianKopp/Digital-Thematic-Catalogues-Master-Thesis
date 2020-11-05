@@ -55,10 +55,12 @@ class IncipitFactory : Factory<Incipit, IncipitEntity, IncipitResource>() {
     )
 
     override fun resourceFromModel(model: Incipit): IncipitResource = IncipitResource(
-            self = WebMvcLinkBuilder.linkTo(IncipitApiController::class.java)
-                    .slash("incipits/" + model.id)
-                    .withSelfRel()
-                    .withTitle(model.title!!),
+            self = model.title?.let {
+                WebMvcLinkBuilder.linkTo(IncipitApiController::class.java)
+                        .slash("incipits/" + model.id)
+                        .withSelfRel()
+                        .withTitle(it)
+            },
             collection = WebMvcLinkBuilder.linkTo(IncipitApiController::class.java)
                     .slash("incipits")
                     .withSelfRel(),

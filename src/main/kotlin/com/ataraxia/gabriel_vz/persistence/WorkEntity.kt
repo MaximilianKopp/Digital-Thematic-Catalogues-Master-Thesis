@@ -23,9 +23,9 @@ class WorkEntity(
         var placeOfPremiere: PlaceEntity? = null,
 
         @OneToOne(
-                mappedBy = "relatedWork",
                 cascade = [CascadeType.ALL],
-                fetch = FetchType.EAGER)
+                fetch = FetchType.LAZY)
+        @JoinColumn(name = "incipit_id", referencedColumnName = "id")
         var incipit: IncipitEntity? = null,
         var commentary: String? = null,
         var dedication: String? = null,

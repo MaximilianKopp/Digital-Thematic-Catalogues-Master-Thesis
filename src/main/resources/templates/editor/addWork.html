@@ -108,12 +108,13 @@
                 <div class="col col-2 ml-3 mt-3">
                     <div class="form-group">
                         <label for="places">Places</label>
-                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places" name="Place of Premiere">
+                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places"
+                                name="Place of Premiere">
                             <option value="">Select Places</option>
                             <option
                                     th:each="place : ${places}"
                                     th:value="${place.id}"
-                                    th:text="${place.id}">
+                                    th:text="${place.title}">
                             </option>
                         </select>
                         <span th:if="${#fields.hasErrors('placeOfPremiere')}" th:errors="*{placeOfPremiere}"></span>
@@ -126,12 +127,49 @@
                             <option
                                     th:each="text : ${texts}"
                                     th:value="${text.id}"
-                                    th:text="${text.id}">
+                                    th:text="${text.title}">
                             </option>
                         </select>
                         <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{relatedText}"></span>
                     </div>
+                </div>
+                <div class="col col-2 ml-3 mt-3">
+                    <div class="form-group">
+                        <label for="clef">Clef</label>
+                        <input type="text" class="form-control" th:field="*{incipit.clef}" id="clef"
+                               placeholder="Clef">
+                        <span th:if="${#fields.hasErrors('incipit.clef')}" th:errors="*{incipit.clef}"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="keysig">Key Signature</label>
+                        <input type="text" class="form-control" th:field="*{incipit.keysig}" id="keysig"
+                               placeholder="Key Signature">
+                        <span th:if="${#fields.hasErrors('incipit.keysig')}" th:errors="*{incipit.keysig}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timesig">Time Signature</label>
+                        <input type="text" class="form-control" th:field="*{incipit.timesig}" id="timesig"
+                               placeholder="Time Signature">
+                        <span th:if="${#fields.hasErrors('incipit.timesig')}" th:errors="*{incipit.timesig}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="score">Score</label>
+                        <input type="text" class="form-control" th:field="*{incipit.score}" id="score"
+                               placeholder="Score">
+                        <span th:if="${#fields.hasErrors('incipit.score')}" th:errors="*{incipit.score}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" th:field="*{incipit.description}" id="description"
+                               placeholder="Description">
+                        <span th:if="${#fields.hasErrors('incipit.description')}"
+                              th:errors="*{incipit.description}"></span>
+
+                    </div>
                 </div>
             </div>
         </form>

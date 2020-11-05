@@ -2,12 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of References</title>
+    <title>List of Incipits</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{../styles.css}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
           type="text/css"/>
+    <script src="http://www.verovio.org/javascript/latest/verovio-toolkit.js"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 
@@ -30,9 +34,9 @@
                 <tbody>
                 <tr th:each="incipit : ${incipits.page}">
                     <td><a href="index.html" th:href="@{'incipit/?id=' + ${incipit.id}}"
-                           th:text="${incipit.title}"></a></td>
+                           th:text="${incipit.description}"></a></td>
                     <td th:text="${incipit.description}">id</td>
-                    <td th:text="${incipit.score}">title</td>
+                    <td class="svg_output">
                 </tr>
                 </tbody>
             </table>
@@ -65,8 +69,49 @@
 </div>
 <div th:insert="fragments/footer :: footer"></div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    var vrvToolkit = new verovio.toolkit();
+    var zoom = 20;
+    var pageHeight = 100;
+    var pageWidth = 100;
+
+    function setOptions() {
+
+        pageHeight = $(document).height();
+        pageWidth = $(window).width();
+        options = {
+            pageHeight: pageHeight,
+            pageWidth: pageWidth,
+            scale: zoom,
+            adjustPageHeight: true
+        };
+        vrvToolkit.setOptions(options);
+    }
+
+    function loadData() {
+        setOptions();
+        /*[# th:each="incipit : ${incipits.page}"]*/
+        var clef = /*[[${incipit?.clef}]]*/ 'default';
+        var keysig = /*[[${incipit?.keysig}]]*/ 'default';
+        var timesig = /*[[${incipit?.timesig}]]*/ 'default';
+        var score = /*[[${incipit?.score}]]*/ 'default';
+        var data = "@clef:" + clef + "\n" + "@keysig:" + keysig + "\n" + "@timesig:" + timesig + "\n" + "@data:" + score;
+        vrvToolkit.loadData(data);
+        svg = vrvToolkit.renderToSVG(1, {});
+        $(".svg_output").html(svg);
+        /*[/]*/
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            dataType: "text"
+            , success: function (data) {
+                loadData(data);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -39,8 +39,8 @@ class WorkService(
     }
 
     override fun create(m: Work): Either<Exception, Work> = try {
-        val placeEntity = workRepository.save(workFactory.entityFromModel(m))
-        workFactory.modelFromEntity(placeEntity).right()
+        val workEntity = workRepository.save(workFactory.entityFromModel(m))
+        workFactory.modelFromEntity(workEntity).right()
     } catch (e: Exception) {
         e.left()
     }
