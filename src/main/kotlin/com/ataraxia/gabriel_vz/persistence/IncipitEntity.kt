@@ -2,28 +2,26 @@ package com.ataraxia.gabriel_vz.persistence
 
 import arrow.core.Option
 import com.fasterxml.jackson.annotation.JsonBackReference
-import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
 @Table(name = "incipit")
 class IncipitEntity(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var text: String?,
-        var clef: String?,
-        var keysig: String?,
-        var timesig: String?,
-        var score: String?,
-        var description: String?,
+        var text: String? = null,
+        var clef: String? = null,
+        var keysig: String? = null,
+        var timesig: String? = null,
+        var score: String? = null,
+        var description: String? = null,
 
         @JsonBackReference
-        @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "work", referencedColumnName = "id")
-        var relatedWork: WorkEntity? = Option.empty<WorkEntity?>().orNull()
+        @OneToOne(mappedBy = "incipit", orphanRemoval = true )
+        var relatedWork: WorkEntity? = null
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,

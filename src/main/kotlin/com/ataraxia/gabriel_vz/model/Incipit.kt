@@ -4,16 +4,16 @@ import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
 class Incipit(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var text: String?,
-        var clef: String?,
-        var keysig: String?,
-        var timesig: String?,
-        var score: String?,
-        var description: String?,
+        var text: String? = null,
+        var clef: String? = null,
+        var keysig: String? = null,
+        var timesig: String? = null,
+        var score: String? = null,
+        var description: String? = null,
         var relatedWork: MutableMap<String?, String?> = mutableMapOf()
 ) : Model(
         id,
