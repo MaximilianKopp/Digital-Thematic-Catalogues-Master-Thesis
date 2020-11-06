@@ -2,6 +2,7 @@ package com.ataraxia.gabriel_vz.controller.editor
 
 import com.ataraxia.gabriel_vz.factory.PlaceFactory
 import com.ataraxia.gabriel_vz.model.Work
+import com.ataraxia.gabriel_vz.service.LiteratureService
 import com.ataraxia.gabriel_vz.service.PlaceService
 import com.ataraxia.gabriel_vz.service.TextService
 import com.ataraxia.gabriel_vz.service.WorkService
@@ -19,7 +20,8 @@ class EditorWorkController(
         val workService: WorkService,
         val placeFactory: PlaceFactory,
         val placeService: PlaceService,
-        val textService: TextService
+        val textService: TextService,
+        val literatureService: LiteratureService
 ) {
 
     @GetMapping("/createWork")
@@ -27,6 +29,7 @@ class EditorWorkController(
         model.addAttribute("work", Work())
         model.addAttribute("places", placeService.getAll().toOption().orNull())
         model.addAttribute("texts", textService.getAll().toOption().orNull())
+        model.addAttribute("literature", literatureService.getAll().toOption().orNull())
         return "editor/addWork"
     }
 
@@ -39,6 +42,9 @@ class EditorWorkController(
         work?.apply {
             if (placeOfPremiere?.id == "") {
                 this.placeOfPremiere = null
+            }
+            if (relatedText?.id == "") {
+                this.relatedText = null
             }
             if (relatedText?.id == "") {
                 this.relatedText = null
