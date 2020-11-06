@@ -1,25 +1,26 @@
 package com.ataraxia.gabriel_vz.persistence
 
-import arrow.core.Option
 import com.fasterxml.jackson.annotation.JsonBackReference
-import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Table
 @Entity(name = "literature")
 class LiteratureEntity(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var author: String?,
-        var isbn: String?,
-        var yearOfPublishing: String?,
+        var author: String? = null,
+        var isbn: String? = null,
+        var yearOfPublishing: String? = null,
 
         @JsonBackReference
         @ManyToOne(fetch = FetchType.LAZY)
-        var relatedWork: WorkEntity? = Option.empty<WorkEntity?>().orNull()
+        var relatedWork: WorkEntity? = null
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,

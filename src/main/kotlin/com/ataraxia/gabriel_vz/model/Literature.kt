@@ -4,13 +4,13 @@ import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
 class Literature(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var author: String?,
-        var isbn: String?,
-        var yearOfPublishing: String?,
+        var author: String? = null,
+        var isbn: String? = null,
+        var yearOfPublishing: String? = null,
         var relatedWork: MutableMap<String?, String?> = mutableMapOf()
 ) : Model(
         id,
