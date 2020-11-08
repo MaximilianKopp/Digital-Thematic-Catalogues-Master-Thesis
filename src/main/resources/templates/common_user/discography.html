@@ -26,6 +26,7 @@
                     <th>Label</th>
                     <th>Record Id</th>
                     <th>Date of publishing</th>
+                    <th>Actions <a href="/editor/createDiscography" class="fas fa-plus-circle"></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,8 @@
                     <td th:text="${discography.label}">id</td>
                     <td th:text="${discography.recordId}">title</td>
                     <td th:text="${discography.dateOfPublishing}">body</td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createWork">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createWork">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

@@ -6,16 +6,15 @@ import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "discography")
 class DiscographyEntity(
-        id: String?,
-        title: String?,
+        id: String? = null ,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var label: String?,
-        var recordId: String?,
-        var dateOfPublishing: String?,
+        var label: String? = null,
+        var recordId: String? = null,
+        var dateOfPublishing: String? = null,
 
         @JsonManagedReference
         @ManyToMany(mappedBy = "relatedDiscographies",
@@ -27,17 +26,9 @@ class DiscographyEntity(
         var musicians: MutableSet<PersonEntity>? = mutableSetOf(),
 
         @JsonBackReference(value = "work-discography")
-        @ManyToMany(
-                fetch = FetchType.LAZY,
-                cascade = [
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-                ]
-        )
-        @JoinTable(
-                joinColumns = [JoinColumn(name = "discography_id", referencedColumnName = "id")],
-                inverseJoinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")])
+        @ManyToMany(mappedBy = "discographies")
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
+
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,
@@ -57,18 +48,26 @@ class DiscographyEntity(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is DiscographyEntity) return false
+        if (!super.equals(other)) return false
 
-        if (id != other.id) return false
-        if (title != other.title) return false
         if (label != other.label) return false
         if (recordId != other.recordId) return false
         if (dateOfPublishing != other.dateOfPublishing) return false
+        if (musicians != other.musicians) return false
+        if (relatedWorks != other.relatedWorks) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return 31
+        var result = super.hashCode()
+        result = 31 * result + (label?.hashCode() ?: 0)
+        result = 31 * result + (recordId?.hashCode() ?: 0)
+        result = 31 * result + (dateOfPublishing?.hashCode() ?: 0)
+        result = 31 * result + (musicians?.hashCode() ?: 0)
+        result = 31 * result + (relatedWorks?.hashCode() ?: 0)
+        return result
     }
+
 
 }
