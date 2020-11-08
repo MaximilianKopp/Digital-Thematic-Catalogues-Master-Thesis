@@ -26,11 +26,6 @@
                                       class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
                         <td th:text="${persons.title}"></td>
                     </tr>
-                    <tr th:each="mapEntry : ${persons.relatedWorks}">
-                        <th>Related Work:</th>
-                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
-                               th:text="${mapEntry.value}"></a></td>
-                    </tr>
                     <tr th:each="mapEntry : ${persons.relatedDiscographies}">
                         <th>Related Discography:</th>
                         <td><a href="discography.html" th:href="@{'../discography?id='+ ${mapEntry.key}}"
@@ -51,6 +46,11 @@
                     <tr>
                         <th>Description:</th>
                         <td th:text="${persons.description}"></td>
+                    </tr>
+                    <tr th:each="mapEntry : ${persons.relatedWorks}">
+                        <th>Related Work:</th>
+                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
+                               th:text="${mapEntry.value}"></a></td>
                     </tr>
                     </tbody>
                 </table>

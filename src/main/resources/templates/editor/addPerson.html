@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create Person</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{../styles.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="content">
+    <div class="container-fluid p-0">
+        <form action="#" th:action="@{/editor/addPerson}" th:object="${person}" method="post">
+
+            <div class="row no-gutters">
+                <div class="col col-1">
+                    <div th:replace="fragments/sidebar :: sidebar"></div>
+                </div>
+
+                <div class="col col-2 ml-3 mt-3">
+                    <div class="form-group">
+                        <label for="personTitle">Title</label>
+                        <input type="text" class="form-control" th:field="*{title}"
+                               id="personTitle"
+                               placeholder="Title">
+                        <span th:if="${#fields.hasErrors('title')}"
+                              th:errors="*{title}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personName">Title</label>
+                        <input type="text" class="form-control" th:field="*{name}"
+                               id="personName"
+                               placeholder="Title">
+                        <span th:if="${#fields.hasErrors('name')}"
+                              th:errors="*{name}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personPND">PND</label>
+                        <input type="text" class="form-control" th:field="*{pnd}"
+                               id="personPND"
+                               placeholder="PND">
+                        <span th:if="${#fields.hasErrors('pnd')}"
+                              th:errors="*{pnd}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personRole">Role</label>
+                        <input type="text" class="form-control" th:field="*{role}"
+                               id="personRole"
+                               placeholder="role">
+                        <span th:if="${#fields.hasErrors('role')}"
+                              th:errors="*{role}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personDescription">Description</label>
+                        <input type="text" class="form-control" th:field="*{description}"
+                               id="personDescription"
+                               placeholder="description">
+                        <span th:if="${#fields.hasErrors('description')}"
+                              th:errors="*{description}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:insert="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

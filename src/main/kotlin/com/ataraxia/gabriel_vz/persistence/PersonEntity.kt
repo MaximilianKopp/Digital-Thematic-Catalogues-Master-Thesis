@@ -8,24 +8,17 @@ import javax.persistence.*
 @Entity
 @Table(name = "person")
 class PersonEntity(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var name: String,
-        var pnd: String,
-        var role: String,
-        var description: String,
+        var name: String? = null,
+        var pnd: String? = null,
+        var role: String? = null,
+        var description: String? = null,
 
         @JsonBackReference(value = "work-person")
-        @ManyToMany(cascade = [
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-        ])
-        @JoinTable(
-                joinColumns = [JoinColumn(name = "person_id")],
-                inverseJoinColumns = [JoinColumn(name = "work_id")]
-        )
+        @ManyToMany(mappedBy = "relatedPersons")
         var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf(),
 
         @JsonBackReference

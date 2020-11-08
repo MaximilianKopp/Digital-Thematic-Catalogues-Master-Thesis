@@ -4,16 +4,16 @@ import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
 class Person(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var name: String,
-        var pnd: String,
-        var role: String,
-        var description: String,
-        var relatedWorks: Map<String?, String?>,
-        var relatedDiscographies: Map<String?, String?>?
+        var name: String? = null,
+        var pnd: String? = null,
+        var role: String? = null,
+        var description: String? = null,
+        var relatedWorks: Map<String?, String?> = mutableMapOf(),
+        var relatedDiscographies: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,
