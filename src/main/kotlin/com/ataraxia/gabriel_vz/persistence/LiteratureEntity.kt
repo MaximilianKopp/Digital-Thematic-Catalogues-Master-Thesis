@@ -2,10 +2,7 @@ package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import java.time.OffsetDateTime
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.ManyToOne
-import javax.persistence.Table
+import javax.persistence.*
 
 @Table
 @Entity(name = "literature")
@@ -19,8 +16,8 @@ class LiteratureEntity(
         var yearOfPublishing: String? = null,
 
         @JsonBackReference
-        @ManyToOne(fetch = FetchType.LAZY)
-        var relatedWork: WorkEntity? = null
+        @ManyToMany(mappedBy = "literatureList")
+        var relatedWorks: MutableSet<WorkEntity>? = null
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,
@@ -35,7 +32,7 @@ class LiteratureEntity(
         if (author != other.author) return false
         if (isbn != other.isbn) return false
         if (yearOfPublishing != other.yearOfPublishing) return false
-        if (relatedWork != other.relatedWork) return false
+        if (relatedWorks != other.relatedWorks) return false
 
         return true
     }

@@ -137,10 +137,11 @@
                     <details>
                         <summary>References</summary>
                         <div class="form-check">
-                            <th:block th:each="reference : ${literature}">
-                                <input th:value="${reference.id}" type="checkbox" class="form-check-input" id="literatureCheck">
+                            <th:block th:each="reference, iterstat : ${literature}">
+                                <input type="checkbox" th:value="${reference.id}" th:field="*{literatureList[__${iterstat.index}__].id}" class="form-check-input" id="literatureCheck">
                                 <label th:text="${reference.title}" class="form-check-label" for="literatureCheck"></label>
                                 <br/>
+                                <span th:if="${#fields.hasErrors('literatureList')}" th:errors="*{literatureList}"></span>
                             </th:block>
                         </div>
                     </details>
