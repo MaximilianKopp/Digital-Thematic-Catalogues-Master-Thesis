@@ -63,13 +63,12 @@ class WorkEntity(
         )
         var relatedPersons: MutableSet<PersonEntity>? = mutableSetOf(),
 
-        @JsonManagedReference
-        @OneToMany(mappedBy = "relatedWork",
-                cascade = [
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
-                ], orphanRemoval = true)
-        var literatureList: MutableSet<LiteratureEntity>? = mutableSetOf()
+        @ManyToMany(cascade = [CascadeType.MERGE])
+        @JoinTable(
+                joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
+                inverseJoinColumns = [JoinColumn(name = "literature_id", referencedColumnName = "id")]
+        )
+        var literatureList: MutableList<LiteratureEntity>? = null
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,
@@ -98,12 +97,12 @@ class WorkEntity(
 
     fun addLiterature(literature: LiteratureEntity) {
         literatureList?.add(literature)
-        literature.relatedWork = this
+        literature.relatedWorks?.add(this)
     }
 
     fun removeLiterature(literature: LiteratureEntity) {
         literatureList?.remove(literature)
-        literature.relatedWork = this
+        literature.relatedWorks?.add(this)
     }
 
     fun addIncipit(incipit: IncipitEntity?) {

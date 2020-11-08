@@ -50,7 +50,7 @@ internal class WorkFactoryTest {
             editor = "Max",
             relatedText = null,
             instrumentation = "Für Klavier",
-            literatureList = mutableSetOf(),
+            literatureList = mutableListOf(),
             relatedPersons = mutableSetOf(),
             discographies = mutableSetOf()
     )
@@ -71,7 +71,7 @@ internal class WorkFactoryTest {
             editor = "Max",
             relatedText = null,
             instrumentation = "Für Klavier",
-            literatureList = mutableSetOf(),
+            literatureList = mutableListOf(),
             relatedPersons = mutableSetOf(),
             discographies = mutableSetOf()
     )
