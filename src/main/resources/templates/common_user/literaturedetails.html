@@ -26,11 +26,6 @@
                                       class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
                         <td th:text="${reference.title}"></td>
                     </tr>
-                    <tr th:each="mapEntry : ${reference.relatedWorks}">
-                        <th>Related Work:</th>
-                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
-                               th:text="${mapEntry.value}"></a></td>
-                    </tr>
                     <tr>
                         <th>Author:</th>
                         <td th:text="${reference.author}"></td>
@@ -42,6 +37,11 @@
                     <tr>
                         <th>Year of Publishing:</th>
                         <td th:text="${reference.yearOfPublishing}"></td>
+                    </tr>
+                    <tr th:each="mapEntry : ${reference.relatedWorks}">
+                        <th>Related Work:</th>
+                        <td><a href="workdetails.html" th:href="@{'../work?id='+ ${mapEntry.key}}"
+                               th:text="${mapEntry.value}"></a></td>
                     </tr>
                     </tbody>
                 </table>

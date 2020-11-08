@@ -20,8 +20,8 @@ class Work(
         var duration: String? = null,
         var editor: String? = null,
         var relatedText: Text? = null,
-        var discographies: MutableSet<Discography>? = mutableSetOf(),
-        var relatedPersons: MutableSet<Person>? = mutableSetOf(),
+        var discographies: MutableList<Discography>? = null,
+        var relatedPersons: MutableList<Person>? = null,
         var literatureList: MutableList<Literature>? = null
 ) : Model(
         id,

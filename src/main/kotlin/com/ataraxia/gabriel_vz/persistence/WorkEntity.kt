@@ -42,33 +42,27 @@ class WorkEntity(
         var relatedText: TextEntity? = null,
 
         @JsonManagedReference
-        @ManyToMany(
-                mappedBy = "relatedWorks",
-                cascade = [
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
-                ]
+        @ManyToMany(cascade = [CascadeType.MERGE])
+        @JoinTable(
+                joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
+                inverseJoinColumns = [JoinColumn(name = "discographies_id", referencedColumnName = "id")]
         )
-        var discographies: MutableSet<DiscographyEntity>? = mutableSetOf(),
+        var discographies: MutableList<DiscographyEntity>? = mutableListOf(),
 
         @JsonManagedReference
-        @ManyToMany(
-                mappedBy = "relatedWorks",
-                cascade = [
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
-                ]
+        @ManyToMany(cascade = [CascadeType.MERGE])
+        @JoinTable(
+                joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
+                inverseJoinColumns = [JoinColumn(name = "person_id", referencedColumnName = "id")]
         )
-        var relatedPersons: MutableSet<PersonEntity>? = mutableSetOf(),
+        var relatedPersons: MutableList<PersonEntity>? = mutableListOf(),
 
         @ManyToMany(cascade = [CascadeType.MERGE])
         @JoinTable(
                 joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
                 inverseJoinColumns = [JoinColumn(name = "literature_id", referencedColumnName = "id")]
         )
-        var literatureList: MutableList<LiteratureEntity>? = null
+        var literatureList: MutableList<LiteratureEntity>? = mutableListOf()
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,
@@ -142,7 +136,6 @@ class WorkEntity(
         result = 31 * result + category.hashCode()
         result = 31 * result + duration.hashCode()
         result = 31 * result + editor.hashCode()
-        result = 31 * result + discographies.hashCode()
         return result
     }
 

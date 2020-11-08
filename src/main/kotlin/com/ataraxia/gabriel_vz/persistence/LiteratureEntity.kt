@@ -17,7 +17,7 @@ class LiteratureEntity(
 
         @JsonBackReference
         @ManyToMany(mappedBy = "literatureList")
-        var relatedWorks: MutableSet<WorkEntity>? = null
+        var relatedWorks: MutableSet<WorkEntity>? = mutableSetOf()
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,

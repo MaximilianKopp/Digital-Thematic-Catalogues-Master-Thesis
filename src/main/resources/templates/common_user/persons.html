@@ -27,6 +27,7 @@
                     <th>PND</th>
                     <th>Role</th>
                     <th>Description</th>
+                    <th>Actions <a href="/editor/createPerson" class="fas fa-plus-circle"></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,8 @@
                     <td th:text="${person.pnd}">title</td>
                     <td th:text="${person.role}">body</td>
                     <td th:text="${person.description}">body</td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createWork">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createWork">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

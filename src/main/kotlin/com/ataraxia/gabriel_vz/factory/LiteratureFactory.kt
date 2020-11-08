@@ -23,7 +23,7 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             yearOfPublishing = entity.yearOfPublishing,
             isbn = entity.isbn,
             author = entity.author,
-            relatedWorks = mutableMapOf()
+            relatedWorks = entity.relatedWorks?.map { Pair(it.id, it.title) }!!.toMap()
     )
 
     override fun entityFromModel(model: Literature): LiteratureEntity = LiteratureEntity(

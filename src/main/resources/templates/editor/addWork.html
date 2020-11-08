@@ -146,6 +146,30 @@
                         </div>
                     </details>
 
+                    <details>
+                        <summary>Records</summary>
+                        <div class="form-check">
+                            <th:block th:each="record, iterstat : ${discography}">
+                                <input type="checkbox" th:value="${record.id}" th:field="*{discographies[__${iterstat.index}__].id}" class="form-check-input" id="discographyCheck">
+                                <label th:text="${record.title}" class="form-check-label" for="discographyCheck"></label>
+                                <br/>
+                                <span th:if="${#fields.hasErrors('discographies')}" th:errors="*{discographies}"></span>
+                            </th:block>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Persons</summary>
+                        <div class="form-check">
+                            <th:block th:each="person, iterstat : ${persons}">
+                                <input type="checkbox" th:value="${person.id}" th:field="*{relatedPersons[__${iterstat.index}__].id}" class="form-check-input" id="personsCheck">
+                                <label th:text="${person.title}" class="form-check-label" for="personsCheck"></label>
+                                <br/>
+                                <span th:if="${#fields.hasErrors('relatedPersons')}" th:errors="*{relatedPersons}"></span>
+                            </th:block>
+                        </div>
+                    </details>
+
                 </div>
 
                 <div class="col col-2 ml-3 mt-3">

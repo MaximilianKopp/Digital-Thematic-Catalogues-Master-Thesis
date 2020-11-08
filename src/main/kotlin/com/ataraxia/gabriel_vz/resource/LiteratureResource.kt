@@ -43,7 +43,7 @@ class LiteratureResource(
                 accessMode = READ_ONLY,
                 dataType = "String"
         )
-        var relatedWork: MutableMap<String?, List<String?>> = mutableMapOf()
+        var relatedWork: Map<String?, String?>
 
 ) : Resource(
         self,

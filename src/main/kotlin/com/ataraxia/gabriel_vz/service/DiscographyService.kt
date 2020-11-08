@@ -38,9 +38,7 @@ class DiscographyService(
 
     override fun create(m: Discography): Either<Exception, Discography> = try {
         val discographyEntity = discographyRepository.save(discographyFactory.entityFromModel(m))
-        discographyFactory
-                .modelFromEntity(discographyEntity)
-                .right()
+        discographyFactory.modelFromEntity(discographyEntity).right()
     } catch (e: Exception) {
         e.left()
     }

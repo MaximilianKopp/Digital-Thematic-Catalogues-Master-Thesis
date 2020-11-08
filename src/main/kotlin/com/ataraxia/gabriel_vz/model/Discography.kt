@@ -4,15 +4,15 @@ import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
 class Discography(
-        id: String?,
-        title: String?,
+        id: String? = null,
+        title: String? = null,
         created: OffsetDateTime = OffsetDateTime.now(),
         modified: OffsetDateTime = OffsetDateTime.now(),
-        var label: String?,
-        var recordId: String?,
-        var dateOfPublishing: String?,
-        var musicians: MutableSet<Person>?,
-        var relatedWorks: Map<String?, String?>
+        var label: String? = null,
+        var recordId: String? = null,
+        var dateOfPublishing: String? = null,
+        var musicians: MutableSet<Person>? = mutableSetOf(),
+        var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,

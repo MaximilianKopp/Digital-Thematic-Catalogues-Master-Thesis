@@ -2,7 +2,6 @@ package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
 import com.ataraxia.gabriel_vz.controller.API.PersonApiController
-import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Person
 import com.ataraxia.gabriel_vz.persistence.PersonEntity
 import com.ataraxia.gabriel_vz.resource.PersonResource
@@ -23,7 +22,7 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             role = entity.role,
             name = entity.name,
             pnd = entity.pnd,
-            relatedWorks = emptyMap(),
+            relatedWorks = entity.relatedWorks?.map { Pair(it.id, it.title) }!!.toMap(),
             relatedDiscographies = emptyMap()
     )
 
@@ -35,7 +34,8 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             description = model.description,
             role = model.role,
             name = model.name,
-            pnd = model.pnd
+            pnd = model.pnd,
+            relatedWorks = mutableSetOf()
     )
 
     override fun modelFromResource(resource: PersonResource): Person = Person(
@@ -47,7 +47,7 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             role = resource.role,
             name = resource.name,
             pnd = resource.pnd,
-            relatedWorks = emptyMap(),
+            relatedWorks = resource.relatedWorks,
             relatedDiscographies = emptyMap()
     )
 
@@ -67,11 +67,11 @@ final class PersonFactory : Factory<Person, PersonEntity, PersonResource>() {
             modified = Option.fromNullable(model.modified)
                     .map(OffsetDateTime::toString)
                     .orNull(),
-            description = model.description,
-            role = model.role,
-            name = model.name,
-            pnd = model.pnd,
-            relatedWorks = emptyMap(),
+            description = model.description!!,
+            role = model.role!!,
+            name = model.name!!,
+            pnd = model.pnd!!,
+            relatedWorks = model.relatedWorks,
             relatedDiscographies = emptyMap()
     )
 }
