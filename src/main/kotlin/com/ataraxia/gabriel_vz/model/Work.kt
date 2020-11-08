@@ -22,7 +22,7 @@ class Work(
         var relatedText: Text? = null,
         var discographies: MutableSet<Discography>? = mutableSetOf(),
         var relatedPersons: MutableSet<Person>? = mutableSetOf(),
-        var literatureList: MutableSet<Literature>? = mutableSetOf()
+        var literatureList: MutableList<Literature>? = null
 ) : Model(
         id,
         title,

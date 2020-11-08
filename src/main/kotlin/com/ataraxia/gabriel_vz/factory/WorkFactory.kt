@@ -42,7 +42,7 @@ class WorkFactory(
             category = entity.category!!,
             literatureList = entity.literatureList?.map(
                     literatureFactory::modelFromEntity
-            )!!.toMutableSet(),
+            )!!.toMutableList(),
             relatedPersons = entity.relatedPersons?.map(
                     personFactory::modelFromEntity
             )!!.toMutableSet()
@@ -70,7 +70,7 @@ class WorkFactory(
             category = model.category,
             literatureList = model.literatureList?.map(
                     literatureFactory::entityFromModel
-            )!!.toMutableSet(),
+            )!!.toMutableList(),
             relatedPersons = model.relatedPersons?.map(
                     personFactory::entityFromModel
             )!!.toMutableSet()
@@ -98,7 +98,7 @@ class WorkFactory(
             category = resource.category,
             literatureList = resource.literatureList.map(
                     literatureFactory::modelFromResource
-            ).toMutableSet(),
+            ).toMutableList(),
             relatedPersons = resource.relatedPersons.map(
                     personFactory::modelFromResource
             ).toMutableSet()

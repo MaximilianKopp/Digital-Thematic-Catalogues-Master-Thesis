@@ -11,7 +11,7 @@ class Literature(
         var author: String? = null,
         var isbn: String? = null,
         var yearOfPublishing: String? = null,
-        var relatedWork: MutableMap<String?, String?> = mutableMapOf()
+        var relatedWorks: MutableMap<String?, List<String?>> = mutableMapOf()
 ) : Model(
         id,
         title,

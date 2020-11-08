@@ -1,6 +1,7 @@
 package com.ataraxia.gabriel_vz.factory
 
 import arrow.core.Option
+import arrow.generic.coproduct2.first
 import com.ataraxia.gabriel_vz.controller.API.LiteratureApiController
 import com.ataraxia.gabriel_vz.controller.API.WorkApiController
 import com.ataraxia.gabriel_vz.model.Literature
@@ -22,7 +23,7 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             yearOfPublishing = entity.yearOfPublishing,
             isbn = entity.isbn,
             author = entity.author,
-            relatedWork = mutableMapOf(Pair(entity.relatedWork?.id, entity.relatedWork?.title))
+            relatedWorks = mutableMapOf()
     )
 
     override fun entityFromModel(model: Literature): LiteratureEntity = LiteratureEntity(
@@ -32,7 +33,8 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             modified = model.modified,
             yearOfPublishing = model.yearOfPublishing,
             isbn = model.isbn,
-            author = model.author
+            author = model.author,
+            relatedWorks = mutableSetOf()
     )
 
     override fun modelFromResource(resource: LiteratureResource): Literature = Literature(
@@ -43,7 +45,7 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             yearOfPublishing = resource.yearOfPublishing,
             isbn = resource.isbn,
             author = resource.author,
-            relatedWork = resource.relatedWork
+            relatedWorks = resource.relatedWork
     )
 
     override fun resourceFromModel(model: Literature): LiteratureResource = LiteratureResource(
@@ -65,6 +67,6 @@ class LiteratureFactory : Factory<Literature, LiteratureEntity, LiteratureResour
             yearOfPublishing = model.yearOfPublishing,
             isbn = model.isbn,
             author = model.author,
-            relatedWork = model.relatedWork
+            relatedWork = model.relatedWorks
     )
 }

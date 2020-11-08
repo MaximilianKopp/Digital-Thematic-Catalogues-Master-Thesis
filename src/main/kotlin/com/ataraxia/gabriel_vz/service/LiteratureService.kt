@@ -53,7 +53,7 @@ class LiteratureService(
                     this.author = literatureEntity.author
                     this.isbn = literatureEntity.isbn
                     this.yearOfPublishing = literatureEntity.yearOfPublishing
-                    this.relatedWork = literatureEntity.relatedWork
+                    this.relatedWorks = literatureEntity.relatedWorks
                 }
         literatureFactory
                 .modelFromEntity(updatedLiteratureEntity)
