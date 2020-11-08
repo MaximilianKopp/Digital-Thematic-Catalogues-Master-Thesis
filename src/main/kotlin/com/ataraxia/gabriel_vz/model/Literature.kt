@@ -1,5 +1,6 @@
 package com.ataraxia.gabriel_vz.model
 
+import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.root.Model
 import java.time.OffsetDateTime
 
@@ -11,7 +12,7 @@ class Literature(
         var author: String? = null,
         var isbn: String? = null,
         var yearOfPublishing: String? = null,
-        var relatedWorks: MutableMap<String?, List<String?>> = mutableMapOf()
+        var relatedWorks: Map<String?, String?> = mutableMapOf()
 ) : Model(
         id,
         title,
