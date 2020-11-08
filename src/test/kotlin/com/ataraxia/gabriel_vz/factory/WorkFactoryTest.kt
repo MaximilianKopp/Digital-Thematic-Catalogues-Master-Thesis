@@ -51,8 +51,8 @@ internal class WorkFactoryTest {
             relatedText = null,
             instrumentation = "Für Klavier",
             literatureList = mutableListOf(),
-            relatedPersons = mutableSetOf(),
-            discographies = mutableSetOf()
+            relatedPersons = mutableListOf(),
+            discographies = mutableListOf()
     )
 
     private fun simpleWorkEntity() = WorkEntity(
@@ -72,8 +72,8 @@ internal class WorkFactoryTest {
             relatedText = null,
             instrumentation = "Für Klavier",
             literatureList = mutableListOf(),
-            relatedPersons = mutableSetOf(),
-            discographies = mutableSetOf()
+            relatedPersons = mutableListOf(),
+            discographies = mutableListOf()
     )
 
     private fun simpleWorkResource() = WorkResource(

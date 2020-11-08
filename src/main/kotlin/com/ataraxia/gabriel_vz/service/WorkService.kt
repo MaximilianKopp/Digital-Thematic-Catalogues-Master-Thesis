@@ -7,7 +7,6 @@ import com.ataraxia.gabriel_vz.controller.paging.Paged
 import com.ataraxia.gabriel_vz.controller.paging.Paging
 import com.ataraxia.gabriel_vz.factory.WorkFactory
 import com.ataraxia.gabriel_vz.model.Work
-import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.repository.WorkRepository
 import com.ataraxia.gabriel_vz.root.Service
 import org.springframework.data.domain.PageRequest
@@ -27,7 +26,6 @@ class WorkService(
     } catch (e: Exception) {
         e.left()
     }
-
 
     override fun get(id: String): Either<Exception, Work> = try {
         workRepository.findById(id)

@@ -29,7 +29,7 @@ class WorkFactory(
             relatedText = entity.relatedText?.let { textFactory.modelFromEntity(it) },
             discographies = entity.discographies?.map(
                     discographyFactory::modelFromEntity
-            )!!.toMutableSet(),
+            )!!.toMutableList(),
             instrumentation = entity.instrumentation!!,
             editor = entity.editor!!,
             duration = entity.duration!!,
@@ -45,7 +45,7 @@ class WorkFactory(
             )!!.toMutableList(),
             relatedPersons = entity.relatedPersons?.map(
                     personFactory::modelFromEntity
-            )!!.toMutableSet()
+            )!!.toMutableList()
     )
 
     override fun entityFromModel(model: Work): WorkEntity = WorkEntity(
@@ -57,7 +57,7 @@ class WorkFactory(
             relatedText = model.relatedText?.let { textFactory.entityFromModel(it) },
             discographies = model.discographies?.map(
                     discographyFactory::entityFromModel
-            )!!.toMutableSet(),
+            )!!.toMutableList(),
             instrumentation = model.instrumentation,
             editor = model.editor,
             duration = model.duration,
@@ -73,7 +73,7 @@ class WorkFactory(
             )!!.toMutableList(),
             relatedPersons = model.relatedPersons?.map(
                     personFactory::entityFromModel
-            )!!.toMutableSet()
+            )!!.toMutableList()
     )
 
     override fun modelFromResource(resource: WorkResource): Work = Work(
@@ -85,7 +85,7 @@ class WorkFactory(
             relatedText = resource.relatedText?.let { textFactory.modelFromResource(it) },
             discographies = resource.discographies.map(
                     discographyFactory::modelFromResource
-            ).toMutableSet(),
+            ).toMutableList(),
             instrumentation = resource.instrumentation,
             editor = resource.editor,
             duration = resource.duration,
@@ -101,7 +101,7 @@ class WorkFactory(
             ).toMutableList(),
             relatedPersons = resource.relatedPersons.map(
                     personFactory::modelFromResource
-            ).toMutableSet()
+            ).toMutableList()
     )
 
     override fun resourceFromModel(model: Work): WorkResource = WorkResource(
