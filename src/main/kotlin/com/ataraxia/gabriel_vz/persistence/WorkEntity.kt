@@ -37,12 +37,19 @@ class WorkEntity(
         @JsonManagedReference
         @ManyToOne(
                 fetch = FetchType.LAZY,
-                cascade = [CascadeType.MERGE]
+                cascade = [
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ]
         )
         var relatedText: TextEntity? = null,
 
         @JsonManagedReference
-        @ManyToMany(cascade = [CascadeType.MERGE])
+        @ManyToMany(
+                cascade = [
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ])
         @JoinTable(
                 joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
                 inverseJoinColumns = [JoinColumn(name = "discographies_id", referencedColumnName = "id")]

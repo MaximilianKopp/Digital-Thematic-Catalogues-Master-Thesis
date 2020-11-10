@@ -29,35 +29,35 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="text : ${texts.page}">
+                <tr th:each="text : ${texts?.page}">
                     <td><a href="index.html" th:href="@{'text/?id=' + ${text.id}}"
                            th:text="${text.title}"></a></td>
                     <td th:text="${text.author}">id</td>
                     <td th:text="${text.excerpt}">title</td>
-                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createText">Edit</a>
-                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createText">Delete</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button" th:href="@{'/editor/editText/?id=' + ${text.id}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button" th:href="@{'/editor/deleteText/?id=' + ${text.id}}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
 
             <nav aria-label="Page navigation" class="paging">
-                <ul class="pagination" th:if="${texts.page.totalPages > 1}">
+                <ul class="pagination" th:if="${texts?.page?.totalPages > 1}">
                     <li class="page-item">
-                        <a class="page-link" th:href="@{'?pageNumber=' + ${texts.paging.pageNumber - 1}}"
+                        <a class="page-link" th:href="@{'?pageNumber=' + ${texts.paging?.pageNumber - 1}}"
                            tabindex="-1">Previous</a>
                     </li>
-                    <th:block th:each="item : ${texts.paging.getItems()}">
-                        <li class="page-item" th:classappend="${item.index == texts.paging.pageNumber? 'active' : ''}"
-                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                    <th:block th:each="item : ${texts?.paging?.getItems()}">
+                        <li class="page-item" th:classappend="${item.index == texts?.paging?.pageNumber? 'active' : ''}"
+                            th:if="${item?.pageItemType?.name() == 'PAGE'}">
                             <a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
                                th:text="${item.index}"></a>
                         </li>
-                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                        <li class="page-item disabled" th:if="${item?.pageItemType?.name() == 'DOTS'}">
                             <a class="page-link" href="#">...</a>
                         </li>
                     </th:block>
                     <li class="page-item">
-                        <a class="page-link" th:href="@{'?pageNumber=' + ${texts.paging.pageNumber + 1}}">Next</a>
+                        <a class="page-link" th:href="@{'?pageNumber=' + ${texts?.paging?.pageNumber + 1}}">Next</a>
                     </li>
                 </ul>
             </nav>

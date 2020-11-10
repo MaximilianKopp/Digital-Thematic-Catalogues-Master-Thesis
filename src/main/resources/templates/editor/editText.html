@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Composition</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{../styles.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="content">
+    <div class="container-fluid p-0">
+        <form action="#" th:action="@{'/editor/updateText/?id=' + ${text.id}}" th:object="${text}" method="post">
+
+            <div class="row no-gutters">
+                <div class="col col-1">
+                    <div th:replace="fragments/sidebar :: sidebar"></div>
+                </div>
+
+                <div class="col col-2 ml-3 mt-3">
+                    <div class="form-group">
+                        <label for="textTitle">Title</label>
+                        <input type="text" class="form-control" th:field="*{title}"
+                               id="textTitle"
+                               placeholder="Title">
+                        <span th:if="${#fields.hasErrors('title')}"
+                              th:errors="*{title}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="textAuthor">Author</label>
+                        <input type="text" class="form-control" th:field="*{author}"
+                               id="textAuthor"
+                               placeholder="Author">
+                        <span th:if="${#fields.hasErrors('author')}"
+                              th:errors="*{author}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="textExcerpt">Excerpt</label>
+                        <input type="text" class="form-control" th:field="*{excerpt}"
+                               id="textExcerpt"
+                               placeholder="Excerpt">
+                        <span th:if="${#fields.hasErrors('excerpt')}"
+                              th:errors="*{excerpt}"></span>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:insert="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

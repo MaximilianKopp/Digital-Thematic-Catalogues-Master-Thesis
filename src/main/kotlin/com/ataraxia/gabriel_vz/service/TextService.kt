@@ -53,6 +53,7 @@ class TextService(
                     this.excerpt = textEntity.excerpt
                     this.relatedWorks = textEntity.relatedWorks
                 }
+        textRepository.save(updatedTextEntity)
         textFactory
                 .modelFromEntity(updatedTextEntity)
                 .right()

@@ -5,9 +5,7 @@ import com.ataraxia.gabriel_vz.service.TextService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @Controller
@@ -24,10 +22,29 @@ class EditorTextController(
 
     @PostMapping("/addText")
     fun addText(@Valid text: Text, bindingResult: BindingResult): String {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             print(bindingResult.allErrors)
         }
         textService.create(text)
-        return "/editor/addText"
+        return "redirect:/editor/createText"
+    }
+
+    @GetMapping("/editText")
+    fun updateTextForm(@RequestParam("id") id: String, model: Model): String {
+        val text = textService.get(id).toOption().orNull()
+        model.addAttribute("text", text)
+        return "/editor/editText"
+    }
+
+    @PostMapping("/updateText")
+    fun editText(@RequestParam("id") id: String, @Valid text: Text): String {
+        textService.update(id, text)
+        return "/editor/editText"
+    }
+
+    @GetMapping("/deleteText")
+    fun deleteText(@RequestParam("id") id: String): String {
+        textService.delete(id)
+        return "/common_user/texts"
     }
 }
