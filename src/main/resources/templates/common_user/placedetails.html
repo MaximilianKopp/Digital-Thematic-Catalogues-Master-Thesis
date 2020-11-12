@@ -24,7 +24,7 @@
                     <tr>
                         <th>Title: <a href="places.html" th:href="@{/places}"
                                       class="fas fa-arrow-alt-circle-left fa-lg"></a></th>
-                        <td th:text="${place.name}"></td>
+                        <td th:text="${place.title}"></td>
                     </tr>
                     <tr th:each="mapEntry : ${place.relatedWorks}">
                         <th>Related Work:</th>
@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <th>Coordinates:</th>
-                        <td th:text="${'X: ' + place.coordinates.longitude + ' ' + 'Y: ' + place.coordinates.latitude + ' (ESRI)'}"></td>
+                        <td th:text="${'X: ' + place?.coordinates?.longitude + ' ' + 'Y: ' + place?.coordinates?.latitude + ' (ESRI)'}"></td>
                     </tr>
                     </tbody>
                 </table>
