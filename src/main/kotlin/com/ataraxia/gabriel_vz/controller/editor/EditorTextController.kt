@@ -12,39 +12,46 @@ import javax.validation.Valid
 @RequestMapping("/editor/")
 class EditorTextController(
         val textService: TextService
-) {
+) : com.ataraxia.gabriel_vz.root.Controller<Model, Text>() {
+
 
     @GetMapping("/createText")
-    fun showTextForm(model: Model): String {
-        model.addAttribute("text", Text())
+    override fun showAddForm(m: Model): String {
+        m.addAttribute("text", Text())
         return "editor/addText"
     }
 
     @PostMapping("/addText")
-    fun addText(@Valid text: Text, bindingResult: BindingResult): String {
+    override fun add(@Valid type: Text, bindingResult: BindingResult): String {
         if (bindingResult.hasErrors()) {
             print(bindingResult.allErrors)
         }
-        textService.create(text)
-        return "redirect:/editor/createText"
+        textService.create(type)
+        return "redirect:/texts"
     }
 
     @GetMapping("/editText")
-    fun updateTextForm(@RequestParam("id") id: String, model: Model): String {
+    override fun showUpdateForm(@RequestParam("id") id: String, m: Model): String {
         val text = textService.get(id).toOption().orNull()
-        model.addAttribute("text", text)
+        m.addAttribute("text", text)
         return "/editor/editText"
     }
 
-    @PostMapping("/updateText")
-    fun editText(@RequestParam("id") id: String, @Valid text: Text): String {
-        textService.update(id, text)
-        return "/editor/editText"
+    @PostMapping("/updateText/{id}")
+    override fun update(@PathVariable("id") id: String, @Valid type: Text): String {
+        textService.update(id, type)
+        return "redirect:/texts"
     }
 
     @GetMapping("/deleteText")
-    fun deleteText(@RequestParam("id") id: String): String {
+    override fun deleteById(@RequestParam("id") id: String): String {
         textService.delete(id)
-        return "/common_user/texts"
+        return "redirect:/texts"
+    }
+
+    @GetMapping("/deleteTexts")
+    override fun deleteAll(): String {
+        textService.deleteAll()
+        return "redirect:/texts"
     }
 }
