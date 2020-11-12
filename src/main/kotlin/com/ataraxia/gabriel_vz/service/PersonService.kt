@@ -50,6 +50,7 @@ class PersonService(
         val personEntity = personFactory.entityFromModel(m)
         val updatedPersonEntity = personData.get()
                 .apply {
+                    this.title = personEntity.title
                     this.name = personEntity.name
                     this.description = personEntity.description
                     this.pnd = personEntity.pnd
@@ -57,6 +58,7 @@ class PersonService(
                     this.relatedDiscographies = personEntity.relatedDiscographies
                     this.relatedWorks = personEntity.relatedWorks
                 }
+        personRepository.save(updatedPersonEntity)
         personFactory
                 .modelFromEntity(updatedPersonEntity)
                 .right()

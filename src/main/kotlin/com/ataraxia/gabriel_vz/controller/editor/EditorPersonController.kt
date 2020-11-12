@@ -26,7 +26,7 @@ class EditorPersonController(
             print(bindingResult.hasErrors())
         }
         personService.create(type)
-        return "/editor/addPerson"
+        return "redirect:/persons"
     }
 
     @GetMapping("/editPerson")
