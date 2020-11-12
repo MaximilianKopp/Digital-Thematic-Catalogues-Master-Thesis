@@ -30,12 +30,12 @@
                 </thead>
                 <tbody>
                 <tr th:each="text : ${texts?.page}">
-                    <td><a href="index.html" th:href="@{'text/?id=' + ${text.id}}"
+                    <td><a href="index.html" th:href="@{'text?id=' + ${text.id}}"
                            th:text="${text.title}"></a></td>
                     <td th:text="${text.author}">id</td>
                     <td th:text="${text.excerpt}">title</td>
-                    <td><a class="btn btn-success btn-sm" role="button" th:href="@{'/editor/editText/?id=' + ${text.id}}">Edit</a>
-                        <a class="btn btn-danger btn-sm" role="button" th:href="@{'/editor/deleteText/?id=' + ${text.id}}">Delete</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button" th:href="@{'/editor/editText?id=' + ${text.id}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button" th:href="@{'/editor/deleteText?id=' + ${text.id}}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
