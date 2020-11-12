@@ -18,7 +18,10 @@ class WorkEntity(
         @JsonManagedReference
         @ManyToOne(
                 fetch = FetchType.LAZY,
-                cascade = [CascadeType.MERGE]
+                cascade = [
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+                ]
         )
         var placeOfPremiere: PlaceEntity? = null,
 

@@ -1,6 +1,5 @@
 package com.ataraxia.gabriel_vz.controller.view
 
-import arrow.core.right
 import com.ataraxia.gabriel_vz.service.*
 import org.springframework.expression.spel.SpelEvaluationException
 import org.springframework.expression.spel.SpelMessage
@@ -9,7 +8,6 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.thymeleaf.exceptions.TemplateProcessingException
 
 @Controller
 @RequestMapping("/")
@@ -200,6 +198,4 @@ class ViewController(
         )
         return "common_user/persondetails"
     }
-
-
 }

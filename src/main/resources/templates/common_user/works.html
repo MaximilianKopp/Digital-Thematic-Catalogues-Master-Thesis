@@ -30,7 +30,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="work : ${works.page}">
+                <tr th:each="work : ${works?.page}">
                     <td><a href="workdetails.html" th:href="@{'work?id='+ ${work?.id}}"
                            th:text="${work?.title}"></a></td>
                     <td th:text="${work?.dateOfCreation}">title</td>
