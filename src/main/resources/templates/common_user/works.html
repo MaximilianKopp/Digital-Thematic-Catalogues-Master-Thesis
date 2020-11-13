@@ -35,8 +35,10 @@
                            th:text="${work?.title}"></a></td>
                     <td th:text="${work?.dateOfCreation}">title</td>
                     <td th:text="${work?.dateOfPremiere}">body</td>
-                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createWork">Edit</a>
-                    <a class="btn btn-danger btn-sm" role="button" href="/editor/createWork">Delete</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button"
+                           th:href="@{'/editor/editWork?id=' + ${work.id}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button"
+                           th:href="@{'/editor/deleteWork?id=' + ${work .id}}">Delete</a></td>
 
                 </tr>
                 </tbody>

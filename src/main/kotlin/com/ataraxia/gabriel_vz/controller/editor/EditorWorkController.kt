@@ -67,14 +67,14 @@ class EditorWorkController(
         type.relatedPersons?.map { personFactory.entityFromModel(it).relatedWorks?.add(workFactory.entityFromModel(type)) }
 
         workService.create(type)
-        return "editor/addWork"
+        return "redirect:/works"
     }
 
     @GetMapping("/editWork")
     override fun showUpdateForm(@RequestParam("id") id: String, m: Model): String {
         val work = workService.get(id).toOption().orNull()
         m.addAttribute("work", work)
-        return "redirect:/editWork"
+        return "/editor/editWork"
     }
 
     @PostMapping("/updateWork/{id}")

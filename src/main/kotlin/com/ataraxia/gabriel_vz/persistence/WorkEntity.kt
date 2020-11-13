@@ -19,8 +19,7 @@ class WorkEntity(
         @ManyToOne(
                 fetch = FetchType.LAZY,
                 cascade = [
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
+                    CascadeType.MERGE
                 ]
         )
         var placeOfPremiere: PlaceEntity? = null,

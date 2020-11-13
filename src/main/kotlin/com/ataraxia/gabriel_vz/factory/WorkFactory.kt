@@ -55,9 +55,6 @@ class WorkFactory(
             created = model.created,
             modified = model.modified,
             relatedText = model.relatedText?.let { textFactory.entityFromModel(it) },
-            discographies = model.discographies?.map(
-                    discographyFactory::entityFromModel
-            )!!.toMutableList(),
             instrumentation = model.instrumentation,
             editor = model.editor,
             duration = model.duration,
@@ -70,10 +67,13 @@ class WorkFactory(
             category = model.category,
             literatureList = model.literatureList?.map(
                     literatureFactory::entityFromModel
-            )!!.toMutableList(),
+            )?.toMutableList(),
             relatedPersons = model.relatedPersons?.map(
                     personFactory::entityFromModel
-            )!!.toMutableList()
+            )?.toMutableList(),
+            discographies = model.discographies?.map(
+                    discographyFactory::entityFromModel
+            )?.toMutableList()
     )
 
     override fun modelFromResource(resource: WorkResource): Work = Work(

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit Discography</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/styles.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="content">
+    <div class="container-fluid p-0">
+        <form action="#" th:action="@{/editor/updateWork/{id} (id=${work.id})}" th:object="${work}"
+              method="post">
+
+            <div class="row no-gutters">
+                <div class="col col-1">
+                    <div th:replace="fragments/sidebar :: sidebar"></div>
+                </div>
+
+                <div class="col col-2 ml-3 mt-3">
+                    <!-- Fields for Workdescription -->
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" required="required" class="form-control" th:field="*{title}" id="title"
+                               placeholder="Title">
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="opus">Opus</label>
+                        <input type="text" required="required" class="form-control" th:field="*{opus}" id="opus"
+                               placeholder="Opus">
+                        <span th:if="${#fields.hasErrors('opus')}" th:errors="*{opus}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateOfCreation">Date of Creation</label>
+                        <input type="text" class="form-control" th:field="*{dateOfCreation}" id="dateOfCreation"
+                               placeholder="Date of Creation">
+                        <span th:if="${#fields.hasErrors('dateOfCreation')}" th:errors="*{dateOfCreation}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateOfPremiere">Date of Premiere</label>
+                        <input type="text" class="form-control" th:field="*{dateOfPremiere}" id="dateOfPremiere"
+                               placeholder="Date of Premiere">
+                        <span th:if="${#fields.hasErrors('dateOfPremiere')}" th:errors="*{dateOfPremiere}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="commentary">Commentary</label>
+                        <input type="text" class="form-control" th:field="*{commentary}" id="commentary"
+                               placeholder="Commentary">
+                        <span th:if="${#fields.hasErrors('commentary')}" th:errors="*{commentary}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+                <div class="col col-2 ml-3 mt-3">
+
+                    <div class="form-group">
+                        <label for="dedication">Dedication</label>
+                        <input type="text" class="form-control" th:field="*{dedication}" id="dedication"
+                               placeholder="Dedication">
+                        <span th:if="${#fields.hasErrors('dedication')}" th:errors="*{dedication}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instrumentation">Instrumentation</label>
+                        <input type="text" class="form-control" th:field="*{instrumentation}" id="instrumentation"
+                               placeholder="Instrumentation">
+                        <span th:if="${#fields.hasErrors('instrumentation')}" th:errors="*{instrumentation}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" class="form-control" th:field="*{category}" id="category"
+                               placeholder="Category">
+                        <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <input type="text" class="form-control" th:field="*{duration}" id="duration"
+                               placeholder="Duration">
+                        <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editor">Editor</label>
+                        <input type="text" class="form-control" th:field="*{editor}" id="editor"
+                               placeholder="Editor">
+                        <span th:if="${#fields.hasErrors('editor')}" th:errors="*{editor}"></span>
+                    </div>
+                </div>
+
+                <div class="col col-2 ml-3 mt-3">
+                    <div class="form-group">
+                        <label for="clef">Clef</label>
+                        <input type="text" class="form-control" th:field="*{incipit.clef}" id="clef"
+                               placeholder="Clef">
+                        <span th:if="${#fields.hasErrors('incipit.clef')}" th:errors="*{incipit.clef}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keysig">Key Signature</label>
+                        <input type="text" class="form-control" th:field="*{incipit.keysig}" id="keysig"
+                               placeholder="Key Signature">
+                        <span th:if="${#fields.hasErrors('incipit.keysig')}" th:errors="*{incipit.keysig}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timesig">Time Signature</label>
+                        <input type="text" class="form-control" th:field="*{incipit.timesig}" id="timesig"
+                               placeholder="Time Signature">
+                        <span th:if="${#fields.hasErrors('incipit.timesig')}" th:errors="*{incipit.timesig}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="score">Score</label>
+                        <input type="text" class="form-control" th:field="*{incipit.score}" id="score"
+                               placeholder="Score">
+                        <span th:if="${#fields.hasErrors('incipit.score')}" th:errors="*{incipit.score}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" th:field="*{incipit.description}" id="description"
+                               placeholder="Description">
+                        <span th:if="${#fields.hasErrors('incipit.description')}"
+                              th:errors="*{incipit.description}"></span>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div th:insert="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>
