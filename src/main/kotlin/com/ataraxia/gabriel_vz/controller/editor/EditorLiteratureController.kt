@@ -26,10 +26,10 @@ class EditorLiteratureController(
             print(bindingResult.allErrors)
         }
         literatureService.create(type)
-        return "editor/addLiterature"
+        return "redirect:/literature"
     }
 
-    @GetMapping("/editLiterature")
+    @GetMapping("/editReference")
     override fun showUpdateForm(@RequestParam("id") id: String, m: Model): String {
         val literature = literatureService.get(id).toOption().orNull()
         m.addAttribute("literature", literature)
