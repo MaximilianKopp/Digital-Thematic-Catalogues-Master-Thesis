@@ -17,7 +17,7 @@ class EditorLiteratureController(
     @GetMapping("/createLiterature")
     override fun showAddForm(m: Model): String {
         m.addAttribute("literature", Literature())
-        return "editor/addLiterature"
+        return "redirect:/literature"
     }
 
     @PostMapping("/addLiterature")

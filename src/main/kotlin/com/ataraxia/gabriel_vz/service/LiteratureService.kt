@@ -50,11 +50,13 @@ class LiteratureService(
         val literatureEntity = literatureFactory.entityFromModel(m)
         val updatedLiteratureEntity = literatureData.get()
                 .apply {
+                    this.title = literatureEntity.title
                     this.author = literatureEntity.author
                     this.isbn = literatureEntity.isbn
                     this.yearOfPublishing = literatureEntity.yearOfPublishing
                     this.relatedWorks = literatureEntity.relatedWorks
                 }
+        literatureRepository.save(updatedLiteratureEntity)
         literatureFactory
                 .modelFromEntity(updatedLiteratureEntity)
                 .right()
