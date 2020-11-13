@@ -26,17 +26,17 @@ class EditorDiscographyController(
             print(bindingResult.allErrors)
         }
         discographyService.create(type)
-        return "/editor/addDiscography"
+        return "redirect:/discography"
     }
 
-    @GetMapping("/editDiscography")
+    @GetMapping("/editRecord")
     override fun showUpdateForm(@RequestParam("id") id: String, m: Model): String {
         val discography = discographyService.get(id).toOption().orNull()
         m.addAttribute("discography", discography)
-        return "redirect:/editDiscography"
+        return "editor/editDiscography"
     }
 
-    @PostMapping("/updateDiscography/{id}")
+    @PostMapping("/updateRecord/{id}")
     override fun update(@PathVariable("id") id: String, @Valid type: Discography): String {
         discographyService.update(id, type)
         return "redirect:/discography"

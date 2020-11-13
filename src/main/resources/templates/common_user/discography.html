@@ -36,8 +36,10 @@
                     <td th:text="${discography.label}">id</td>
                     <td th:text="${discography.recordId}">title</td>
                     <td th:text="${discography.dateOfPublishing}">body</td>
-                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createWork">Edit</a>
-                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createWork">Delete</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button"
+                           th:href="@{'/editor/editRecord?id=' + ${discography.id}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button"
+                           th:href="@{'/editor/deleteRecord?id=' + ${discography.id}}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
