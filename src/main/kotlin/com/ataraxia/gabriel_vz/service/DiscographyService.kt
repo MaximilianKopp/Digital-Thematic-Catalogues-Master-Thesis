@@ -55,6 +55,7 @@ class DiscographyService(
                     this.musicians = discographyEntity.musicians
                     this.relatedWorks = discographyEntity.relatedWorks
                 }
+        discographyRepository.save(updatedDiscographyEntity)
         discographyFactory
                 .modelFromEntity(updatedDiscographyEntity)
                 .right()

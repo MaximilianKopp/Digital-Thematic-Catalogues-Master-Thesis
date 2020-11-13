@@ -51,12 +51,14 @@ class PlaceService(
         val placeEntity = placeFactory.entityFromModel(m)
         val updatedPlaceEntity = placeData.get()
                 .apply {
+                    this.title = placeEntity.title
                     this.name = placeEntity.name
                     this.country = placeEntity.country
                     this.locality = placeEntity.locality
                     this.coordinates = placeEntity.coordinates
                     this.relatedWorks = placeEntity.relatedWorks
                 }
+        placeRepository.save(updatedPlaceEntity)
         placeFactory
                 .modelFromEntity(updatedPlaceEntity)
                 .right()

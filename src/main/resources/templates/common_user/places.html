@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of References</title>
+    <title>List of Places</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{../styles.css}">
@@ -23,44 +23,44 @@
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Name</th>
                     <th>Locality</th>
                     <th>Country</th>
-                    <th>Actions <a href="/editor/createPlace" class="fas fa-plus-circle"></a> </th>
+                    <th>Actions <a href="/editor/createPlace" class="fas fa-plus-circle"></a></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="place : ${places.page}">
-                    <td><a href="index.html" th:href="@{'place/?id=' + ${place.id}}"
+                <tr th:each="place : ${places?.page}">
+                    <td><a href="index.html" th:href="@{'place?id=' + ${place.id}}"
                            th:text="${place.title}"></a></td>
-                    <td th:text="${place.name}">id</td>
                     <td th:text="${place.locality}">title</td>
                     <td th:text="${place.country}">body</td>
-                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createPlace">Edit</a>
-                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createPlace">Delete</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button"
+                           th:href="@{'/editor/editPlace?id=' + ${place.id}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button"
+                           th:href="@{'/editor/deletePlace?id=' + ${place.id}}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
 
             <nav aria-label="Page navigation" class="paging">
-                <ul class="pagination" th:if="${places.page.totalPages > 1}">
+                <ul class="pagination" th:if="${places?.page?.totalPages > 1}">
                     <li class="page-item">
-                        <a class="page-link" th:href="@{'?pageNumber=' + ${places.paging.pageNumber - 1}}"
+                        <a class="page-link" th:href="@{'?pageNumber=' + ${places.paging?.pageNumber - 1}}"
                            tabindex="-1">Previous</a>
                     </li>
-                    <th:block th:each="item : ${places.paging.getItems()}">
+                    <th:block th:each="item : ${places?.paging?.getItems()}">
                         <li class="page-item"
-                            th:classappend="${item.index == places.paging.pageNumber? 'active' : ''}"
-                            th:if="${item.pageItemType.name() == 'PAGE'}">
-                            <a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
+                            th:classappend="${item.index == places?.paging?.pageNumber? 'active' : ''}"
+                            th:if="${item?.pageItemType?.name() == 'PAGE'}">
+                            <a class="page-link" th:href="@{'?pageNumber=' + ${item?.index}}"
                                th:text="${item.index}"></a>
                         </li>
-                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                        <li class="page-item disabled" th:if="${item?.pageItemType?.name() == 'DOTS'}">
                             <a class="page-link" href="#">...</a>
                         </li>
                     </th:block>
                     <li class="page-item">
-                        <a class="page-link" th:href="@{'?pageNumber=' + ${places.paging.pageNumber + 1}}">Next</a>
+                        <a class="page-link" th:href="@{'?pageNumber=' + ${places?.paging?.pageNumber + 1}}">Next</a>
                     </li>
                 </ul>
             </nav>

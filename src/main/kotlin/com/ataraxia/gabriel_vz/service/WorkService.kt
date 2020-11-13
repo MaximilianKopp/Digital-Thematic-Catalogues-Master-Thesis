@@ -37,7 +37,7 @@ class WorkService(
     }
 
     override fun create(m: Work): Either<Exception, Work> = try {
-        val workEntity = workRepository.save(workFactory.entityFromModel(m))
+        val workEntity = workRepository.saveAndFlush(workFactory.entityFromModel(m))
         workFactory.modelFromEntity(workEntity).right()
     } catch (e: Exception) {
         e.left()
@@ -51,8 +51,6 @@ class WorkService(
                     this.title = workEntity.title
                     this.dateOfCreation = workEntity.dateOfCreation
                     this.dateOfPremiere = workEntity.dateOfPremiere
-                    this.placeOfPremiere = workEntity.placeOfPremiere
-                    this.incipit = workEntity.incipit
                     this.commentary = workEntity.commentary
                     this.dedication = workEntity.dedication
                     this.instrumentation = workEntity.instrumentation
@@ -64,6 +62,7 @@ class WorkService(
                     this.relatedPersons = workEntity.relatedPersons
                     this.literatureList = workEntity.literatureList
                 }
+        workRepository.save(updatedWorkEntity)
         workFactory.modelFromEntity(updatedWorkEntity).right()
     } catch (e: Exception) {
         e.left()

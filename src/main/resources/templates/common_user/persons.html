@@ -38,8 +38,10 @@
                     <td th:text="${person.pnd}">title</td>
                     <td th:text="${person.role}">body</td>
                     <td th:text="${person.description}">body</td>
-                    <td><a class="btn btn-success btn-sm" role="button" href="/editor/createWork">Edit</a>
-                        <a class="btn btn-danger btn-sm" role="button" href="/editor/createWork">Delete</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button"
+                           th:href="@{'/editor/editPerson?id=' + ${person.id}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" role="button"
+                           th:href="@{'/editor/deletePerson?id=' + ${person.id}}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
