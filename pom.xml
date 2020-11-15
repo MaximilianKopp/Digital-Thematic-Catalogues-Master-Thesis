@@ -93,8 +93,17 @@
         <dependency>
             <groupId>io.arrow-kt</groupId>
             <artifactId>arrow-core</artifactId>
-            <version>0.10.5</version>
+            <version>0.11.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.arrow-kt/arrow-aql -->
+        <dependency>
+            <groupId>io.arrow-kt</groupId>
+            <artifactId>arrow-aql</artifactId>
+            <version>0.11.0</version>
+        </dependency>
+
+
+
 
         <!-- ==================== -->
         <!--        MYSQL         -->
