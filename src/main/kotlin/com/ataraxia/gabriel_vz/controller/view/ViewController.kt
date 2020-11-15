@@ -1,13 +1,18 @@
 package com.ataraxia.gabriel_vz.controller.view
 
+import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.service.*
+import org.springframework.data.domain.Page
 import org.springframework.expression.spel.SpelEvaluationException
 import org.springframework.expression.spel.SpelMessage
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import javax.validation.Valid
 
 @Controller
 @RequestMapping("/")
@@ -18,7 +23,8 @@ class ViewController(
         private val textService: TextService,
         private val placeService: PlaceService,
         private val discographyService: DiscographyService,
-        private val personService: PersonService
+        private val personService: PersonService,
+        private val searchService: SearchService
 ) {
 
     @GetMapping
@@ -26,38 +32,25 @@ class ViewController(
         return "common_user/index"
     }
 
+    @GetMapping("/search")
+    fun search(m: Model): String? {
+        m.addAttribute("work", Work())
+        return "/common_user/search"
+    }
+
+    @PostMapping("/searchResults")
+    fun searchResults(@Valid work: Work, m: Model, bindingResult: BindingResult, @RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
+                      @RequestParam(value = "size", required = false, defaultValue = "10") size: Int): String {
+
+
+        m.addAttribute("works", searchService.pagedResults(work, pageNumber, size))
+        return "/common_user/works"
+    }
+
     @GetMapping("/statistics")
     fun statistics(): String {
         return "/common_user/statistics"
     }
-
-//    @GetMapping("/works")
-//    fun index(model: Model): String {
-//        return findPaginated(1, "title", "asc", model)
-//    }
-//
-//    @GetMapping("works/page/{pageNo}")
-//    fun findPaginated(@PathVariable("pageNo") pageNo: Int,
-//                      @RequestParam("sortField") sortfield: String,
-//                      @RequestParam("sortDir") sortDir: String, model: Model): String {
-//        val pageSize = 8
-//
-//        val page = workService.findPaginated(pageNo, pageSize, sortfield, sortDir)
-//        val works = page.content
-//        model.addAttribute("currentPage", pageNo)
-//        model.addAttribute("totalPages", page.totalPages)
-//        model.addAttribute("totalItems", page.totalElements)
-//        model.addAttribute("sortField", sortfield)
-//        model.addAttribute("sortDir", sortDir)
-//        model.addAttribute("reverseSortDir",
-//                when {
-//                    sortDir.equals("asc") -> "desc"
-//                    else -> "asc"
-//                })
-//
-//        model.addAttribute("works", works)
-//        return "works"
-//    }
 
     @GetMapping("/works")
     fun allWorks(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") pageNumber: Int,
@@ -198,4 +191,32 @@ class ViewController(
         )
         return "common_user/persondetails"
     }
+
+    //    @GetMapping("/works")
+//    fun index(model: Model): String {
+//        return findPaginated(1, "title", "asc", model)
+//    }
+//
+//    @GetMapping("works/page/{pageNo}")
+//    fun findPaginated(@PathVariable("pageNo") pageNo: Int,
+//                      @RequestParam("sortField") sortfield: String,
+//                      @RequestParam("sortDir") sortDir: String, model: Model): String {
+//        val pageSize = 8
+//
+//        val page = workService.findPaginated(pageNo, pageSize, sortfield, sortDir)
+//        val works = page.content
+//        model.addAttribute("currentPage", pageNo)
+//        model.addAttribute("totalPages", page.totalPages)
+//        model.addAttribute("totalItems", page.totalElements)
+//        model.addAttribute("sortField", sortfield)
+//        model.addAttribute("sortDir", sortDir)
+//        model.addAttribute("reverseSortDir",
+//                when {
+//                    sortDir.equals("asc") -> "desc"
+//                    else -> "asc"
+//                })
+//
+//        model.addAttribute("works", works)
+//        return "works"
+//    }
 }

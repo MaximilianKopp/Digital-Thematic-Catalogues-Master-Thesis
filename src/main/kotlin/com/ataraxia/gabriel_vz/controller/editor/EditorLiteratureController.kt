@@ -17,7 +17,7 @@ class EditorLiteratureController(
     @GetMapping("/createLiterature")
     override fun showAddForm(m: Model): String {
         m.addAttribute("literature", Literature())
-        return "redirect:/literature"
+        return "/editor/addLiterature"
     }
 
     @PostMapping("/addLiterature")
@@ -42,13 +42,13 @@ class EditorLiteratureController(
         return "redirect:/literature"
     }
 
-    @GetMapping("deleteReference")
+    @GetMapping("/deleteReference")
     override fun deleteById(@RequestParam("id") id: String): String {
         literatureService.delete(id)
         return "redirect:/literature"
     }
 
-    @GetMapping("deleteLiterature")
+    @GetMapping("/deleteLiterature")
     override fun deleteAll(): String {
         literatureService.deleteAll()
         return "redirect:/literature"

@@ -133,20 +133,19 @@
                         <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{relatedText}"></span>
                     </div>
 
-
-                    <details>
+                    <details open>
                         <summary>References</summary>
                         <div class="form-check">
                             <th:block th:each="reference, iterstat : ${literature}">
-                                <input type="checkbox" th:value="${reference.id}" th:field="*{literatureList[__${iterstat.index}__].id}" class="form-check-input" id="literatureCheck">
+                                <input type="checkbox" th:value="${reference.id}" th:field="*{relatedLiterature[__${iterstat.index}__].id}" class="form-check-input" id="literatureCheck">
                                 <label th:text="${reference.title}" class="form-check-label" for="literatureCheck"></label>
                                 <br/>
-                                <span th:if="${#fields.hasErrors('literatureList')}" th:errors="*{literatureList}"></span>
+                                <span th:if="${#fields.hasErrors('relatedLiterature')}" th:errors="*{relatedLiterature}"></span>
                             </th:block>
                         </div>
                     </details>
 
-                    <details>
+                    <details open>
                         <summary>Records</summary>
                         <div class="form-check">
                             <th:block th:each="record, iterstat : ${discography}">
@@ -158,7 +157,7 @@
                         </div>
                     </details>
 
-                    <details>
+                    <details open>
                         <summary>Persons</summary>
                         <div class="form-check">
                             <th:block th:each="person, iterstat : ${persons}">

@@ -101,41 +101,78 @@
 
                 <div class="col col-2 ml-3 mt-3">
                     <div class="form-group">
-                        <label for="clef">Clef</label>
-                        <input type="text" class="form-control" th:field="*{incipit.clef}" id="clef"
-                               placeholder="Clef">
-                        <span th:if="${#fields.hasErrors('incipit.clef')}" th:errors="*{incipit.clef}"></span>
+                        <label for="places">Places</label>
+                        <select th:field="*{placeOfPremiere.id}" class="form-control" id="places"
+                                name="Place of Premiere">
+                            <option value="">Select Places</option>
+                            <option
+                                    th:each="place : ${places}"
+                                    th:value="${place.id}"
+                                    th:text="${place.title}">
+                            </option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('placeOfPremiere')}" th:errors="*{placeOfPremiere}"></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="keysig">Key Signature</label>
-                        <input type="text" class="form-control" th:field="*{incipit.keysig}" id="keysig"
-                               placeholder="Key Signature">
-                        <span th:if="${#fields.hasErrors('incipit.keysig')}" th:errors="*{incipit.keysig}"></span>
+                        <label for="texts">Text</label>
+                        <select th:field="*{relatedText.id}" class="form-control" id="texts" name="Related Text">
+                            <option value="">Select Text</option>
+                            <option
+                                    th:each="text : ${texts}"
+                                    th:value="${text.id}"
+                                    th:text="${text.title}">
+                            </option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('relatedText')}" th:errors="*{relatedText}"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="timesig">Time Signature</label>
-                        <input type="text" class="form-control" th:field="*{incipit.timesig}" id="timesig"
-                               placeholder="Time Signature">
-                        <span th:if="${#fields.hasErrors('incipit.timesig')}" th:errors="*{incipit.timesig}"></span>
-                    </div>
+                    <details open>
+                        <summary>References</summary>
+                        <div class="form-check">
+                            <th:block th:each="reference, iterstat : ${literature}">
+                                <input type="checkbox" th:value="${reference.id}"
+                                       th:field="*{relatedLiterature[__${iterstat.index}__].id}"
+                                       class="form-check-input" id="literatureCheck">
+                                <label th:text="${reference.title}" class="form-check-label"
+                                       for="literatureCheck"></label>
+                                <br/>
+                                <span th:if="${#fields.hasErrors('relatedLiterature')}"
+                                      th:errors="*{relatedLiterature}"></span>
+                            </th:block>
+                        </div>
+                    </details>
 
-                    <div class="form-group">
-                        <label for="score">Score</label>
-                        <input type="text" class="form-control" th:field="*{incipit.score}" id="score"
-                               placeholder="Score">
-                        <span th:if="${#fields.hasErrors('incipit.score')}" th:errors="*{incipit.score}"></span>
-                    </div>
+                    <details open>
+                        <summary>Records</summary>
+                        <div class="form-check">
+                            <th:block th:each="record, iterstat : ${discography}">
+                                <input type="checkbox" th:value="${record.id}"
+                                       th:field="*{discographies[__${iterstat.index}__].id}" class="form-check-input"
+                                       id="discographyCheck">
+                                <label th:text="${record.title}" class="form-check-label"
+                                       for="discographyCheck"></label>
+                                <br/>
+                                <span th:if="${#fields.hasErrors('discographies')}" th:errors="*{discographies}"></span>
+                            </th:block>
+                        </div>
+                    </details>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <input type="text" class="form-control" th:field="*{incipit.description}" id="description"
-                               placeholder="Description">
-                        <span th:if="${#fields.hasErrors('incipit.description')}"
-                              th:errors="*{incipit.description}"></span>
+                    <details open>
+                        <summary>Persons</summary>
+                        <div class="form-check">
+                            <th:block th:each="person, iterstat : ${persons}">
+                                <input type="checkbox" th:value="${person.id}"
+                                       th:field="*{relatedPersons[__${iterstat.index}__].id}" class="form-check-input"
+                                       id="personsCheck">
+                                <label th:text="${person.title}" class="form-check-label" for="personsCheck"></label>
+                                <br/>
+                                <span th:if="${#fields.hasErrors('relatedPersons')}"
+                                      th:errors="*{relatedPersons}"></span>
+                            </th:block>
+                        </div>
+                    </details>
 
-                    </div>
                 </div>
             </div>
 

@@ -4,7 +4,6 @@ import com.ataraxia.gabriel_vz.model.Work
 import com.ataraxia.gabriel_vz.persistence.WorkEntity
 import com.ataraxia.gabriel_vz.resource.WorkResource
 import io.kotlintest.matchers.types.shouldBeInstanceOf
-import io.mockk.InternalPlatformDsl.toStr
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
@@ -50,7 +49,7 @@ internal class WorkFactoryTest {
             editor = "Max",
             relatedText = null,
             instrumentation = "Für Klavier",
-            literatureList = mutableListOf(),
+            relatedLiterature = mutableListOf(),
             relatedPersons = mutableListOf(),
             discographies = mutableListOf()
     )

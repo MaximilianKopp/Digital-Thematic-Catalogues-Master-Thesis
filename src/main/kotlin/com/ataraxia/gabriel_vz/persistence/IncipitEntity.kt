@@ -30,7 +30,7 @@ class IncipitEntity(
 ) {
 
     fun addWork(workEntity: WorkEntity) {
-        relatedWork = workEntity
+        this.relatedWork = workEntity
         workEntity.addIncipit(this)
     }
 
@@ -40,22 +40,27 @@ class IncipitEntity(
         if (!super.equals(other)) return false
 
         if (text != other.text) return false
+        if (clef != other.clef) return false
         if (keysig != other.keysig) return false
         if (timesig != other.timesig) return false
         if (score != other.score) return false
         if (description != other.description) return false
+        if (relatedWork != other.relatedWork) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = super.hashCode()
-        result = 31 * result + text.hashCode()
-        result = 31 * result + keysig.hashCode()
-        result = 31 * result + timesig.hashCode()
-        result = 31 * result + score.hashCode()
-        result = 31 * result + description.hashCode()
+        result = 31 * result + (text?.hashCode() ?: 0)
+        result = 31 * result + (clef?.hashCode() ?: 0)
+        result = 31 * result + (keysig?.hashCode() ?: 0)
+        result = 31 * result + (timesig?.hashCode() ?: 0)
+        result = 31 * result + (score?.hashCode() ?: 0)
+        result = 31 * result + (description?.hashCode() ?: 0)
+        result = 31 * result + (relatedWork?.hashCode() ?: 0)
         return result
     }
+
 
 }

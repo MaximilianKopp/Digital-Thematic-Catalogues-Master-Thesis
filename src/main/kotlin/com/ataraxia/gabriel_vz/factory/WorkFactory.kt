@@ -40,7 +40,7 @@ class WorkFactory(
             incipit = entity.incipit?.let { incipitFactory.modelFromEntity(it) },
             commentary = entity.commentary!!,
             category = entity.category!!,
-            literatureList = entity.literatureList?.map(
+            relatedLiterature = entity.literatureList?.map(
                     literatureFactory::modelFromEntity
             )!!.toMutableList(),
             relatedPersons = entity.relatedPersons?.map(
@@ -65,7 +65,7 @@ class WorkFactory(
             incipit = model.incipit?.let { incipitFactory.entityFromModel(it) },
             commentary = model.commentary,
             category = model.category,
-            literatureList = model.literatureList?.map(
+            literatureList = model.relatedLiterature?.map(
                     literatureFactory::entityFromModel
             )?.toMutableList(),
             relatedPersons = model.relatedPersons?.map(
@@ -96,7 +96,7 @@ class WorkFactory(
             incipit = resource.incipit?.let { incipitFactory.modelFromResource(it) },
             commentary = resource.commentary,
             category = resource.category,
-            literatureList = resource.literatureList.map(
+            relatedLiterature = resource.literatureList.map(
                     literatureFactory::modelFromResource
             ).toMutableList(),
             relatedPersons = resource.relatedPersons.map(
@@ -135,7 +135,7 @@ class WorkFactory(
             incipit = model.incipit?.let { incipitFactory.resourceFromModel(it) },
             commentary = model.commentary!!,
             category = model.category!!,
-            literatureList = model.literatureList?.map(
+            literatureList = model.relatedLiterature?.map(
                     literatureFactory::resourceFromModel
             )!!.toMutableSet(),
             relatedPersons = model.relatedPersons?.map(

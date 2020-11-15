@@ -11,7 +11,7 @@ class Work(
         var opus: String? = null,
         var dateOfCreation: String? = null,
         var dateOfPremiere: String? = null,
-        var placeOfPremiere: Place? = Place(),
+        var placeOfPremiere: Place? = null,
         var incipit: Incipit? = null,
         var commentary: String? = null,
         var dedication: String? = null,
@@ -22,7 +22,7 @@ class Work(
         var relatedText: Text? = null,
         var discographies: MutableList<Discography>? = null,
         var relatedPersons: MutableList<Person>? = null,
-        var literatureList: MutableList<Literature>? = null
+        var relatedLiterature: MutableList<Literature>? = mutableListOf()
 ) : Model(
         id,
         title,
@@ -48,7 +48,7 @@ class Work(
         if (relatedText != other.relatedText) return false
         if (discographies != other.discographies) return false
         if (relatedPersons != other.relatedPersons) return false
-        if (literatureList != other.literatureList) return false
+        if (relatedLiterature != other.relatedLiterature) return false
 
         return true
     }
@@ -68,11 +68,11 @@ class Work(
         result = 31 * result + (relatedText?.hashCode() ?: 0)
         result = 31 * result + discographies.hashCode()
         result = 31 * result + relatedPersons.hashCode()
-        result = 31 * result + literatureList.hashCode()
+        result = 31 * result + relatedLiterature.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "Work(opus=$opus, dateOfCreation=$dateOfCreation, dateOfPremiere=$dateOfPremiere, placeOfPremiere=$placeOfPremiere, incipit=$incipit, commentary=$commentary, dedication=$dedication, instrumentation=$instrumentation, category=$category, duration=$duration, editor=$editor, relatedText=$relatedText, discographies=$discographies, relatedPersons=$relatedPersons, literatureList=$literatureList)"
+        return "Work(opus=$opus, dateOfCreation=$dateOfCreation, dateOfPremiere=$dateOfPremiere, placeOfPremiere=$placeOfPremiere, incipit=$incipit, commentary=$commentary, dedication=$dedication, instrumentation=$instrumentation, category=$category, duration=$duration, editor=$editor, relatedText=$relatedText, discographies=$discographies, relatedPersons=$relatedPersons, literatureList=$relatedLiterature)"
     }
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of Compositions</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{../styles.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-lg-2">
+            <div th:replace="fragments/sidebar :: sidebar"></div>
+        </div>
+        <div class="col col-lg-4">
+            <form action="#" th:action="@{/searchResults}" th:object="${work}" method="post">
+
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" th:field="*{title}" id="title"
+                           placeholder="Search by title">
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="opus">Opus</label>
+                    <input type="text" class="form-control" th:field="*{opus}" id="opus"
+                           placeholder="Search by opus">
+                    <span th:if="${#fields.hasErrors('opus')}" th:errors="*{opus}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" th:field="*{category}" id="category"
+                           placeholder="Search by category">
+                    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="instrumentation">Instrumentation</label>
+                    <input type="text" class="form-control" th:field="*{instrumentation}" id="instrumentation"
+                           placeholder="Search by instrumentation">
+                    <span th:if="${#fields.hasErrors('instrumentation')}" th:errors="*{instrumentation}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input type="text" class="form-control" th:field="*{duration}" id="duration"
+                           placeholder="Search by duration">
+                    <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

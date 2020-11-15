@@ -50,13 +50,14 @@ class IncipitService(
         val incipitEntity = incipitFactory.entityFromModel(m)
         val updatedIncipitEntity = incipitData.get()
                 .apply {
+                    this.title = incipitEntity.title
                     this.description = incipitEntity.description
                     this.keysig = incipitEntity.keysig
                     this.score = incipitEntity.score
                     this.text = incipitEntity.text
                     this.timesig = incipitEntity.timesig
-                    this.relatedWork = incipitEntity.relatedWork
                 }
+        incipitRepository.save(updatedIncipitEntity)
         incipitFactory
                 .modelFromEntity(updatedIncipitEntity)
                 .right()
