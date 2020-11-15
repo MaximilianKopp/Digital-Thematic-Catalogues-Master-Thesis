@@ -127,7 +127,7 @@
                     <tbody>
                     <tr th:each="person : ${work?.relatedPersons}">
                         <td><a href="persons.html" th:href="@{'person?id='+ ${person?.id}}"
-                               th:text="${person?.name}"></a></td>
+                               th:text="${person?.title}"></a></td>
                         <td th:text="${person?.pnd}"></td>
                         <td th:text="${person?.role}"></td>
                     </tr>
@@ -142,7 +142,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="reference : ${work?.literatureList}">
+                    <tr th:each="reference : ${work?.relatedLiterature}">
                         <td><a href="persons.html" th:href="@{'reference?id='+ ${reference?.id}}"
                                th:text="${reference?.title}"></a></td>
                         <td th:text="${reference?.isbn}"></td>

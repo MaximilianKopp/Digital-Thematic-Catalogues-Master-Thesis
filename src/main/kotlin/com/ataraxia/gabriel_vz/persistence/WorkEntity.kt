@@ -1,6 +1,8 @@
 package com.ataraxia.gabriel_vz.persistence
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
+import org.hibernate.annotations.Fetch
+import org.hibernate.annotations.FetchMode
 import java.time.OffsetDateTime
 import javax.persistence.*
 
@@ -25,7 +27,7 @@ class WorkEntity(
         var placeOfPremiere: PlaceEntity? = null,
 
         @OneToOne(
-                cascade = [CascadeType.ALL],
+                cascade = [CascadeType.PERSIST, CascadeType.MERGE],
                 fetch = FetchType.LAZY)
         @JoinColumn(name = "incipit_id", referencedColumnName = "id")
         var incipit: IncipitEntity? = null,
@@ -40,8 +42,7 @@ class WorkEntity(
         @ManyToOne(
                 fetch = FetchType.LAZY,
                 cascade = [
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
+                    CascadeType.MERGE
                 ]
         )
         var relatedText: TextEntity? = null,
@@ -66,12 +67,12 @@ class WorkEntity(
         )
         var relatedPersons: MutableList<PersonEntity>? = mutableListOf(),
 
-        @ManyToMany(cascade = [CascadeType.MERGE])
+        @ManyToMany(cascade = [CascadeType.MERGE, CascadeType.REFRESH])
         @JoinTable(
                 joinColumns = [JoinColumn(name = "work_id", referencedColumnName = "id")],
                 inverseJoinColumns = [JoinColumn(name = "literature_id", referencedColumnName = "id")]
         )
-        var literatureList: MutableList<LiteratureEntity>? = mutableListOf()
+        var literatureList: MutableList<LiteratureEntity>? = null
 ) : com.ataraxia.gabriel_vz.root.Entity(
         id,
         title,

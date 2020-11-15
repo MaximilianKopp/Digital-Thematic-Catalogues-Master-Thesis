@@ -57,6 +57,7 @@ class WorkService(
                     this.category = workEntity.category
                     this.duration = workEntity.duration
                     this.editor = workEntity.editor
+                    this.placeOfPremiere = workEntity.placeOfPremiere
                     this.relatedText = workEntity.relatedText
                     this.discographies = workEntity.discographies
                     this.relatedPersons = workEntity.relatedPersons
