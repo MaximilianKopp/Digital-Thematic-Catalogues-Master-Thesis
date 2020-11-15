@@ -40,6 +40,9 @@
                     <td class="svg_output">
                     <td><a class="btn btn-success btn-sm" role="button"
                            th:href="@{'/editor/editIncipit?id=' + ${incipit.id}}">Edit</a>
+                        <form th:action="@{'/editor/downloadMEI?id='+ ${incipit.id}}" method="post">
+                            <button type="submit" class="btn btn-sm btn-success">Download</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
