@@ -39,10 +39,10 @@ class EditorIncipitController(
 
     @PostMapping("/downloadMEI")
     fun getMei(@RequestParam("id") id: String, model: Model): String {
-        var data = ""
+
         val bw = BufferedWriter(FileWriter("test.mei"))
         val incipit = incipitService.get(id).orNull()
-        data = meiService.paeToMei(incipit)
+        val data = meiService.paeToMei(incipit)
         bw.write(data)
         bw.close()
         return "redirect:/editor/incipits/download/test.mei"
@@ -51,11 +51,11 @@ class EditorIncipitController(
     @GetMapping("/incipits/download/{fileName:.+}")
     fun downloadMEI(@PathVariable("fileName") fileName: String, @RequestHeader referer: String,
                     response: HttpServletResponse) {
-        if (referer != null && !referer.isEmpty) {
+        if (referer != null && !referer.isEmpty()) {
             println("Download permitted")
         }
 
-        val file = Paths.get("src/main/resources/download/", fileName)
+        val file = Paths.get(fileName)
         if (Files.exists(file)) {
             response.contentType = "APPLICATION/OCTET-STREAM"
             response.addHeader("Content-Disposition", "attachment; filename=$fileName")
