@@ -38,8 +38,11 @@
                            th:text="${incipit.description}"></a></td>
                     <td th:text="${incipit.description}">id</td>
                     <td class="svg_output">
-                    <td><a class="btn btn-success btn-sm" role="button"
+                    <td><a class="btn btn-success btn-sm mb-2" role="button"
                            th:href="@{'/editor/editIncipit?id=' + ${incipit.id}}">Edit</a>
+                        <form th:action="@{'/editor/downloadMEI?id='+ ${incipit.id}}" method="post">
+                            <button type="submit" class="btn btn-sm btn-success">MEI</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
