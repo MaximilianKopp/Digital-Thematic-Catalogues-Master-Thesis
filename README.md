@@ -1,4 +1,4 @@
-# Nachträgliche Neu-Implementierung zur Masterarbeit Digitale Werkverzeichnisse in der Musik - Architekturmodell und Referenzimplementierung
+# Nachträgliche Neu-Implementierung zur Masterarbeit:<br> Digitale Werkverzeichnisse in der Musik - Architekturmodell und Referenzimplementierung
 
 Dieses Projekt fußt thematisch auf meiner in 2019 geschriebenen Masterarbeit "Digitale Werkverzeichnisse in der Musik - Architekturmodell und Referenzimplementierung", in deren Rahmen ich zuvor einen Prototyp in Java entwickelt und erst nachträglich in diese neu-implementierte Kotlin-Anwendung überführt habe.
 
